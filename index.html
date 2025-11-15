@@ -1,72 +1,145 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Keira J – Landing</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>THE REAL ;-) | Landing</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#000;
+    }
+    .screen{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      background-position:center center;
+      background-size:cover;
+      background-repeat:no-repeat;
+      cursor:default;
+    }
 
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: sans-serif;
-  }
+    /* ใส่รูปแต่ละ welcome */
+    .state1{background-image:url("assets/welcome1.png");}
+    .state2{background-image:url("assets/welcome2.png");}
+    .state3{background-image:url("assets/welcome3.png");}
+    .state4{background-image:url("assets/welcome4.png");}
 
-  .container {
-    width: 100vw;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-  }
+    /* ปุ่ม overlay ที่มองไม่เห็น (คลิกได้อย่างเดียว) */
+    .hotspot{
+      position:absolute;
+      cursor:pointer;
+    }
 
-  .frame {
-    width: 100vw;
-    height: 100vh;
-    scroll-snap-align: start;
-    position: relative;
-  }
+    /* ตำแหน่งประมาณจาก figma (เฟรม 1440x1024) → แปลงเป็น % */
 
-  .frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    user-select: none;
-  }
-</style>
+    /* welcome1: ปุ่มรูปกระดาษกลางจอ */
+    .hs-w1-center{
+      left:25%;
+      top:20%;
+      width:50%;
+      height:65%;
+    }
 
+    /* welcome2: ปุ่ม Keira (กล่องขวาล่าง) */
+    .hs-w2-keira{
+      right:17%;
+      top:55%;
+      width:10%;
+      height:10%;
+    }
+
+    /* welcome2: ปุ่ม > home < (ปุ่มกลางล่าง) */
+    .hs-w2-home{
+      left:42%;
+      bottom:8%;
+      width:16%;
+      height:7%;
+    }
+
+    @media (max-width:768px){
+      /* มือถือ – ขยายปุ่มให้กว้างขึ้นนิดหน่อย */
+      .hs-w1-center{left:18%;width:64%;}
+      .hs-w2-keira{right:12%;width:18%;}
+      .hs-w2-home{left:35%;width:30%;}
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
+  <div id="screen" class="screen state1">
+    <!-- hotspot จะถูกเติม/ลบด้วย JavaScript ตาม state -->
+  </div>
 
-  <!-- Frame 1 -->
-  <section id="f1" class="frame">
-    <img src="assets/welcome1.png" onclick="goToFrame(2)">
-  </section>
+  <script>
+    const screenEl = document.getElementById('screen');
+    let state = 1; // 1,2,3,4 = welcome1~4
 
-  <!-- Frame 2 -->
-  <section id="f2" class="frame">
-    <img src="assets/welcome2.png" onclick="goToFrame(3)">
-  </section>
+    function clearHotspots(){
+      const hs = screenEl.querySelectorAll('.hotspot');
+      hs.forEach(h => h.remove());
+      // ลบ handler click ทั้งหมดก่อน แล้วค่อยใส่ใหม่
+      screenEl.onclick = null;
+    }
 
-  <!-- Frame 3 -->
-  <section id="f3" class="frame">
-    <img src="assets/welcome3.png" onclick="goHome()">
-  </section>
+    function setState(newState){
+      state = newState;
+      screenEl.className = 'screen state' + state;
+      clearHotspots();
 
-</div>
+      if(state === 1){
+        // welcome1: คลิกกระดาษกลางจอ -> welcome2
+        const center = document.createElement('div');
+        center.className = 'hotspot hs-w1-center';
+        center.onclick = (e)=>{
+          e.stopPropagation();
+          setState(2);
+        };
+        screenEl.appendChild(center);
+      }
+      else if(state === 2){
+        // welcome2: คลิกอย่างอื่น -> welcome4 (ผิด)
+        screenEl.onclick = ()=>{
+          setState(4);
+        };
 
-<script>
-  function goToFrame(n){
-    document.getElementById("f" + n).scrollIntoView({ behavior: 'smooth' });
-  }
+        // ปุ่ม Keira = ถูก
+        const keira = document.createElement('div');
+        keira.className = 'hotspot hs-w2-keira';
+        keira.onclick = (e)=>{
+          e.stopPropagation();
+          setState(3);
+        };
+        screenEl.appendChild(keira);
 
-  // Frame 3 → Homepage
-  function goHome(){
-    window.location.href = "publications.html";
-  }
-</script>
+        // ปุ่ม > home < = ถูก
+        const home = document.createElement('div');
+        home.className = 'hotspot hs-w2-home';
+        home.onclick = (e)=>{
+          e.stopPropagation();
+          setState(3);
+        };
+        screenEl.appendChild(home);
+      }
+      else if(state === 3){
+        // welcome3: คลิกที่ไหนก็ไปหน้า home จริง
+        screenEl.onclick = ()=>{
+          window.location.href = "home.html"; // หรือชื่อไฟล์ home ของคุณ
+        };
+      }
+      else if(state === 4){
+        // welcome4: wrong key – คลิกที่ไหนก็กลับไปเริ่มใหม่
+        screenEl.onclick = ()=>{
+          setState(1);
+        };
+      }
+    }
 
+    // เริ่มที่ welcome1
+    setState(1);
+  </script>
 </body>
 </html>
