@@ -2,11 +2,322 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Keira J — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE REAL ;-) — Keira J.</title>
+
+  <style>
+    :root{
+      --purple:#2300a9;
+      --purple-dark:#12005c;
+      --bg:#12005c;
+      --text:#ffffff;
+      --muted:#d4d4ff;
+      --accent:#ffd44d;
+      --card-bg:#190b78;
+      --card-border:#3b2fb0;
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:var(--muted);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:24px 12px 60px;
+    }
+
+    /* กล่องหลัก */
+    .shell{
+      border:6px solid #000;
+      background:var(--purple);
+      min-height:100vh;
+      padding:32px 28px 40px;
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap:32px;
+    }
+
+    /* side nav */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap:32px;
+      position:sticky;
+      top:20px;
+      align-self:flex-start;
+    }
+
+    .brand-top{
+      font-size:14px;
+      letter-spacing:2px;
+    }
+
+    .side-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      font-size:16px;
+    }
+
+    .side-nav a{
+      color:var(--text);
+    }
+
+    .side-nav a.active{
+      text-decoration:underline;
+    }
+
+    /* hero */
+    .hero{
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+    }
+
+    .hero-title{
+      font-size:clamp(42px,7vw,64px);
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    .hero-layout{
+      display:grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+      gap:24px;
+      align-items:flex-start;
+    }
+
+    .hero-photo img{
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      object-fit: cover;
+      display:block;
+    }
+
+    .hero-bio-label{
+      font-size:18px;
+      margin-bottom:6px;
+      text-decoration:underline;
+    }
+
+    .hero-bio-text{
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .hero-tags{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    /* bio picture */
+    .bio-small-photo img{
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid #ffffff40;
+      margin-top:20px;
+    }
+
+    /* sections ส่วนล่าง */
+    section{
+      margin-top:40px;
+    }
+
+    section h2{
+      font-size:20px;
+      margin-bottom:12px;
+      text-transform:lowercase;
+      text-decoration:underline;
+    }
+
+    p{
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+
+    .pub-list{display:flex;flex-direction:column;gap:18px;}
+
+    .pub-card{
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      padding:12px 14px;
+      font-size:13px;
+    }
+
+    .pub-title{font-weight:600;margin-bottom:2px;color:var(--text);}
+    .pub-venue{font-size:12px;color:var(--muted);margin-bottom:4px;}
+    .pub-meta{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    .pub-links a{font-size:12px;margin-right:10px;}
+
+    .article-card{
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      padding:10px 12px;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    .article-title{
+      font-weight:600;
+      margin-bottom:4px;
+    }
+
+    .contact-text{
+      font-size:14px;
+    }
+
+    @media (max-width:900px){
+      .shell{
+        grid-template-columns:1fr;
+        padding:24px 18px 30px;
+      }
+      .side{
+        position:static;
+        flex-direction:row;
+        justify-content:space-between;
+      }
+      .hero-layout{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
-<body style="font-family:sans-serif; background:#0e0e11; color:white;">
-  <h1>Homepage / Publications</h1>
-  <p>นี่คือหน้า Home หลังจาก Landing (เดี๋ยวเราค่อยเอาเวอร์ชันสวย ๆ มาแทนได้)</p>
-  <a href="index.html" style="color:yellow;">← กลับไป Landing</a>
+<body>
+
+<div class="page">
+  <div class="shell" id="top">
+
+    <!-- เมนูซ้าย -->
+    <aside class="side">
+      <div class="brand-top">THE REAL ;-)</div>
+      <nav class="side-nav">
+        <a href="#top" class="active">home</a>
+        <a href="#about">bio</a>
+        <a href="#publications">projects / publications</a>
+        <a href="#articles">articles</a>
+        <a href="#contact">contact</a>
+        <a href="#cv">cv <small>[soon]</small></a>
+      </nav>
+    </aside>
+
+    <!-- ขวา: hero + content -->
+    <main class="hero">
+
+      <!-- HERO -->
+      <div>
+        <div class="hero-title">KEIRA J.</div>
+
+        <div class="hero-layout">
+
+          <!-- รูป HERO -->
+          <div class="hero-photo">
+            <img src="assets/my%20picture%20home.png" alt="Keira hero">
+          </div>
+
+          <!-- BIO -->
+          <div id="about">
+            <div class="hero-bio-label">bio</div>
+            <p class="hero-bio-text">
+              Supharada Jundok is a CSIE senior student at National Dong Hwa University, Taiwan.
+              Her journey into machine learning and cybersecurity has led her to hands-on projects across disciplines.
+              She blends logic with language to connect ideas through stories, structure, and creativity.
+              Today she works with projects in a whole world — codifying in Hualien and summertime in Khon Kaen.
+            </p>
+
+            <div class="hero-tags">
+              EN · 中文(繁體) · TH · CS / ML · LLM Safety · Remote Sensing
+            </div>
+
+            <!-- รูป BIO วงกลม -->
+            <div class="bio-small-photo">
+              <img src="assets/my%20bio%20picture.png" alt="Keira bio portrait">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS & PUBLICATIONS -->
+      <section id="publications">
+        <h2>projects / publications</h2>
+
+        <div class="pub-list">
+
+          <div class="pub-card">
+            <div class="pub-title">Few-Shot Tree Species Classification with RGB–CHM Fusion</div>
+            <div class="pub-venue">BDSIC 2025 — Best Presentation Award</div>
+            <div class="pub-meta">Keira J., A. Teammate, M. Shiau-Wei</div>
+            <div class="pub-links">
+              <a href="#">paper</a>
+              <a href="#">slides</a>
+              <a href="#">code</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-title">Prompt-Injection Gateway: Evaluating & Defending LLMs</div>
+            <div class="pub-venue">LLM Safety Project</div>
+            <div class="pub-meta">Keira J. & Lab Group</div>
+            <div class="pub-links">
+              <a href="#">report</a>
+              <a href="#">repo</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ARTICLES -->
+      <section id="articles">
+        <h2>articles</h2>
+
+        <div class="article-card">
+          <div class="article-title">How UAV Trees Taught Me About Data</div>
+          <p>Notes from building my first forest ML pipeline…</p>
+        </div>
+
+        <div class="article-card">
+          <div class="article-title">Reading Jailbreak Papers at Midnight</div>
+          <p>Why inference-time alignment became my obsession…</p>
+        </div>
+
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>contact</h2>
+        <p class="contact-text">
+          Email: your@email  
+          GitHub: github.com/your  
+          LinkedIn: link  
+        </p>
+      </section>
+
+      <!-- CV -->
+      <section id="cv">
+        <h2>cv</h2>
+        <p class="contact-text">Coming soon.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
 </body>
 </html>
