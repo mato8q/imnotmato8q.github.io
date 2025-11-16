@@ -1,154 +1,300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>THE REAL ;-) | Keira J.</title>
+  <style>
+    :root{
+      --purple:#280F91;
+      --fg:#ffffff;
+      --muted:#d0c8ff;
+      --card-bg:#1f1460;
+      --line:#3a278f;
+      --accent:#ffd44d;
+      --max:1100px;
+    }
 
-<title>Keira J.</title>
-<link rel="icon" type="image/png" href="assets/favicon.png" />
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{
+      background:var(--purple);
+      color:var(--fg);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    a{color:var(--fg);text-decoration:none;}
+    a:hover{text-decoration:underline;}
 
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: "Courier New", monospace;
-    background: #1b0fa8;
-    color: white;
-    overflow-x: hidden;
-  }
+    /* ---------- HERO ---------- */
 
-  /* Landing background */
-  .landing {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: url("assets/home.png") no-repeat center center/cover;
-  }
+    .hero-wrapper{
+      width:100%;
+      min-height:70vh;
+      position:relative;
+      overflow:hidden;
+    }
 
-  /* Purple overlay for Figma look */
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(40,0,150,0.55);
-    mix-blend-mode: multiply;
-  }
+    .hero-img{
+      width:100%;
+      height:100%;
+      min-height:70vh;
+      object-fit:cover;
+      display:block;
+    }
 
-  /* Navigation sidebar */
-  .nav {
-    position: absolute;
-    top: 120px;
-    left: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+    /* side menu ที่วางทับบนรูป */
+    .side-nav{
+      position:absolute;
+      left:6vw;          /* ขยับเทียบกับ Figma ได้ */
+      top:18vh;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      font-family:"Courier New",monospace;
+      font-size:18px;    /* ให้ตัวใหญ่ขึ้น */
+      letter-spacing:0.08em;
+    }
 
-  .nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    transition: 0.2s ease;
-  }
+    .side-nav-title{
+      font-size:16px;
+      margin-bottom:14px;
+      text-transform:uppercase;
+    }
 
-  .nav a:hover {
-    opacity: 0.75;
-  }
+    .side-nav a{
+      color:var(--fg);
+    }
 
-  /* Big KEIRA J text */
-  .title {
-    position: absolute;
-    top: 160px;
-    left: 300px;
-    font-size: 140px;
-    font-weight: bold;
-    letter-spacing: 4px;
-  }
+    .side-nav a.active{
+      text-decoration:underline;
+    }
 
-  /* Bio Section */
-  .bio-section {
-    width: 100%;
-    background: #1b0fa8;
-    padding: 80px 10%;
-  }
+    /* ---------- MAIN CONTENT ---------- */
 
-  .bio-title {
-    font-size: 36px;
-    margin-bottom: 30px;
-    border-bottom: 3px solid white;
-    display: inline-block;
-    padding-bottom: 6px;
-  }
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:40px 20px 60px;
+    }
 
-  .bio-container {
-    display: flex;
-    gap: 50px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
+    section{
+      margin-bottom:40px;
+    }
 
-  .bio-img {
-    width: 180px;
-    height: 180px;
-    border-radius: 100%;
-    object-fit: cover;
-    border: 3px solid white;
-  }
+    h2{
+      font-family:"Courier New",monospace;
+      font-size:22px;
+      text-transform:lowercase;
+      margin-bottom:14px;
+      text-decoration:underline;
+    }
 
-  .bio-text {
-    max-width: 600px;
-    font-size: 17px;
-    line-height: 1.6;
-  }
+    /* BIO SECTION */
 
-</style>
+    .bio-layout{
+      display:flex;
+      flex-direction:row;
+      gap:32px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    .bio-photo{
+      flex:0 0 180px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .bio-photo img{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid var(--muted);
+      background:#000;
+    }
+
+    .bio-text{
+      flex:1 1 260px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--fg);
+    }
+
+    .bio-meta{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* PROJECTS / PUBLICATIONS */
+
+    .section-title{
+      font-family:"Courier New",monospace;
+      font-size:18px;
+      text-transform:lowercase;
+      text-decoration:underline;
+      margin-bottom:14px;
+    }
+
+    .card-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .card{
+      background:var(--card-bg);
+      border:1px solid var(--line);
+      padding:14px 18px;
+      font-size:14px;
+    }
+
+    .card-title{
+      font-weight:600;
+      margin-bottom:4px;
+    }
+
+    .card-meta{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .card-links a{
+      font-size:12px;
+      margin-right:10px;
+      text-transform:lowercase;
+      color:var(--accent);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width:768px){
+      .side-nav{
+        left:16px;
+        top:18px;
+        font-size:16px;
+      }
+      .side-nav-title{
+        font-size:14px;
+      }
+      .hero-wrapper{
+        min-height:60vh;
+      }
+      .bio-layout{
+        flex-direction:column;
+        align-items:center;
+        text-align:left;
+      }
+      .bio-photo{
+        order:-1;
+      }
+      .bio-text{
+        width:100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- Landing section -->
-<div class="landing">
-  <div class="overlay"></div>
+  <!-- HERO (home.png) -->
+  <header class="hero-wrapper">
+    <img src="assets/home.png" alt="Keira J hero" class="hero-img" />
 
-  <!-- Navigation (left sidebar) -->
-  <div class="nav">
-    <a href="index.html">home</a>
-    <a href="#bio">bio</a>
-    <a href="publications.html">projects / publications</a>
-    <a href="#">articles</a>
-    <a href="#">contact</a>
-    <a href="#">cv [soon]</a>
-  </div>
+    <nav class="side-nav">
+      <div class="side-nav-title">THE REAL ;-)</div>
+      <a href="#top" class="active">home</a>
+      <a href="#bio">bio</a>
+      <a href="#projects">projects / publications</a>
+      <a href="#articles">articles</a>
+      <a href="#contact">contact</a>
+      <a href="#cv">cv [soon]</a>
+    </nav>
+  </header>
 
-  <!-- Big text -->
-  <div class="title">KEIRA J.</div>
-</div>
+  <main class="page" id="top">
+    <!-- BIO -->
+    <section id="bio">
+      <h2>bio</h2>
+      <div class="bio-layout">
+        <div class="bio-photo">
+          <img src="assets/my_bio_picture.png" alt="Supharada Jundok portrait">
+        </div>
+        <div class="bio-text">
+          <p>
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at National Dong Hwa University, Taiwan.
+            My early journey into machine learning and cybersecurity has led me to hands-on projects across disciplines.
+            I blend logic with language to connect ideas through stories, structure, and creativity.
+          </p>
+          <p>
+            Today I keep working on projects across the world — codifying in Hualien and spending summers in Khon Kaen.
+            I enjoy testing ML models, writing about politics and Taiwan, and exploring LLM safety.
+          </p>
+          <div class="bio-meta">
+            EN · 中文(繁體) · ES ·TH       CS / ML · Cybersecurity · REMOTE SENSING
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- BIO SECTION -->
-<div id="bio" class="bio-section">
-  <div class="bio-title">bio</div>
+    <!-- PROJECTS / PUBLICATIONS -->
+    <section id="projects">
+      <div class="section-title">projects / publications</div>
 
-  <div class="bio-container">
-    <img src="assets/my_bio_picture.png" class="bio-img">
+      <div class="card-list">
+        <article class="card">
+          <div class="card-title">
+            Carbon Sink Estimation in Primary Forest via Individualized Tree Segmentation and Species-Level Classification
+          </div>
+          <div class="card-meta">
+            BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei
+            CSIE 2025 Undergraduated Project - 🏆 Honorable Mention · Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei
+          </div>
+          <div class="card-links">
+            <a href="#" target="_blank">paper</a>
+            <a href="#" target="_blank">slides</a>
+            <a href="#" target="_blank">code</a>
+          </div>
+        </article>
 
-    <div class="bio-text">
-      Supharada Jundok is a CSIE senior student at National Dong Hwa University, Taiwan.
-      Her early journey into machine learning and cybersecurity has led her to hands-on projects 
-      across disciplines. She blends logic with language to connect ideas through stories, 
-      structure, and creativity.
+        <article class="card">
+          <div class="card-title">
+            Coming soon..
+          </div>
+          <div class="card-meta">
+            LLM Safety Project — inference-time alignment &amp; jailbreak evaluation
+          </div>
+          <div class="card-links">
+            <a href="#" target="_blank">report</a>
+            <a href="#" target="_blank">repo</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <br><br>
-      Today she keeps work with projects in a whole world — codifying in Hualien and summertime in Khon Kaen.  
-      <br><br>
-      EN・中文(繁體)・TH・CS/ML・LLM SAFETY・REMOTE SENSING
-    </div>
-  </div>
-</div>
+    <!-- ARTICLES (placeholder) -->
+    <section id="articles">
+      <div class="section-title">articles</div>
+      <p style="font-size:14px;color:var(--muted);">
+        Coming soon — notes about ML, remote sensing, and LLM safety experiments.
+      </p>
+    </section>
 
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">contact</div>
+      <p style="font-size:14px;">
+        Email: <a href="mailto:your@email">your@email</a> ·
+        GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
+      </p>
+    </section>
+
+    <!-- CV placeholder -->
+    <section id="cv">
+      <div class="section-title">cv [soon]</div>
+      <p style="font-size:14px;color:var(--muted);">Curriculum vitae will be added later.</p>
+    </section>
+
+  </main>
 </body>
 </html>
