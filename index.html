@@ -12,24 +12,25 @@
       width:100%;
       height:100%;
       overflow:hidden;
-      background:#000;
+      background:#280F91; /* สีม่วงแบบเดียวกับ Figma */
       font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+      color:#fff;
     }
 
-    /* กรอบกลางจอ ขนาดอัตราส่วน 1440x1024 */
+    /* กรอบกลางจอ สัดส่วน 1440x1024 */
     .frame-wrapper{
       width:100vw;
       height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      background:#000;
+      background:#280F91; /* ให้ข้าง ๆ เป็นสีม่วง */
     }
 
     .frame{
       position:relative;
-      width:min(100vw,1440px);   /* ไม่เกิน 1440px */
-      aspect-ratio:1440/1024;    /* รักษาอัตราส่วน */
+      width:min(100vw,1440px);
+      aspect-ratio:1440/1024;
       max-height:100vh;
       overflow:hidden;
     }
@@ -39,59 +40,77 @@
       inset:0;
       width:100%;
       height:100%;
-      object-fit:contain;        /* แสดงรูปเต็มเฟรม ไม่ยืด */
+      object-fit:contain;   /* รูปไม่เสียสัดส่วน */
       display:block;
     }
 
-    /* hotspot ใสทับบนรูป */
+    /* hotspot ใส ๆ บนรูป */
     .hotspot{
       position:absolute;
       cursor:pointer;
       background:transparent;
     }
 
-    /* คลิกเต็มจอ (ใช้กับ welcome3 / welcome4) */
     .hotspot-full{
       left:0;top:0;width:100%;height:100%;
     }
 
-    /* welcome1: โซน "กระดาษกลาง" กว้าง ๆ ให้คลิกง่าย */
+    /* welcome1: โซนรูปกระดาษกว้าง ๆ */
     .hs-w1-center{
-      left:20%;   /* จากซ้าย 20% ของเฟรม */
-      top:10%;    /* จากบน 10% */
+      left:20%;
+      top:10%;
       width:60%;
       height:80%;
     }
 
-    /* welcome2: คลิกผิด = ทั้งเฟรม (z-index 1) */
-    .hs-w2-wrong{
-      left:0;top:0;width:100%;height:100%;
-      z-index:1;
+    /* -------------------------
+       แถบเลือกคำตอบใน welcome2
+       ------------------------- */
+    .choice-bar{
+      position:absolute;
+      left:50%;
+      bottom:5%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:12px;
+      padding:10px 14px;
+      background:rgba(0,0,0,0.35);
+      border:2px solid #ffffff66;
+      border-radius:4px;
+      backdrop-filter:blur(4px);
+      align-items:center;
     }
 
-    /* welcome2: กล่องชื่อ Keira (อยู่ขวากลาง ๆ) */
-    .hs-w2-keira{
-      top:52%;
-      right:16%;
-      width:12%;
-      height:10%;
-      z-index:2;  /* ให้ทับ wrong */
+    .choice-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#ffd44d;
+      margin-right:4px;
     }
 
-    /* welcome2: ปุ่ม > home < (กลางล่าง) */
-    .hs-w2-home{
-      bottom:7%;
-      left:42%;
-      width:16%;
-      height:7%;
-      z-index:2;
+    .choice-btn{
+      border:1px solid #ffffff80;
+      background:rgba(17, 17, 60, 0.85);
+      color:#fff;
+      padding:4px 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      cursor:pointer;
+    }
+
+    .choice-btn:hover{
+      background:#ffd44d;
+      color:#280F91;
     }
 
     @media (max-width:768px){
-      /* มือถือ – ขยายปุ่มนิดหน่อยให้กดง่ายขึ้น */
       .hs-w1-center{left:15%;width:70%;}
-      .hs-w2-keira{right:10%;width:18%;}
-      .hs-w2-home{left:34%;width:32%;}
+      .choice-bar{
+        flex-wrap:wrap;
+        bottom:4%;
+      }
     }
   </style>
 </head>
@@ -100,7 +119,7 @@
   <div class="frame-wrapper">
     <div id="frame" class="frame">
       <img id="frame-img" src="assets/welcome1.png" alt="welcome screen" />
-      <!-- hotspot จะเติมด้วย JS -->
+      <!-- hotspot + choice bar จะถูกสร้างด้วย JS -->
     </div>
   </div>
 
@@ -110,15 +129,15 @@
 
     let state = 1; // 1=welcome1, 2=welcome2, 3=welcome3, 4=welcome4
 
-    function clearHotspots(){
-      frame.querySelectorAll('.hotspot').forEach(h => h.remove());
+    function clearHotspotsAndUI(){
+      frame.querySelectorAll('.hotspot, .choice-bar').forEach(el => el.remove());
     }
 
     function addHotspot(className, handler){
       const h = document.createElement('div');
       h.className = 'hotspot ' + className;
       h.onclick = function(e){
-        e.stopPropagation();   // กันคลิกฟองขึ้นตัวอื่น
+        e.stopPropagation();
         handler();
       };
       frame.appendChild(h);
@@ -126,36 +145,56 @@
 
     function setState(s){
       state = s;
-      clearHotspots();
+      clearHotspotsAndUI();
 
       if(state === 1){
         img.src = 'assets/welcome1.png';
 
-        // คลิกตรงกระดาษ → welcome2
+        // คลิกตรงรูปกลาง -> welcome2
         addHotspot('hs-w1-center', () => setState(2));
       }
       else if(state === 2){
         img.src = 'assets/welcome2.png';
 
-        // พื้นที่ผิด (ทั้งจอ) → welcome4
-        addHotspot('hs-w2-wrong', () => setState(4));
+        // แถบเลือกชื่อด้านล่าง
+        const bar = document.createElement('div');
+        bar.className = 'choice-bar';
 
-        // ปุ่มที่ถูก: Keira + > home <
-        addHotspot('hs-w2-keira', () => setState(3));
-        addHotspot('hs-w2-home',  () => setState(3));
+        const label = document.createElement('span');
+        label.className = 'choice-label';
+        label.textContent = 'WHO AM I?';
+        bar.appendChild(label);
+
+        const names = ['PEI-YU 沛妤','KHANUN ขนุน', 'GÉnesis','KEIRA']; // เปลี่ยนข้อความได้
+        names.forEach(name => {
+          const btn = document.createElement('button');
+          btn.className = 'choice-btn';
+          btn.textContent = name;
+          btn.onclick = (e)=>{
+            e.stopPropagation();
+            if(name === 'KEIRA'){
+              setState(3);   // ตอบถูก
+            }else{
+              setState(4);   // ตอบผิด
+            }
+          };
+          bar.appendChild(btn);
+        });
+
+        frame.appendChild(bar);
       }
       else if(state === 3){
         img.src = 'assets/welcome3.png';
 
-        // welcome3: คลิกตรงไหนก็ไปหน้า home จริง
+        // welcome3: คลิกที่ไหนก็เข้า home จริง
         addHotspot('hotspot-full', () => {
-          window.location.href = 'home.html';   // ชื่อไฟล์หน้าโฮมของคุณ
+          window.location.href = 'home.html'; // ← ชื่อไฟล์หน้าโฮมของคุณ
         });
       }
       else if(state === 4){
         img.src = 'assets/welcome4.png';
 
-        // welcome4: คลิกไหนก็กลับไปเริ่มใหม่
+        // access denied: คลิกไหนก็กลับไปเริ่มใหม่
         addHotspot('hotspot-full', () => setState(1));
       }
     }
