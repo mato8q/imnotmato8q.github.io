@@ -4,137 +4,159 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>THE REAL ;-) | Landing</title>
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
+
     html,body{
       width:100%;
       height:100%;
       overflow:hidden;
       background:#000;
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
     }
-    .screen{
-      position:relative;
+
+    /* กรอบกลางจอ ขนาดอัตราส่วน 1440x1024 */
+    .frame-wrapper{
       width:100vw;
       height:100vh;
-      background-position:center center;
-      background-size:cover;
-      background-repeat:no-repeat;
-      cursor:default;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
     }
 
-    /* ใส่รูปแต่ละ welcome */
-    .state1{background-image:url("assets/welcome1.png");}
-    .state2{background-image:url("assets/welcome2.png");}
-    .state3{background-image:url("assets/welcome3.png");}
-    .state4{background-image:url("assets/welcome4.png");}
+    .frame{
+      position:relative;
+      width:min(100vw,1440px);   /* ไม่เกิน 1440px */
+      aspect-ratio:1440/1024;    /* รักษาอัตราส่วน */
+      max-height:100vh;
+      overflow:hidden;
+    }
 
-    /* ปุ่ม overlay ที่มองไม่เห็น (คลิกได้อย่างเดียว) */
+    .frame img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;        /* แสดงรูปเต็มเฟรม ไม่ยืด */
+      display:block;
+    }
+
+    /* hotspot ใสทับบนรูป */
     .hotspot{
       position:absolute;
       cursor:pointer;
+      background:transparent;
     }
 
-    /* ตำแหน่งประมาณจาก figma (เฟรม 1440x1024) → แปลงเป็น % */
+    /* คลิกเต็มจอ (ใช้กับ welcome3 / welcome4) */
+    .hotspot-full{
+      left:0;top:0;width:100%;height:100%;
+    }
 
-    /* welcome1: ปุ่มรูปกระดาษกลางจอ */
+    /* welcome1: โซน "กระดาษกลาง" กว้าง ๆ ให้คลิกง่าย */
     .hs-w1-center{
-      left:25%;
-      top:20%;
-      width:50%;
-      height:65%;
+      left:20%;   /* จากซ้าย 20% ของเฟรม */
+      top:10%;    /* จากบน 10% */
+      width:60%;
+      height:80%;
     }
 
-    /* welcome2: ปุ่ม Keira (กล่องขวาล่าง) */
+    /* welcome2: คลิกผิด = ทั้งเฟรม (z-index 1) */
+    .hs-w2-wrong{
+      left:0;top:0;width:100%;height:100%;
+      z-index:1;
+    }
+
+    /* welcome2: กล่องชื่อ Keira (อยู่ขวากลาง ๆ) */
     .hs-w2-keira{
-      right:17%;
-      top:55%;
-      width:10%;
+      top:52%;
+      right:16%;
+      width:12%;
       height:10%;
+      z-index:2;  /* ให้ทับ wrong */
     }
 
-    /* welcome2: ปุ่ม > home < (ปุ่มกลางล่าง) */
+    /* welcome2: ปุ่ม > home < (กลางล่าง) */
     .hs-w2-home{
+      bottom:7%;
       left:42%;
-      bottom:8%;
       width:16%;
       height:7%;
+      z-index:2;
     }
 
     @media (max-width:768px){
-      /* มือถือ – ขยายปุ่มให้กว้างขึ้นนิดหน่อย */
-      .hs-w1-center{left:18%;width:64%;}
-      .hs-w2-keira{right:12%;width:18%;}
-      .hs-w2-home{left:35%;width:30%;}
+      /* มือถือ – ขยายปุ่มนิดหน่อยให้กดง่ายขึ้น */
+      .hs-w1-center{left:15%;width:70%;}
+      .hs-w2-keira{right:10%;width:18%;}
+      .hs-w2-home{left:34%;width:32%;}
     }
   </style>
 </head>
 <body>
 
-  <div id="screen" class="screen state1">
-    <!-- hotspot จะถูกเติม/ลบด้วย JavaScript ตาม state -->
+  <div class="frame-wrapper">
+    <div id="frame" class="frame">
+      <img id="frame-img" src="assets/welcome1.png" alt="welcome screen" />
+      <!-- hotspot จะเติมด้วย JS -->
+    </div>
   </div>
 
   <script>
-    const screenEl = document.getElementById('screen');
-    let state = 1; // 1,2,3,4 = welcome1~4
+    const frame = document.getElementById('frame');
+    const img   = document.getElementById('frame-img');
+
+    let state = 1; // 1=welcome1, 2=welcome2, 3=welcome3, 4=welcome4
 
     function clearHotspots(){
-      const hs = screenEl.querySelectorAll('.hotspot');
-      hs.forEach(h => h.remove());
-      // ลบ handler click ทั้งหมดก่อน แล้วค่อยใส่ใหม่
-      screenEl.onclick = null;
+      frame.querySelectorAll('.hotspot').forEach(h => h.remove());
     }
 
-    function setState(newState){
-      state = newState;
-      screenEl.className = 'screen state' + state;
+    function addHotspot(className, handler){
+      const h = document.createElement('div');
+      h.className = 'hotspot ' + className;
+      h.onclick = function(e){
+        e.stopPropagation();   // กันคลิกฟองขึ้นตัวอื่น
+        handler();
+      };
+      frame.appendChild(h);
+    }
+
+    function setState(s){
+      state = s;
       clearHotspots();
 
       if(state === 1){
-        // welcome1: คลิกกระดาษกลางจอ -> welcome2
-        const center = document.createElement('div');
-        center.className = 'hotspot hs-w1-center';
-        center.onclick = (e)=>{
-          e.stopPropagation();
-          setState(2);
-        };
-        screenEl.appendChild(center);
+        img.src = 'assets/welcome1.png';
+
+        // คลิกตรงกระดาษ → welcome2
+        addHotspot('hs-w1-center', () => setState(2));
       }
       else if(state === 2){
-        // welcome2: คลิกอย่างอื่น -> welcome4 (ผิด)
-        screenEl.onclick = ()=>{
-          setState(4);
-        };
+        img.src = 'assets/welcome2.png';
 
-        // ปุ่ม Keira = ถูก
-        const keira = document.createElement('div');
-        keira.className = 'hotspot hs-w2-keira';
-        keira.onclick = (e)=>{
-          e.stopPropagation();
-          setState(3);
-        };
-        screenEl.appendChild(keira);
+        // พื้นที่ผิด (ทั้งจอ) → welcome4
+        addHotspot('hs-w2-wrong', () => setState(4));
 
-        // ปุ่ม > home < = ถูก
-        const home = document.createElement('div');
-        home.className = 'hotspot hs-w2-home';
-        home.onclick = (e)=>{
-          e.stopPropagation();
-          setState(3);
-        };
-        screenEl.appendChild(home);
+        // ปุ่มที่ถูก: Keira + > home <
+        addHotspot('hs-w2-keira', () => setState(3));
+        addHotspot('hs-w2-home',  () => setState(3));
       }
       else if(state === 3){
-        // welcome3: คลิกที่ไหนก็ไปหน้า home จริง
-        screenEl.onclick = ()=>{
-          window.location.href = "home.html"; // หรือชื่อไฟล์ home ของคุณ
-        };
+        img.src = 'assets/welcome3.png';
+
+        // welcome3: คลิกตรงไหนก็ไปหน้า home จริง
+        addHotspot('hotspot-full', () => {
+          window.location.href = 'home.html';   // ชื่อไฟล์หน้าโฮมของคุณ
+        });
       }
       else if(state === 4){
-        // welcome4: wrong key – คลิกที่ไหนก็กลับไปเริ่มใหม่
-        screenEl.onclick = ()=>{
-          setState(1);
-        };
+        img.src = 'assets/welcome4.png';
+
+        // welcome4: คลิกไหนก็กลับไปเริ่มใหม่
+        addHotspot('hotspot-full', () => setState(1));
       }
     }
 
