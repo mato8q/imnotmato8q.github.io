@@ -1,21 +1,19 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ชื่อแท็บ -->
   <title>Keira J.</title>
 
-  <!-- icon แท็บ (เอาไฟล์ icon.png ไปวางในโฟลเดอร์ assets) -->
-  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <!-- ถ้ามีไฟล์ icon แล้วค่อยใช้บรรทัดนี้ -->
+  <!-- <link rel="icon" type="image/png" href="assets/icon.png" /> -->
 
   <style>
     :root {
       --bg: #2200A5;
       --fg: #f7f4ff;
       --muted: #b9b5e3;
-      --card: #2b1bb0;
       --line: #3c29d0;
       --accent: #ffdd6b;
       --max: 980px;
@@ -40,64 +38,22 @@
       text-decoration: underline;
     }
 
-    /* ---------- HERO LANDING (รูป home.png) ---------- */
+    /* ---------- HERO: แสดงรูป home.png เต็ม ๆ ---------- */
     .hero {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background: url("assets/Home.png") center center / cover no-repeat;
-      overflow: hidden;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(20, 0, 120, 0.45); /* overlay ม่วงบาง ๆ ให้ฟิลเตอร์เหมือน figma */
-    }
-
-    /* ตัวอักษร KEIRA J. */
-    .hero-title {
-      position: absolute;
-      top: 18%;
-      left: 120px;
-      font-size: 80px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      z-index: 2;
-      color: #ffffff;
-    }
-
-    /* เมนู sidebar ซ้ายล่าง */
-    .hero-nav {
-      position: absolute;
-      left: 60px;
-      bottom: 18%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 2;
-    }
-
-    .hero-nav a {
-      color: #ffffff;
-      font-size: 22px;
-      text-decoration: none;
-    }
-
-    .hero-nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* เผื่อบางจอภาพไม่เต็มซ้าย/ขวา → ให้ bg สีเดียวกับหน้า index */
-    .hero::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+      width: 100%;
       background: var(--bg);
-      z-index: -1;
+      display: flex;
+      justify-content: center;
     }
 
-    /* ---------- CONTENT PAGE (ตั้งแต่ bio ลงไป) ---------- */
+    .hero-img {
+      width: 100%;
+      max-width: 1440px;  /* กว้างสุดเท่ารูปจาก figma */
+      height: auto;
+      display: block;
+    }
+
+    /* ---------- CONTENT PAGE (เหมือนเดิม) ---------- */
     .page {
       max-width: var(--max);
       margin: 0 auto;
@@ -181,15 +137,6 @@
     }
 
     @media (max-width: 768px) {
-      .hero-title {
-        font-size: 52px;
-        left: 40px;
-        top: 22%;
-      }
-      .hero-nav {
-        left: 30px;
-        bottom: 20%;
-      }
       .bio-layout {
         flex-direction: column;
         align-items: center;
@@ -201,23 +148,12 @@
 
 <body>
 
-  <!-- ---------- HERO LANDING ---------- -->
+  <!-- HERO: แค่รูป ไม่มี text ซ้อน -->
   <header class="hero">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-title">KEIRA J.</div>
-
-    <nav class="hero-nav">
-      <a href="home.html">home</a>
-      <a href="#bio">bio</a>
-      <a href="#projects">projects / publications</a>
-      <a href="#articles">articles</a>
-      <a href="#contact">contact</a>
-      <a href="#cv">cv [soon]</a>
-    </nav>
+    <img src="assets/Home.png" alt="Keira J. landing" class="hero-img">
   </header>
 
-  <!-- ---------- MAIN CONTENT (เหมือนเดิมตั้งแต่ bio ลงไป) ---------- -->
+  <!-- MAIN CONTENT (bio ลงไป = โค้ดเดิมของเธอ) -->
   <main class="page" id="top">
     <!-- BIO -->
     <section id="bio">
@@ -228,17 +164,17 @@
         </div>
         <div class="bio-text">
           <p>
-            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at NDHU, Taiwan.
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), 
+            a CSIE senior student at National Dong Hwa University, Taiwan.
             My early journey into machine learning and cybersecurity has led me to hands-on projects across disciplines.
-            I blend logic with language to connect ideas through stories, structure, and creativity.
+            I blend logic with languages to connect ideas through stories, structure, and creativity.
           </p>
           <p>
             Today I keep working on projects across the world — codifying in Hualien and spending summers in Khon Kaen.
             I enjoy testing ML models, writing about politics and Taiwan, and exploring LLM safety.
           </p>
           <div class="bio-meta">
-            EN · 中文(繁體) · ES · TH · CS / ML · Cybersecurity · REMOTE SENSING
-            National Dong Hwa University, Taiwan.
+            EN · 中文(繁體) · ES · TH · CS / ML · CYBERSECURITY · REMOTE SENSING
           </div>
         </div>
       </div>
@@ -255,7 +191,8 @@
           </div>
           <div class="card-meta">
             BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei<br>
-            CSIE 2025 Undergraduated Project - 🏆 Honorable Mention · Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei
+            CSIE 2025 Undergraduated Project - 🏆 Honorable Mention · Keira J., Aaron Kuo 
+                                                · Advisor Profesor: C. Shiau-Wei
           </div>
           <div class="card-links">
             <a href="#" target="_blank">paper</a>
@@ -269,7 +206,7 @@
             Coming soon..
           </div>
           <div class="card-meta">
-            LLM Project — inference-time alignment
+            LLM Safety Project
           </div>
           <div class="card-links">
             <a href="#" target="_blank">report</a>
@@ -283,7 +220,7 @@
     <section id="articles">
       <div class="section-title">articles</div>
       <p style="font-size:14px;color:var(--muted);">
-        Coming soon — on medium.
+        Coming soon —..
       </p>
     </section>
 
@@ -291,7 +228,7 @@
     <section id="contact">
       <div class="section-title">contact</div>
       <p style="font-size:14px;">
-        Email: <a href="mailto:your@email">supharada.mt@gmail</a> ·
+        Email: <a href="mailto:your@email">supharada.mt@gmail.com</a> ·
         GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
       </p>
     </section>
