@@ -2,208 +2,213 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>THE REAL ;-) | Keira J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ชื่อแท็บ -->
+  <title>Keira J.</title>
+
+  <!-- icon แท็บ (เอาไฟล์ icon.png ไปวางในโฟลเดอร์ assets) -->
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+
   <style>
-    :root{
-      --purple:#280F91;
-      --fg:#ffffff;
-      --muted:#d0c8ff;
-      --card-bg:#1f1460;
-      --line:#3a278f;
-      --accent:#ffd44d;
-      --max:1100px;
+    :root {
+      --bg: #2200A5;
+      --fg: #f7f4ff;
+      --muted: #b9b5e3;
+      --card: #2b1bb0;
+      --line: #3c29d0;
+      --accent: #ffdd6b;
+      --max: 980px;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;}
-    html,body{
-      background:var(--purple);
-      color:var(--fg);
-      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-    }
-    a{color:var(--fg);text-decoration:none;}
-    a:hover{text-decoration:underline;}
+    * { box-sizing: border-box; }
 
-    /* ---------- HERO ---------- */
-
-    .hero-wrapper{
-      width:100%;
-      min-height:70vh;
-      position:relative;
-      overflow:hidden;
+    body {
+      margin: 0;
+      font-family: "Courier New", monospace;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
     }
 
-    .hero-img{
-      width:100%;
-      height:100%;
-      min-height:70vh;
-      object-fit:cover;
-      display:block;
+    a {
+      color: var(--accent);
+      text-decoration: none;
     }
 
-    /* side menu ที่วางทับบนรูป */
-    .side-nav{
-      position:absolute;
-      left:6vw;          /* ขยับเทียบกับ Figma ได้ */
-      top:18vh;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      font-family:"Courier New",monospace;
-      font-size:18px;    /* ให้ตัวใหญ่ขึ้น */
-      letter-spacing:0.08em;
+    a:hover {
+      text-decoration: underline;
     }
 
-    .side-nav-title{
-      font-size:16px;
-      margin-bottom:14px;
-      text-transform:uppercase;
+    /* ---------- HERO LANDING (รูป home.png) ---------- */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: url("assets/home.png") center center / cover no-repeat;
+      overflow: hidden;
     }
 
-    .side-nav a{
-      color:var(--fg);
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 0, 120, 0.45); /* overlay ม่วงบาง ๆ ให้ฟิลเตอร์เหมือน figma */
     }
 
-    .side-nav a.active{
-      text-decoration:underline;
+    /* ตัวอักษร KEIRA J. */
+    .hero-title {
+      position: absolute;
+      top: 18%;
+      left: 120px;
+      font-size: 80px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      z-index: 2;
+      color: #ffffff;
     }
 
-    /* ---------- MAIN CONTENT ---------- */
-
-    .page{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:40px 20px 60px;
+    /* เมนู sidebar ซ้ายล่าง */
+    .hero-nav {
+      position: absolute;
+      left: 60px;
+      bottom: 18%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 2;
     }
 
-    section{
-      margin-bottom:40px;
+    .hero-nav a {
+      color: #ffffff;
+      font-size: 22px;
+      text-decoration: none;
     }
 
-    h2{
-      font-family:"Courier New",monospace;
-      font-size:22px;
-      text-transform:lowercase;
-      margin-bottom:14px;
-      text-decoration:underline;
+    .hero-nav a:hover {
+      text-decoration: underline;
     }
 
-    /* BIO SECTION */
-
-    .bio-layout{
-      display:flex;
-      flex-direction:row;
-      gap:32px;
-      align-items:flex-start;
-      flex-wrap:wrap;
+    /* เผื่อบางจอภาพไม่เต็มซ้าย/ขวา → ให้ bg สีเดียวกับหน้า index */
+    .hero::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: -1;
     }
 
-    .bio-photo{
-      flex:0 0 180px;
-      display:flex;
-      justify-content:center;
+    /* ---------- CONTENT PAGE (ตั้งแต่ bio ลงไป) ---------- */
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 20px 80px;
     }
 
-    .bio-photo img{
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      object-fit:cover;
-      border:3px solid var(--muted);
-      background:#000;
+    section {
+      margin-bottom: 56px;
     }
 
-    .bio-text{
-      flex:1 1 260px;
-      font-size:14px;
-      line-height:1.7;
-      color:var(--fg);
+    h2 {
+      font-size: 26px;
+      margin: 0 0 18px;
+      border-bottom: 2px solid var(--fg);
+      display: inline-block;
+      padding-bottom: 4px;
     }
 
-    .bio-meta{
-      margin-top:10px;
-      font-size:13px;
-      color:var(--muted);
+    .bio-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: flex-start;
     }
 
-    /* PROJECTS / PUBLICATIONS */
-
-    .section-title{
-      font-family:"Courier New",monospace;
-      font-size:18px;
-      text-transform:lowercase;
-      text-decoration:underline;
-      margin-bottom:14px;
+    .bio-photo img {
+      width: 210px;
+      height: 225px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
     }
 
-    .card-list{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .bio-text {
+      flex: 1;
+      min-width: 230px;
+      line-height: 1.7;
+      font-size: 15px;
     }
 
-    .card{
-      background:var(--card-bg);
-      border:1px solid var(--line);
-      padding:14px 18px;
-      font-size:14px;
+    .bio-meta {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
     }
 
-    .card-title{
-      font-weight:600;
-      margin-bottom:4px;
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 14px;
+      text-transform: lowercase;
     }
 
-    .card-meta{
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:8px;
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .card-links a{
-      font-size:12px;
-      margin-right:10px;
-      text-transform:lowercase;
-      color:var(--accent);
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.1);
     }
 
-    /* RESPONSIVE */
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
 
-    @media (max-width:768px){
-      .side-nav{
-        left:16px;
-        top:18px;
-        font-size:16px;
+    .card-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card-links a {
+      font-size: 13px;
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 52px;
+        left: 40px;
+        top: 22%;
       }
-      .side-nav-title{
-        font-size:14px;
+      .hero-nav {
+        left: 30px;
+        bottom: 20%;
       }
-      .hero-wrapper{
-        min-height:60vh;
-      }
-      .bio-layout{
-        flex-direction:column;
-        align-items:center;
-        text-align:left;
-      }
-      .bio-photo{
-        order:-1;
-      }
-      .bio-text{
-        width:100%;
+      .bio-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- HERO (home.png) -->
-  <header class="hero-wrapper">
-    <img src="assets/Home.png" alt="Keira J hero" class="hero-img" />
+  <!-- ---------- HERO LANDING ---------- -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
 
-    <nav class="side-nav">
-      <div class="side-nav-title">THE REAL ;-)</div>
-      <a href="#top" class="active">home</a>
+    <div class="hero-title">KEIRA J.</div>
+
+    <nav class="hero-nav">
+      <a href="home.html">home</a>
       <a href="#bio">bio</a>
       <a href="#projects">projects / publications</a>
       <a href="#articles">articles</a>
@@ -212,6 +217,7 @@
     </nav>
   </header>
 
+  <!-- ---------- MAIN CONTENT (เหมือนเดิมตั้งแต่ bio ลงไป) ---------- -->
   <main class="page" id="top">
     <!-- BIO -->
     <section id="bio">
@@ -222,7 +228,7 @@
         </div>
         <div class="bio-text">
           <p>
-            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at National Dong Hwa University, Taiwan.
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at NDHU, Taiwan.
             My early journey into machine learning and cybersecurity has led me to hands-on projects across disciplines.
             I blend logic with language to connect ideas through stories, structure, and creativity.
           </p>
@@ -231,7 +237,8 @@
             I enjoy testing ML models, writing about politics and Taiwan, and exploring LLM safety.
           </p>
           <div class="bio-meta">
-            EN · 中文(繁體) · ES ·TH       CS / ML · Cybersecurity · REMOTE SENSING
+            EN · 中文(繁體) · ES · TH · CS / ML · Cybersecurity · REMOTE SENSING
+            National Dong Hwa University, Taiwan.
           </div>
         </div>
       </div>
@@ -247,7 +254,7 @@
             Carbon Sink Estimation in Primary Forest via Individualized Tree Segmentation and Species-Level Classification
           </div>
           <div class="card-meta">
-            BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei
+            BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei<br>
             CSIE 2025 Undergraduated Project - 🏆 Honorable Mention · Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei
           </div>
           <div class="card-links">
@@ -262,7 +269,7 @@
             Coming soon..
           </div>
           <div class="card-meta">
-            LLM Safety Project — inference-time alignment &amp; jailbreak evaluation
+            LLM Project — inference-time alignment
           </div>
           <div class="card-links">
             <a href="#" target="_blank">report</a>
@@ -276,7 +283,7 @@
     <section id="articles">
       <div class="section-title">articles</div>
       <p style="font-size:14px;color:var(--muted);">
-        Coming soon — notes about ML, remote sensing, and LLM safety experiments.
+        Coming soon — on medium.
       </p>
     </section>
 
@@ -284,7 +291,7 @@
     <section id="contact">
       <div class="section-title">contact</div>
       <p style="font-size:14px;">
-        Email: <a href="mailto:your@email">your@email</a> ·
+        Email: <a href="mailto:your@email">supharada.mt@gmail</a> ·
         GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
       </p>
     </section>
