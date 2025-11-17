@@ -1,157 +1,210 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="assets/bbicon.png" />
-<title>Keira J.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="assets/bbicon.png" />
 
-<style>
-:root{
-  --bg:#2200A5; 
-  --fg:#f7f4ff;
-  --muted:#b9b5e3;
-  --line:#3c29d0;
-  --accent:#ffdd6b;
-  --max:980px;
-}
+  <title>Keira J.</title>
 
-body{
-  margin:0;
-  font-family:"Courier New", monospace;
-  background:var(--bg);
-  color:var(--fg);
-}
+  <!-- Figma-like Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
 
-/* ========== 1) MENU HERO (ตัวใหญ่บนรูป ซ้ายล่าง ยกขึ้นมาหน่อย) ========== */
-.menu-hero {
-  position:absolute;
-  left:60px;
-  bottom:120px;           /* เดิม 60px → ยกขึ้นมา */
-  z-index:30;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  font-size:28px;         /* ตัวใหญ่ขึ้นอีกนิด */
-}
+  <style>
+    :root {
+      --bg: #2200A5;
+      --fg: #ffffff;
+      --muted: #b9b5e3;
+      --accent: #ffffff;
+      --menu-size: 17px;
+      --menu-spacing: 0.10em;
+    }
 
-.menu-hero a{
-  color:white;
-  text-decoration:none;
-}
+    * { box-sizing: border-box; }
 
-/* ========== 2) MENU แบบ HAMBURGER FIXED ========== */
-.menu-fixed{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:40;
-  display:none;            /* ซ่อนตอนยังอยู่บน hero */
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
 
-.menu-btn{
-  width:40px;
-  height:32px;
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:transform .15s ease;
-}
+    /* HERO */
+    .hero {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: var(--bg);
+    }
 
-.menu-btn:hover{
-  transform:scale(1.05);
-}
+    .hero img {
+      width: 100%;
+      height: auto;
+      max-width: 1440px;
+      display: block;
+    }
 
-.menu-btn div{
-  height:6px;
-  background:white;
-  border-radius:3px;
-}
+    /* MENU — Figma style */
+    .menu {
+      position: fixed;
+      bottom: 60px;
+      left: 60px;
+      z-index: 200;
+      font-weight: 200;
+      font-size: var(--menu-size);
+      letter-spacing: var(--menu-spacing);
+      line-height: 1.9;
+      transition: opacity .3s ease;
+    }
 
-/* side panel */
-.menu-panel{
-  position:fixed;
-  top:0;
-  left:0;
-  width:220px;
-  height:100vh;
-  background:rgba(20,10,130,0.92);
-  padding:40px 20px;
-  transform:translateX(-230px);
-  opacity:0;                   /* เพิ่ม fade */
-  pointer-events:none;         /* ยังคลิกไม่ได้ตอนปิด */
-  transition:transform .25s ease-out, opacity .25s ease-out;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  font-size:22px;
-  box-shadow:4px 0 20px rgba(0,0,0,0.45);  /* shadow ขอบเมนู */
-  backdrop-filter:blur(4px);               /* เบลอด้านหลังเบา ๆ (ถ้าเบราว์เซอร์รองรับ) */
-}
+    .menu a {
+      display: block;
+      color: var(--fg);
+      text-decoration: none;
+      margin: 2px 0;
+    }
 
-.menu-panel a{
-  color:white;
-  text-decoration:none;
-}
+    .menu a.active {
+      text-decoration: underline;
+    }
 
-/* เปิด panel */
-.menu-panel.open{
-  transform:translateX(0);
-  opacity:1;
-  pointer-events:auto;
-}
+    /* HAMBURGER */
+    .hamburger {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      font-size: 32px;
+      cursor: pointer;
+      color: var(--fg);
+      display: none;
+      opacity: 0;
+      transition: opacity .3s ease;
+      z-index: 300;
+    }
 
-/* ========== HERO IMAGE ========== */
-.hero{
-  position:relative;
-  width:100%;
-  display:flex;
-  justify-content:center;
-}
+    /* Slide Panel */
+    .side-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      padding: 80px 30px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(5px);
+      transform: translateX(-120%);
+      transition: transform .35s ease, opacity .3s ease;
+      opacity: 0;
+      z-index: 250;
+    }
 
-.hero img{
-  width:100%;
-  max-width:1440px;
-  display:block;
-}
+    .side-panel.open {
+      transform: translateX(0);
+      opacity: 1;
+    }
 
-/* ========== CONTENT ========== */
-.page{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:60px 20px 80px;
-}
+    .side-panel a {
+      display: block;
+      margin: 12px 0;
+      color: var(--fg);
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
 
-section{ margin-bottom:56px; }
-h2{
-  font-size:26px;
-  margin:0 0 18px;
-  border-bottom:2px solid var(--fg);
-  display:inline-block;
-}
+    /* PAGE */
+    .page {
+      max-width: 900px;
+      padding: 80px 20px;
+      margin: 0 auto;
+    }
 
-.bio-layout{display:flex;gap:30px;flex-wrap:wrap;}
-.bio-photo img{
-  width:210px;height:225px;object-fit:cover;
-  border-radius:50%;border:3px solid white;
-}
-.bio-text{flex:1;min-width:230px;font-size:15px;line-height:1.7;}
-.bio-meta{margin-top:10px;font-size:13px;color:var(--muted);}
-.card-list{display:flex;flex-direction:column;gap:16px;}
-.card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:rgba(0,0,0,0.1);}
-.card-title{font-weight:600;margin-bottom:6px;}
-.card-meta{font-size:13px;color:var(--muted);margin-bottom:6px;}
-.card-links a{margin-right:10px;font-size:13px;}
-</style>
+    h2 {
+      font-size: 28px;
+      font-weight: 300;
+      text-decoration: underline;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 28px;
+      font-weight: 300;
+      text-decoration: underline;
+      letter-spacing: 0.03em;
+      margin: 60px 0 20px;
+    }
+
+    /* BIO */
+    .bio-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: flex-start;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .bio-photo img {
+      width: 210px;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+
+    /* CARDS */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .card-links a {
+      font-size: 13px;
+      margin-right: 10px;
+      color: var(--fg);
+    }
+
+    @media(max-width:700px) {
+      .menu { bottom: 30px; left: 30px; }
+      .hamburger { bottom: 25px; left: 25px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ========== HERO + MENU VERSION 1 (ตัวใหญ่ ซ้ายล่าง) ========== -->
-<header class="hero" id="hero">
-  <nav class="menu-hero" id="menuHero">
-    <a href="#top">home</a>
+  <!-- HERO with ID for linking -->
+  <header class="hero" id="top">
+    <img src="assets/Home.png" alt="Keira J.">
+  </header>
+
+  <!-- MENU -->
+  <nav class="menu" id="menu">
+    <a href="#top" class="active">home</a>
     <a href="#bio">bio</a>
     <a href="#projects">projects / publications</a>
     <a href="#articles">articles</a>
@@ -159,134 +212,138 @@ h2{
     <a href="#cv">cv [soon]</a>
   </nav>
 
-  <img src="assets/Home.png" alt="Keira J.">
-</header>
+  <!-- HAMBURGER -->
+  <div class="hamburger" id="hamburger">☰</div>
 
-<!-- ========== MENU VERSION 2 (hamburger sticky) ========== -->
-<div class="menu-fixed" id="menuFixed">
-  <div class="menu-btn" onclick="togglePanel()">
-    <div></div><div></div><div></div>
+  <!-- SLIDE PANEL -->
+  <div class="side-panel" id="panel">
+    <a href="#top">home</a>
+    <a href="#bio">bio</a>
+    <a href="#projects">projects / publications</a>
+    <a href="#articles">articles</a>
+    <a href="#contact">contact</a>
+    <a href="#cv">cv [soon]</a>
   </div>
-</div>
 
-<div class="menu-panel" id="menuPanel">
-  <a href="#top" onclick="togglePanel()">home</a>
-  <a href="#bio" onclick="togglePanel()">bio</a>
-  <a href="#projects" onclick="togglePanel()">projects / publications</a>
-  <a href="#articles" onclick="togglePanel()">articles</a>
-  <a href="#contact" onclick="togglePanel()">contact</a>
-  <a href="#cv" onclick="togglePanel()">cv [soon]</a>
-</div>
+  <!-- CONTENT -->
+  <main class="page">
 
-<!-- ========== CONTENT ========== -->
-<main class="page" id="top">
+    <!-- BIO -->
+    <section id="bio">
+      <h2>bio</h2>
 
-<section id="bio">
-  <h2>bio</h2>
-  <div class="bio-layout">
-    <div class="bio-photo">
-      <img src="assets/my_bio_picture.png" alt="Supharada Jundok portrait">
-    </div>
-    <div class="bio-text">
-      <p>
-        Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก),
-        a CSIE senior student at National Dong Hwa University, Taiwan.
-        My early journey into machine learning and cybersecurity has led me to hands-on projects across disciplines.
-        I blend logic with languages to connect ideas through stories, structure, and creativity.
+      <div class="bio-layout">
+        <div class="bio-photo">
+          <img src="assets/my_bio_picture.png" alt="">
+        </div>
+        <div class="bio-text">
+          Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก),  
+          a CSIE senior student at National Dong Hwa University, Taiwan.  
+          My early journey into ML and cybersecurity led me into hands-on projects across fields.  
+          I blend logic with language to connect ideas through structure & storytelling.
+          <br><br>
+          Today I work between Hualien (TW) and Khon Kaen (TH),  
+          testing ML models, writing politics & Taiwan contents,  
+          and exploring LLM safety research.
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">projects / publications</div>
+
+      <div class="card-list">
+
+        <article class="card">
+          <div class="card-title">
+            Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification
+          </div>
+
+          <div class="card-meta">
+            BDSIC 2025 — 🏆 Best Presentation Award  
+            Keira J., C. Shiau-Wei<br>
+            CSIE 2025 Undergraduate Project — 🏆 Honorable Mention  
+            Keira J., Aaron Kuo · Advisor: Prof. C. Shiau-Wei
+          </div>
+
+          <div class="card-links">
+            <a href="#">paper</a>
+            <a href="#">slides</a>
+            <a href="#">code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">Coming soon..</div>
+          <div class="card-meta">LLM Safety Project</div>
+          <div class="card-links">
+            <a href="#">report</a>
+            <a href="#">repo</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ARTICLES -->
+    <section id="articles">
+      <div class="section-title">articles</div>
+      <p style="font-size:14px;color:var(--muted);">
+        Coming soon — notes & experiments.
       </p>
-      <p>
-        Today I keep working on projects across the world 
-        — codifying in Hualien, TW and spending summers in Khon Kaen, TH.
-        I enjoy testing ML models, writing about politics and Taiwan, and exploring LLM safety.
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">contact</div>
+      <p style="font-size:14px;">
+        Email: <a href="mailto:supharada.mt@gmail.com">supharada.mt@gmail.com</a> ·  
+        GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
       </p>
-      <div class="bio-meta">
-        EN · 中文(繁體) · TH · ES · CS / ML · CYBERSECURITY · REMOTE SENSING · DATA ANALYTICS
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="projects">
-  <div class="section-title">projects / publications</div>
-  <div class="card-list">
-    <article class="card">
-      <div class="card-title">
-        Carbon Sink Estimation in Primary Forest via Individualized Tree Segmentation and Species-Level Classification
-      </div>
-      <div class="card-meta">
-        BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei<br>
-        CSIE 2025 Undergraduated Project — 🏆 Honorable Mention · Keira J., Aaron Kuo 
-                                            · Advisor Professor: C. Shiau-Wei
-      </div>
-      <div class="card-links">
-        <a href="#" target="_blank">paper</a>
-        <a href="#" target="_blank">slides</a>
-        <a href="#" target="_blank">code</a>
-      </div>
-    </article>
+    <!-- CV -->
+    <section id="cv">
+      <div class="section-title">cv [soon]</div>
+      <p style="font-size:14px;color:var(--muted);">
+        Curriculum vitae will be added later.
+      </p>
+    </section>
 
-    <article class="card">
-      <div class="card-title">Coming soon..</div>
-      <div class="card-meta">
-        LLM Safety Project
-      </div>
-      <div class="card-links">
-        <a href="#" target="_blank">report</a>
-        <a href="#" target="_blank">repo</a>
-      </div>
-    </article>
-  </div>
-</section>
+  </main>
 
-<section id="articles">
-  <div class="section-title">articles</div>
-  <p style="font-size:14px;color:var(--muted);">
-    Coming soon —..
-  </p>
-</section>
+  <!-- JS -->
+  <script>
+    const menu = document.getElementById("menu");
+    const hamburger = document.getElementById("hamburger");
+    const panel = document.getElementById("panel");
+    const bio = document.getElementById("bio");
 
-<section id="contact">
-  <div class="section-title">contact</div>
-  <p style="font-size:14px;">
-    Email: <a href="mailto:supharada.mt@gmail.com">supharada.mt@gmail.com</a> ·
-    GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
-  </p>
-</section>
+    window.addEventListener("scroll", () => {
+      const trigger = bio.offsetTop - 150;
 
-<section id="cv">
-  <div class="section-title">cv [soon]</div>
-  <p style="font-size:14px;color:var(--muted);">Curriculum vitae will be added later.</p>
-</section>
+      if (window.scrollY > trigger) {
+        menu.style.opacity = "0";
+        menu.style.pointerEvents = "none";
 
-</main>
+        hamburger.style.display = "block";
+        setTimeout(() => hamburger.style.opacity = "1", 10);
+      } else {
+        menu.style.opacity = "1";
+        menu.style.pointerEvents = "auto";
 
-<script>
-const hero      = document.getElementById("hero");
-const menuHero  = document.getElementById("menuHero");
-const menuFixed = document.getElementById("menuFixed");
-let heroHeight  = 0;
+        hamburger.style.opacity = "0";
+        setTimeout(() => hamburger.style.display = "none", 300);
 
-/* ความสูง hero คำนวณอัตโนมัติ ตามรูป จริง ๆ แล้ว - 80px กันเผื่อ */
-function updateHeroHeight(){
-  heroHeight = hero.offsetHeight - 80;
-}
-window.addEventListener("load", updateHeroHeight);
-window.addEventListener("resize", updateHeroHeight);
+        panel.classList.remove("open");
+      }
+    });
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > heroHeight) {
-    menuHero.style.display = "none";
-    menuFixed.style.display = "block";
-  } else {
-    menuHero.style.display = "flex";
-    menuFixed.style.display = "none";
-  }
-});
-
-function togglePanel(){
-  document.getElementById("menuPanel").classList.toggle("open");
-}
-</script>
+    hamburger.onclick = () => {
+      panel.classList.toggle("open");
+    };
+  </script>
 
 </body>
 </html>
