@@ -6,7 +6,7 @@
 
   <title>Keira J.</title>
 
-  <!-- ถ้ามีไฟล์ icon แล้วค่อยใช้บรรทัดนี้ -->
+  <!-- ถ้าเตรียม icon แล้ว ค่อยเอาอันนี้ออกจากคอมเมนต์ -->
   <!-- <link rel="icon" type="image/png" href="assets/icon.png" /> -->
 
   <style>
@@ -19,7 +19,9 @@
       --max: 980px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -38,8 +40,9 @@
       text-decoration: underline;
     }
 
-    /* ---------- HERO: แสดงรูป home.png เต็ม ๆ ---------- */
+    /* ---------- HERO: แสดงรูป Home.png เต็ม ๆ ---------- */
     .hero {
+      position: relative;       /* เพื่อให้ left-menu อ้างอิงตำแหน่งจาก hero */
       width: 100%;
       background: var(--bg);
       display: flex;
@@ -53,7 +56,29 @@
       display: block;
     }
 
-    /* ---------- CONTENT PAGE (เหมือนเดิม) ---------- */
+    /* ---------- LEFT MENU บน HERO (แบบใน Figma) ---------- */
+    .left-menu {
+      position: absolute;
+      top: 120px;       /* ระยะจากขอบบน ปรับได้ */
+      left: 60px;       /* ระยะจากขอบซ้าย ปรับให้ฟีลเหมือนใน Figma */
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 22px;  /* ขนาดตัวอักษรของเมนู */
+      font-weight: 500;
+    }
+
+    .left-menu a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .left-menu a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- CONTENT PAGE (bio ลงไป) ---------- */
     .page {
       max-width: var(--max);
       margin: 0 auto;
@@ -142,18 +167,36 @@
         align-items: center;
         text-align: left;
       }
+
+      .left-menu {
+        top: 80px;
+        left: 24px;
+        font-size: 18px;
+        gap: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HERO: แค่รูป ไม่มี text ซ้อน -->
+  <!-- HERO: รูปเต็ม + เมนูซ้อนด้านซ้ายล่าง -->
   <header class="hero">
+
+    <!-- LEFT SLIDE BAR MENU -->
+    <nav class="left-menu">
+      <a href="home.html">home</a>
+      <a href="#bio">bio</a>
+      <a href="#projects">projects / publications</a>
+      <a href="#articles">articles</a>
+      <a href="#contact">contact</a>
+      <a href="#cv">cv [soon]</a>
+    </nav>
+
     <img src="assets/Home.png" alt="Keira J. landing" class="hero-img">
   </header>
 
-  <!-- MAIN CONTENT (bio ลงไป = โค้ดเดิมของเธอ) -->
+  <!-- MAIN CONTENT (bio ลงไปตามที่เธอเขียนไว้) -->
   <main class="page" id="top">
     <!-- BIO -->
     <section id="bio">
@@ -164,7 +207,7 @@
         </div>
         <div class="bio-text">
           <p>
-            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), 
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก),
             a CSIE senior student at National Dong Hwa University, Taiwan.
             My early journey into machine learning and cybersecurity has led me to hands-on projects across disciplines.
             I blend logic with languages to connect ideas through stories, structure, and creativity.
@@ -174,7 +217,7 @@
             I enjoy testing ML models, writing about politics and Taiwan, and exploring LLM safety.
           </p>
           <div class="bio-meta">
-            EN · 中文(繁體) · ES · TH · CS / ML · CYBERSECURITY · REMOTE SENSING
+            EN · 中文(繁體) · ES · TH · CS / ML · CYBERSECURITY · REMOTE SENSING · BIG DATA
           </div>
         </div>
       </div>
@@ -191,8 +234,7 @@
           </div>
           <div class="card-meta">
             BDSIC 2025 — 🏆 Best Presentation Award · Keira J., C. Shiau-Wei<br>
-            CSIE 2025 Undergraduated Project - 🏆 Honorable Mention · Keira J., Aaron Kuo 
-                                                · Advisor Profesor: C. Shiau-Wei
+            CSIE 2025 Undergraduated Project — 🏆 Honorable Mention · Keira J., Aaron Kuo · Advisor Professor: C. Shiau-Wei
           </div>
           <div class="card-links">
             <a href="#" target="_blank">paper</a>
@@ -220,7 +262,7 @@
     <section id="articles">
       <div class="section-title">articles</div>
       <p style="font-size:14px;color:var(--muted);">
-        Coming soon —..
+        Coming soon — ..
       </p>
     </section>
 
@@ -228,7 +270,7 @@
     <section id="contact">
       <div class="section-title">contact</div>
       <p style="font-size:14px;">
-        Email: <a href="mailto:your@email">supharada.mt@gmail.com</a> ·
+        Email: <a href="mailto:supharada.mt@gmail.com">supharada.mt@gmail.com</a> ·
         GitHub: <a href="https://github.com/mato8q" target="_blank">mato8q</a>
       </p>
     </section>
