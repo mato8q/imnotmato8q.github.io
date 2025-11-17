@@ -1,200 +1,182 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Keira J.</title>
 
-  <title>Keira J.</title>
+<style>
+:root{
+  --bg:#2200A5; 
+  --fg:#f7f4ff;
+  --muted:#b9b5e3;
+  --line:#3c29d0;
+  --accent:#ffdd6b;
+  --max:980px;
+}
 
-  <!-- ถ้าเตรียม icon แล้ว ค่อยเอาอันนี้ออกจากคอมเมนต์ -->
-  <!-- <link rel="icon" type="image/png" href="assets/icon.png" /> -->
+body{
+  margin:0;
+  font-family:"Courier New", monospace;
+  background:var(--bg);
+  color:var(--fg);
+}
 
-  <style>
-    :root {
-      --bg: #2200A5;
-      --fg: #f7f4ff;
-      --muted: #b9b5e3;
-      --line: #3c29d0;
-      --accent: #ffdd6b;
-      --max: 980px;
-    }
+/* -------------------------------------------------------
+   1) MENU HERO (บนรูป) — absolute ซ้ายล่าง
+------------------------------------------------------- */
+.menu-hero {
+  position:absolute;
+  left:60px;
+  bottom:60px;
+  z-index:30;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  font-size:26px;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.menu-hero a{
+  color:white;
+  text-decoration:none;
+}
 
-    body {
-      margin: 0;
-      font-family: "Courier New", monospace;
-      background: var(--bg);
-      color: var(--fg);
-      overflow-x: hidden;
-    }
+/* -------------------------------------------------------
+   2) FIXED MENU (แบบ hamburger)
+------------------------------------------------------- */
+.menu-fixed{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:40;
+  display:none;            /* ซ่อนตอนอยู่บน hero */
+}
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+.menu-btn{
+  width:40px;
+  height:32px;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+.menu-btn div{
+  height:6px;
+  background:white;
+  border-radius:3px;
+}
 
-    /* ---------- HERO: แสดงรูป Home.png เต็ม ๆ ---------- */
-    .hero {
-      position: relative;       /* เพื่อให้ left-menu อ้างอิงตำแหน่งจาก hero */
-      width: 100%;
-      background: var(--bg);
-      display: flex;
-      justify-content: center;
-    }
+/* side panel */
+.menu-panel{
+  position:fixed;
+  top:0;
+  left:0;
+  width:220px;
+  height:100vh;
+  background:rgba(20,10,130,0.95);
+  padding:40px 20px;
+  transform:translateX(-230px);
+  transition:0.25s;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  font-size:22px;
+}
 
-    .hero-img {
-      width: 100%;
-      max-width: 1440px;  /* กว้างสุดเท่ารูปจาก figma */
-      height: auto;
-      display: block;
-    }
+.menu-panel a{
+  color:white;
+  text-decoration:none;
+}
 
-    /* ---------- LEFT MENU บน HERO (แบบใน Figma) ---------- */
-    .left-menu {
-      position: absolute;
-      top: 120px;       /* ระยะจากขอบบน ปรับได้ */
-      left: 60px;       /* ระยะจากขอบซ้าย ปรับให้ฟีลเหมือนใน Figma */
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 22px;  /* ขนาดตัวอักษรของเมนู */
-      font-weight: 500;
-    }
+/* เปิด panel */
+.menu-panel.open{
+  transform:translateX(0);
+}
 
-    .left-menu a {
-      color: white;
-      text-decoration: none;
-    }
+/* -------------------------------------------------------
+   HERO IMAGE
+------------------------------------------------------- */
+.hero{
+  position:relative;
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
 
-    .left-menu a:hover {
-      text-decoration: underline;
-    }
+.hero img{
+  width:100%;
+  max-width:1440px;
+  display:block;
+}
 
-    /* ---------- CONTENT PAGE (bio ลงไป) ---------- */
-    .page {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-    }
+/* -------------------------------------------------------
+   CONTENT
+------------------------------------------------------- */
+.page{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:60px 20px 80px;
+}
 
-    section {
-      margin-bottom: 56px;
-    }
+section{ margin-bottom:56px; }
+h2{
+  font-size:26px;
+  margin:0 0 18px;
+  border-bottom:2px solid var(--fg);
+  display:inline-block;
+}
 
-    h2 {
-      font-size: 26px;
-      margin: 0 0 18px;
-      border-bottom: 2px solid var(--fg);
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-
-    .bio-layout {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      align-items: flex-start;
-    }
-
-    .bio-photo img {
-      width: 210px;
-      height: 225px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #ffffff;
-    }
-
-    .bio-text {
-      flex: 1;
-      min-width: 230px;
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .bio-meta {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .section-title {
-      font-size: 20px;
-      margin-bottom: 14px;
-      text-transform: lowercase;
-    }
-
-    .card-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 14px 16px;
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .card-meta {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .card-links a {
-      font-size: 13px;
-      margin-right: 10px;
-    }
-
-    @media (max-width: 768px) {
-      .bio-layout {
-        flex-direction: column;
-        align-items: center;
-        text-align: left;
-      }
-
-      .left-menu {
-        top: 80px;
-        left: 24px;
-        font-size: 18px;
-        gap: 8px;
-      }
-    }
-  </style>
+.bio-layout{display:flex;gap:30px;flex-wrap:wrap;}
+.bio-photo img{
+  width:210px;height:225px;object-fit:cover;
+  border-radius:50%;border:3px solid white;
+}
+.bio-text{flex:1;min-width:230px;font-size:15px;line-height:1.7;}
+.bio-meta{margin-top:10px;font-size:13px;color:var(--muted);}
+.card-list{display:flex;flex-direction:column;gap:16px;}
+.card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:rgba(0,0,0,0.1);}
+.card-title{font-weight:600;margin-bottom:6px;}
+.card-meta{font-size:13px;color:var(--muted);margin-bottom:6px;}
+.card-links a{margin-right:10px;font-size:13px;}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO: รูปเต็ม + เมนูซ้อนด้านซ้ายล่าง -->
-  <header class="hero">
+<!-- -------------------------------------------------------
+   HERO + MENU VERSION 1 (ใหญ่ ซ้ายล่าง)
+------------------------------------------------------- -->
+<header class="hero">
+  <nav class="menu-hero" id="menuHero">
+    <a href="#top">home</a>
+    <a href="#bio">bio</a>
+    <a href="#projects">projects / publications</a>
+    <a href="#articles">articles</a>
+    <a href="#contact">contact</a>
+    <a href="#cv">cv [soon]</a>
+  </nav>
 
-    <!-- LEFT SLIDE BAR MENU -->
-    <nav class="left-menu">
-      <a href="home.html">home</a>
-      <a href="#bio">bio</a>
-      <a href="#projects">projects / publications</a>
-      <a href="#articles">articles</a>
-      <a href="#contact">contact</a>
-      <a href="#cv">cv [soon]</a>
-    </nav>
+  <img src="assets/Home.png">
+</header>
 
-    <img src="assets/Home.png" alt=";-) Keira J." class="hero-img">
-  </header>
+<!-- -------------------------------------------------------
+   MENU VERSION 2 (hamburger sticky)
+------------------------------------------------------- -->
+<div class="menu-fixed" id="menuFixed">
+  <div class="menu-btn" onclick="togglePanel()">
+    <div></div><div></div><div></div>
+  </div>
+</div>
+
+<div class="menu-panel" id="menuPanel">
+  <a href="#top" onclick="togglePanel()">home</a>
+  <a href="#bio" onclick="togglePanel()">bio</a>
+  <a href="#projects" onclick="togglePanel()">projects / publications</a>
+  <a href="#articles" onclick="togglePanel()">articles</a>
+  <a href="#contact" onclick="togglePanel()">contact</a>
+  <a href="#cv" onclick="togglePanel()">cv [soon]</a>
+</div>
 
   <!-- MAIN CONTENT (bio ลงไปตามที่เธอเขียนไว้) -->
   <main class="page" id="top">
@@ -282,5 +264,29 @@
     </section>
 
   </main>
+</body>
+</html>
+</main>
+
+<script>
+const heroHeight = 550;       // กำหนดว่าเลื่อนลงกี่ px จะสลับเมนู
+const menuHero = document.getElementById("menuHero");
+const menuFixed = document.getElementById("menuFixed");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > heroHeight) {
+    menuHero.style.display = "none";
+    menuFixed.style.display = "block";
+  } else {
+    menuHero.style.display = "flex";
+    menuFixed.style.display = "none";
+  }
+});
+
+function togglePanel(){
+  document.getElementById("menuPanel").classList.toggle("open");
+}
+</script>
+
 </body>
 </html>
