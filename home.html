@@ -141,15 +141,17 @@
     }
 
     /* BIO */
+    /* BIO MAIN LAYOUT */
     .bio-layout {
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 40px;
       align-items: flex-start;
       line-height: 1.7;
       font-weight: 300;
     }
-
+    
+    /* PHOTO */
     .bio-photo img {
       width: 210px;
       height: 210px;
@@ -157,6 +159,57 @@
       border-radius: 50%;
       border: 3px solid white;
     }
+    
+    /* RIGHT COLUMN */
+    .bio-right {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    /* NAME + UNDERLINE */
+    .bio-name {
+      font-size: 26px;
+      font-weight: 300;
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    
+    .bio-name::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+    
+    /* SUBTITLE */
+    .bio-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    
+    /* BIO TEXT */
+    .bio-text {
+      margin-top: 5px;
+    }
+    
+    /* META TAGS */
+    .bio-meta {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
 
     /* CARDS */
     .card-list {
@@ -236,23 +289,39 @@
       <h2>bio</h2>
 
       <div class="bio-layout">
+
         <div class="bio-photo">
           <img src="assets/my_bio_picture.png" alt="">
         </div>
-        <div class="bio-text">
-          Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก),  
-          a CSIE senior student at National Dong Hwa University, Taiwan.  
-          My early journey into Machine Learning and cybersecurity led me into hands-on projects across fields.  
-          I blend logic with languages to connect ideas through structure & storytelling.
-          <br><br>
-          Today I work codify between Hualien, Taiwan and summertime in Khon Kaen, Thailand,  
-          testing ML models, writing politics & Taiwan contents,  
-          and exploring LLM safety research.
-        </div>
-         <div class="bio-meta">
+      
+        <div class="bio-right">
+      
+          <div class="bio-name">
+            Supharada Jundok
+          </div>
+      
+          <div class="bio-subtitle">
+            CSIE senior student @ National Dong Hwa University, Taiwan
+          </div>
+      
+          <div class="bio-text">
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at National Dong Hwa University, Hualien, Taiwan. 
+            <br><br>
+            My early journey into machine learning and cybersecurity led me into hands-on, cross-disciplinary projects.
+            I blend logic with language and with code to connect ideas through structure, storytelling, and creativity.
+            <br><br>
+            Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
+            My interests include testing ML models, writing politics and Taiwan-related content, and exploring LLM safety research.
+          </div>
+      
+          <div class="bio-meta">
             EN · 中文(繁體) · ES · TH · CS / ML · CYBERSECURITY · REMOTE SENSING · BIG DATA
           </div>
+      
+        </div>
+      
       </div>
+
     </section>
 
     <!-- PROJECTS -->
