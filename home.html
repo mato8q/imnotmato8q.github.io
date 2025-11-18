@@ -131,17 +131,7 @@
       letter-spacing: 0.03em;
     }
 
-    /* SECTION TITLES */
-    .section-title {
-      font-size: 28px;
-      font-weight: 300;
-      text-decoration: underline;
-      letter-spacing: 0.03em;
-      margin: 60px 0 20px;
-    }
-
-    /* BIO */
-    /* BIO MAIN LAYOUT */
+    /* BIO — NEW UPDATED */
     .bio-layout {
       display: flex;
       flex-wrap: wrap;
@@ -150,8 +140,14 @@
       line-height: 1.7;
       font-weight: 300;
     }
-    
-    /* PHOTO */
+
+    .bio-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
     .bio-photo img {
       width: 210px;
       height: 210px;
@@ -159,8 +155,42 @@
       border-radius: 50%;
       border: 3px solid white;
     }
-    
-    /* RIGHT COLUMN */
+
+    /* ICONS */
+    .bio-icons {
+      margin-top: 16px;
+      display: flex;
+      gap: 14px;
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .bio-icons a {
+      color: var(--fg);
+      text-decoration: none;
+      transition: opacity .25s ease;
+    }
+
+    .bio-icons a:hover {
+      opacity: 0.6;
+    }
+
+    /* LANGUAGES */
+    .bio-languages {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+    }
+
+    /* LOCATION */
+    .bio-location {
+      margin-top: 6px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* RIGHT SIDE */
     .bio-right {
       flex: 1;
       min-width: 260px;
@@ -168,8 +198,7 @@
       flex-direction: column;
       gap: 12px;
     }
-    
-    /* NAME + UNDERLINE */
+
     .bio-name {
       font-size: 26px;
       font-weight: 300;
@@ -178,7 +207,7 @@
       display: inline-block;
       padding-bottom: 6px;
     }
-    
+
     .bio-name::after {
       content: "";
       position: absolute;
@@ -190,28 +219,26 @@
       opacity: 0.65;
       border-radius: 20px;
     }
-    
-    /* SUBTITLE */
+
     .bio-subtitle {
       font-size: 15px;
       color: var(--muted);
       margin-bottom: 12px;
     }
-    
-    /* BIO TEXT */
+
     .bio-text {
       margin-top: 5px;
     }
-    
-    /* META TAGS */
-    .bio-meta {
-      margin-top: 12px;
+
+    /* SPECIALIZATION TAGS */
+    .bio-tags {
+      margin-top: 18px;
       font-size: 13px;
-      color: var(--muted);
+      opacity: 0.75;
+      letter-spacing: 0.08em;
     }
 
-
-    /* CARDS */
+    /* OTHER CONTENT (UNCHANGED)… */
     .card-list {
       display: flex;
       flex-direction: column;
@@ -253,7 +280,7 @@
 
 <body>
 
-  <!-- HERO with ID for linking -->
+  <!-- HERO -->
   <header class="hero" id="top">
     <img src="assets/Home.png" alt="Keira J.">
   </header>
@@ -270,8 +297,6 @@
 
   <!-- HAMBURGER -->
   <div class="hamburger" id="hamburger">☰</div>
-
-  <!-- SLIDE PANEL -->
   <div class="side-panel" id="panel">
     <a href="#top">home</a>
     <a href="#bio">bio</a>
@@ -290,39 +315,58 @@
 
       <div class="bio-layout">
 
+        <!-- LEFT COLUMN (UPDATED) -->
         <div class="bio-photo">
           <img src="assets/my_bio_picture.png" alt="">
-        </div>
-      
-        <div class="bio-right">
-      
-          <div class="bio-name">
-            Supharada Jundok
+
+          <div class="bio-icons">
+            <a href="mailto:supharada.mt@gmail.com">📧</a>
+            <a href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank">🔗</a>
+            <a href="https://github.com/mato8q" target="_blank">🐙</a>
           </div>
-      
+
+          <div class="bio-languages">
+            TH · LA · EN · 中文(繁體) · ES
+          </div>
+
+          <div class="bio-location">
+            Hualien 🇹🇼 · Khon Kaen 🇹🇭
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="bio-right">
+
+          <div class="bio-name">Supharada Jundok</div>
+
           <div class="bio-subtitle">
             CSIE senior student @ National Dong Hwa University, Taiwan
           </div>
-      
+
           <div class="bio-text">
-            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), a CSIE senior student at National Dong Hwa University, Hualien, Taiwan. 
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), 
+            a CSIE senior student at National Dong Hwa University, Hualien, Taiwan.
             <br><br>
-            My early journey into machine learning and cybersecurity led me into hands-on, cross-disciplinary projects.
-            I blend logic with language and with code to connect ideas through structure, storytelling, and creativity.
+            My early journey into machine learning and cybersecurity led me into hands-on, 
+            cross-disciplinary projects. I blend logic with language and with code to connect 
+            ideas through structure, storytelling, and creativity.
             <br><br>
             Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
-            My interests include testing ML models, writing politics and Taiwan-related content, and exploring LLM safety research.
+            My interests include testing ML models, writing politics and Taiwan-related content, 
+            and exploring LLM safety research.
           </div>
-      
-          <div class="bio-meta">
-            EN · 中文(繁體) · ES · TH · CS / ML · CYBERSECURITY · REMOTE SENSING · BIG DATA
+
+          <!-- SPECIALIZATION TAGS -->
+          <div class="bio-tags">
+            CS / ML · CYBERSECURITY · REMOTE SENSING · BIG DATA
           </div>
-      
+
         </div>
-      
+
       </div>
 
     </section>
+
 
     <!-- PROJECTS -->
     <section id="projects">
