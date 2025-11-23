@@ -233,6 +233,53 @@
       letter-spacing: 0.08em;
     }
 
+    /* EDUCATION – CARD STYLE */
+    #education {
+      margin-top: 70px;
+    }
+    
+    .edu-card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+    }
+    
+    .edu-block {
+      margin-bottom: 25px;
+    }
+    
+    .edu-title {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    
+    .edu-sub {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 3px;
+    }
+    
+    .edu-year {
+      font-size: 13px;
+      opacity: 0.75;
+      margin-bottom: 5px;
+    }
+    
+    .edu-honor {
+      font-size: 13px;
+      opacity: 0.8;
+      font-style: italic;
+    }
+    
+    /* remove bottom space from last item */
+    .edu-block:last-child {
+      margin-bottom: 0;
+    }
+
+
     /* PROJECT CARDS */
     .card-list {
       display: flex;
@@ -363,6 +410,39 @@
       </div>
 
     </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>education</h2>
+    
+      <div class="edu-card">
+    
+        <div class="edu-block">
+          <div class="edu-title">
+            🎓 National Dong Hwa University (NDHU), Taiwan
+          </div>
+          <div class="edu-sub">
+            B.S. in International Computer Science & Information Engineering
+          </div>
+          <div class="edu-year">2022 — present</div>
+          <div class="edu-honor">
+            Honors: Honorable Mention (NDHU Undergraduate Project)
+          </div>
+        </div>
+    
+        <div class="edu-block">
+          <div class="edu-title">
+            🎓 Khon Kaen Wittayayon School (KKW), Thailand
+          </div>
+          <div class="edu-sub">
+            High School Diploma, English–Spanish Program
+          </div>
+          <div class="edu-year">2015 — 2020</div>
+        </div>
+    
+      </div>
+    </section>
+
 
 
     <!-- PROJECTS -->
