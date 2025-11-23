@@ -216,6 +216,25 @@
       border-radius: 20px;
     }
 
+    /* UNDERLINE STYLE FOR SECTION HEADERS (education, projects...) */
+    .section-title-line {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    
+    .section-title-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+
     .bio-subtitle {
       font-size: 15px;
       color: var(--muted);
@@ -235,7 +254,7 @@
 
     /* EDUCATION – CARD STYLE */
     #education {
-      margin-top: 70px;
+      margin-top: 50px;
     }
     
     .edu-card {
@@ -398,7 +417,7 @@
             <br><br>
             Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
             My interests include testing ML models, writing politics and Taiwan-related content, 
-            and exploring LLM safety research.
+            and exploring LLM safety research. My Hobby is Muay Thai and Weight Training.
           </div>
 
           <div class="bio-tags">
@@ -413,7 +432,7 @@
 
     <!-- EDUCATION -->
     <section id="education">
-      <h2>education</h2>
+      <h2 class="section-title-line">education</h2>
     
       <div class="edu-card">
     
