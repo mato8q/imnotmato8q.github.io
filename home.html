@@ -298,6 +298,30 @@
       margin-bottom: 0;
     }
 
+    /* Remove default underline from h2 only for education */
+    #education h2 {
+      text-decoration: none;  /* remove the built-in underline */
+    }
+    
+    /* Replace with bio-style underline */
+    #education .section-title-line {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    
+    #education .section-title-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+
 
     /* PROJECT CARDS */
     .card-list {
@@ -432,7 +456,7 @@
 
     <!-- EDUCATION -->
     <section id="education">
-      <h2 class="section-title-line">education</h2>
+      <h2 class="section-title-line edu-title-fix">education</h2>
     
       <div class="edu-card">
     
