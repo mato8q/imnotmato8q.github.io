@@ -489,6 +489,41 @@
       background: rgba(255,255,255,0.10);
     }
 
+    /* Medium Article Card */
+    .medium-card {
+      padding: 20px;
+      margin: 16px 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+      transition: 0.25s;
+    }
+    
+    .medium-card:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+    }
+    
+    .medium-title {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    
+    .medium-date {
+      font-size: 13px;
+      opacity: 0.75;
+      margin-bottom: 10px;
+    }
+    
+    .medium-link {
+      font-size: 14px;
+      color: var(--fg);
+      text-decoration: underline;
+    }
+
+
     @media(max-width:700px) {
       .menu { bottom: 30px; left: 30px; }
       .hamburger { bottom: 25px; left: 25px; }
@@ -801,10 +836,14 @@
     <!-- ARTICLES -->
     <section id="articles">
       <h2>articles</h2>
-      <p style="font-size:14px;color:var(--muted);">
-        Coming soon — notes & experiments.
-      </p>
+    
+      <div id="medium-container" style="margin-top:25px;">
+        <p style="font-size:14px;color:var(--muted);">
+          Loading articles from Medium...
+        </p>
+      </div>
     </section>
+
 
     <!-- CONTACT -->
     <section id="contact">
@@ -882,6 +921,40 @@
         content.style.display = content.style.display === "block" ? "none" : "block";
       });
     });
+  </script>
+
+  <script>
+  async function loadMediumArticles() {
+    const username = "mato8q";
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`;
+  
+    const container = document.getElementById("medium-container");
+  
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+  
+      container.innerHTML = ""; // clear loading text
+  
+      data.items.slice(0, 5).forEach(article => {
+        const card = document.createElement("div");
+        card.className = "medium-card";
+  
+        card.innerHTML = `
+          <div class="medium-title">${article.title}</div>
+          <div class="medium-date">${new Date(article.pubDate).toDateString()}</div>
+          <a class="medium-link" href="${article.link}" target="_blank">Read on Medium →</a>
+        `;
+  
+        container.appendChild(card);
+      });
+  
+    } catch (err) {
+      container.innerHTML = "<p style='color:#bbb;'>Failed to load Medium articles.</p>";
+    }
+  }
+  
+  loadMediumArticles();
   </script>
 
 
