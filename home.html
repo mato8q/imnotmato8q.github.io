@@ -344,39 +344,42 @@
       border-radius: 20px;
     }
 
-
-    /* PROJECT CARDS */
+    /* PROJECT CARDS — MATCH EDUCATION STYLE */
     .card-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
-
+    
     .card {
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 8px;
-      padding: 18px;
-      background: rgba(0,0,0,0.12);
+      margin-top: 10px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);  /* same as edu-card */
     }
-
+    
     .card-title {
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 17px;      /* same as .edu-title */
+      font-weight: 400;
       margin-bottom: 6px;
     }
-
+    
     .card-meta {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 14px;       /* same as .edu-sub */
+      opacity: 0.85;
       margin-bottom: 10px;
-      line-height: 1.4;
+      line-height: 1.6;
+    }
+    
+    .card-links a {
+      font-size: 13px;       /* same as .edu-year */
+      opacity: 0.9;
+      color: var(--fg);
+      margin-right: 14px;
+      text-decoration: underline;
     }
 
-    .card-links a {
-      font-size: 13px;
-      margin-right: 10px;
-      color: var(--fg);
-    }
 
     @media(max-width:700px) {
       .menu { bottom: 30px; left: 30px; }
@@ -499,7 +502,7 @@
           </div>
           <div class="edu-year">2022 — present</div>
           <div class="edu-honor">
-            Honors: Honorable Mention (NDHU Undergraduate Project)
+            Honors: Honorable Mention Award from NDHU 2025 Undergraduate Project
           </div>
         </div>
     
