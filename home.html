@@ -969,19 +969,33 @@
   async function loadMediumArticles() {
     const username = "mato8q";
     const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`;
-  
     const container = document.getElementById("medium-container");
   
     try {
       const res = await fetch(url);
       const data = await res.json();
   
-      container.innerHTML = ""; // clear loading text
+      container.innerHTML = "";
   
       data.items.slice(0, 5).forEach(article => {
   
-        const thumb = article.thumbnail || "";
+        // 1️⃣ ดึงรูปจาก thumbnail ก่อน
+        let thumb = article.thumbnail;
   
+        // 2️⃣ ถ้า thumbnail ว่างหรือเป็น placeholder → แกะรูปจาก content
+        if (!thumb || thumb.includes("stat?event")) {
+          const imgMatch = article.content.match(/<img[^>]+src="([^">]+)"/);
+          if (imgMatch) {
+            thumb = imgMatch[1];
+          }
+        }
+  
+        //ถ้าไม่มีรูปจริง ๆ → ใช้ fallback
+        if (!thumb) {
+          thumb = "assets/placeholder.png";  // ใส่รูปอะไรก็ได้
+        }
+  
+        // Build card
         const card = document.createElement("div");
         card.className = "medium-card";
   
@@ -1005,6 +1019,7 @@
   
   loadMediumArticles();
   </script>
+
 
 
 </body>
