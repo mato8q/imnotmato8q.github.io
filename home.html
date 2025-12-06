@@ -396,20 +396,43 @@
       margin-left: 4px;
     }
     
+    
     .toggle-panel {
-      margin-top: 12px;
-      padding: 10px 0;
-      display: none;
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      overflow: hidden;
-    }
-    
-    .toggle-panel img {
-      flex: 1 1 calc(33.3% - 12px);
-      max-width: calc(33.3% - 12px);
+      transition: max-height 0.35s ease;
     }
 
+    
+    .toggle-panel img {
+      width: calc(33.3% - 12px);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .award-header {
+      font-size: 14px;
+      opacity: 0.85;
+      cursor: pointer;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .award-header:hover {
+      opacity: 1;
+    }
+    
+    .award-member {
+      margin-left: 20px;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
 
     @media(max-width:700px) {
       .menu { bottom: 30px; left: 30px; }
@@ -562,39 +585,42 @@
             Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification
           </div>
         
-          <div class="card-meta">
-        
-            <!-- BDSIC AWARD -->
-            <div>
-              > BDSIC 2025 — 🏆 Publication & Best Presentation Award @ BKK, TH.<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<i>Keira J., C. Shiau-Wei</i>
-        
-              <div class="toggle-btn" onclick="togglePanel('award1', this)">
-                <span class="toggle-arrow">▶</span> show photos
-              </div>
-        
-              <div id="award1" class="toggle-panel">
-                <img src="assets/bdsic1.jpg">
-                <img src="assets/bdsic2.jpg">                
-                <img src="assets/bdsic3.jpg">
-              </div>
+          <div class="award-item">
+            <div class="award-header" onclick="togglePanel('award1', this)">
+              <span class="toggle-arrow">▶</span>
+              BDSIC 2025 — 🏆 Publication & Best Presentation Award @ BKK, TH.
             </div>
+          
+            <div class="award-member">
+              <i>Keira J., C. Shiau-Wei</i>
+            </div>
+          
+            <div id="award1" class="toggle-panel">
+              <img src="assets/bdsic1.jpg">
+              <img src="assets/bdsic2.jpg">
+              <img src="assets/bdsic3.jpg">
+            </div>
+          </div>
+
         
             <br>
         
             <!-- CSIE AWARD -->
-            <div>
-              > CSIE 2025 Undergraduate Project — 🏆 Honorable Mention @ Hualien, TW.<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<i>Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei</i>
-        
-              <div class="toggle-btn" onclick="togglePanel('award2', this)">
-                <span class="toggle-arrow">▶</span> show photos
+            <div class="award-item">
+              <div class="award-header" onclick="togglePanel('award2', this)">
+                <span class="toggle-arrow">▶</span>
+                CSIE 2025 Undergraduate Project — 🏆 Honorable Mention @ Hualien, TW.
               </div>
-        
+            
+              <div class="award-member">
+                <i>Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei</i>
+              </div>
+            
               <div id="award2" class="toggle-panel">
                 <img src="assets/ndhu_undergradproj.jpg">
               </div>
             </div>
+
         
           </div>
         
@@ -670,18 +696,19 @@
   </script>
 
   <script>
-  function togglePanel(id, btn) {
-    const panel = document.getElementById(id);
-    const arrow = btn.querySelector(".toggle-arrow");
-  
-    if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
-      panel.style.maxHeight = "0px";
-      arrow.style.transform = "rotate(0deg)";
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-      arrow.style.transform = "rotate(90deg)";
-    }
+  function togglePanel(id, header) {
+  const panel = document.getElementById(id);
+  const arrow = header.querySelector(".toggle-arrow");
+
+  if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
+    panel.style.maxHeight = "0px";
+    arrow.style.transform = "rotate(0deg)";
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+    arrow.style.transform = "rotate(90deg)";
   }
+}
+
   </script>
 
 
