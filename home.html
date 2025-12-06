@@ -489,20 +489,36 @@
       background: rgba(255,255,255,0.10);
     }
 
-    /* Medium Article Card */
+    /* ARTICLE LIST LAYOUT */
     .medium-card {
-      padding: 20px;
-      margin: 16px 0;
+      padding: 18px;
+      margin: 18px 0;
       border-radius: 12px;
       background: rgba(255,255,255,0.10);
       border: 1px solid rgba(255,255,255,0.25);
       backdrop-filter: blur(6px);
-      transition: 0.25s;
+      display: flex;
+      gap: 18px;
+      transition: 0.25s ease;
     }
     
     .medium-card:hover {
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.17);
       transform: translateY(-3px);
+    }
+    
+    /* Thumbnail */
+    .medium-thumb {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    
+    /* Text section */
+    .medium-content {
+      flex: 1;
     }
     
     .medium-title {
@@ -521,6 +537,28 @@
       font-size: 14px;
       color: var(--fg);
       text-decoration: underline;
+    }
+    
+    /* SEE MORE */
+    .see-more {
+      margin-top: 25px;
+      text-align: center;
+    }
+    
+    .see-more a {
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+      color: var(--fg);
+      text-decoration: none;
+      transition: .25s ease;
+    }
+    
+    .see-more a:hover {
+      background: rgba(255,255,255,0.20);
     }
 
 
@@ -842,6 +880,10 @@
           Loading articles from Medium...
         </p>
       </div>
+    
+      <div class="see-more">
+        <a href="https://medium.com/@mato8q" target="_blank">See more on Medium →</a>
+      </div>
     </section>
 
 
@@ -937,13 +979,20 @@
       container.innerHTML = ""; // clear loading text
   
       data.items.slice(0, 5).forEach(article => {
+  
+        const thumb = article.thumbnail || "";
+  
         const card = document.createElement("div");
         card.className = "medium-card";
   
         card.innerHTML = `
-          <div class="medium-title">${article.title}</div>
-          <div class="medium-date">${new Date(article.pubDate).toDateString()}</div>
-          <a class="medium-link" href="${article.link}" target="_blank">Read on Medium →</a>
+          <img class="medium-thumb" src="${thumb}" alt="thumbnail">
+  
+          <div class="medium-content">
+            <div class="medium-title">${article.title}</div>
+            <div class="medium-date">${new Date(article.pubDate).toDateString()}</div>
+            <a class="medium-link" href="${article.link}" target="_blank">Read on Medium →</a>
+          </div>
         `;
   
         container.appendChild(card);
