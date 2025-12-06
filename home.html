@@ -380,6 +380,36 @@
       text-decoration: underline;
     }
 
+    /* TOGGLE IMAGE PANEL */
+    .toggle-btn {
+      font-size: 13px;
+      color: var(--fg);
+      opacity: 0.85;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+      transition: 0.2s;
+    }
+    
+    .toggle-btn:hover {
+      opacity: 1;
+      margin-left: 4px;
+    }
+    
+    .toggle-panel {
+      margin-top: 12px;
+      padding: 10px 0;
+      display: none;
+      flex-wrap: wrap;
+      gap: 12px;
+      overflow: hidden;
+    }
+    
+    .toggle-panel img {
+      flex: 1 1 calc(33.3% - 12px);
+      max-width: calc(33.3% - 12px);
+    }
+
 
     @media(max-width:700px) {
       .menu { bottom: 30px; left: 30px; }
@@ -527,31 +557,53 @@
       <div class="card-list">
 
         <article class="card">
+
           <div class="card-title">
             Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification
           </div>
-
+        
           <div class="card-meta">
-            BDSIC 2025 — 🏆 Publication & Best Presentation Award<br>
-                      Keira J., C. Shiau-Wei<br>
-            CSIE 2025 Undergraduate Project — 🏆 Honorable Mention<br>
-                      Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei
+        
+            <!-- BDSIC AWARD -->
+            <div>
+              > BDSIC 2025 — 🏆 Publication & Best Presentation Award @ BKK, TH.<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<i>Keira J., C. Shiau-Wei</i>
+        
+              <div class="toggle-btn" onclick="togglePanel('award1', this)">
+                <span class="toggle-arrow">▶</span> show photos
+              </div>
+        
+              <div id="award1" class="toggle-panel">
+                <img src="assets/bdsic1.jpg">
+                <img src="assets/bdsic2.jpg">                
+                <img src="assets/bdsic3.jpg">
+              </div>
+            </div>
+        
+            <br>
+        
+            <!-- CSIE AWARD -->
+            <div>
+              > CSIE 2025 Undergraduate Project — 🏆 Honorable Mention @ Hualien, TW.<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<i>Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei</i>
+        
+              <div class="toggle-btn" onclick="togglePanel('award2', this)">
+                <span class="toggle-arrow">▶</span> show photos
+              </div>
+        
+              <div id="award2" class="toggle-panel">
+                <img src="assets/ndhu_undergradproj.jpg">
+              </div>
+            </div>
+        
           </div>
-
+        
           <div class="card-links">
             <a href="#">paper</a>
             <a href="#">slides</a>
             <a href="#">code</a>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card-title">Coming soon..</div>
-          <div class="card-meta">LLM Safety Project</div>
-          <div class="card-links">
-            <a href="#">report</a>
-            <a href="#">repo</a>
-          </div>
+        
         </article>
 
       </div>
@@ -616,6 +668,22 @@
       panel.classList.toggle("open");
     };
   </script>
+
+  <script>
+  function togglePanel(id, btn) {
+    const panel = document.getElementById(id);
+    const arrow = btn.querySelector(".toggle-arrow");
+  
+    if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
+      panel.style.maxHeight = "0px";
+      arrow.style.transform = "rotate(0deg)";
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      arrow.style.transform = "rotate(90deg)";
+    }
+  }
+  </script>
+
 
 </body>
 </html>
