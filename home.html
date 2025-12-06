@@ -396,22 +396,30 @@
       margin-left: 4px;
     }
     
-    
     .toggle-panel {
       max-height: 0;
       overflow: hidden;
       padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      transition: max-height 0.35s ease;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      transition: max-height 0.35s ease, padding 0.35s ease;
     }
-
+    
+    .toggle-panel.open {
+      max-height: 1200px;
+      padding: 12px 0;
+    }
     
     .toggle-panel img {
-      width: calc(33.3% - 12px);
-      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.25);
+    }
+    
+    .award-item {
+      margin-bottom: 18px;
     }
 
     .award-header {
