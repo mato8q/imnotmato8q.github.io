@@ -2,205 +2,1178 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>THE REAL ;-) | Landing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="assets/bbicon.png" />
+
+  <title>Keira J.</title>
+  <meta name="description" content="Keira J. | Supharada Jundok – Personal website, portfolio, projects, and contact.">
+  <meta name="keywords" content="Keira J., Supharada Jundok, Portfolio, NDHU, Computer Science">
+  <!-- Figma-like Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-
-    html,body{
-      width:100%;
-      height:100%;
-      overflow:hidden;
-      background:#280F91; /* สีม่วงแบบเดียวกับ Figma */
-      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-      color:#fff;
+    :root {
+      --bg: #2200A5;
+      --fg: #ffffff;
+      --muted: #b9b5e3;
+      --accent: #ffffff;
+      --menu-size: 17px;
+      --menu-spacing: 0.10em;
     }
 
-    /* กรอบกลางจอ สัดส่วน 1440x1024 */
-    .frame-wrapper{
-      width:100vw;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#280F91; /* ให้ข้าง ๆ เป็นสีม่วง */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
     }
 
-    .frame{
-      position:relative;
-      width:min(100vw,1440px);
-      aspect-ratio:1440/1024;
-      max-height:100vh;
-      overflow:hidden;
+    /* HERO */
+    .hero {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: var(--bg);
     }
 
-    .frame img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:contain;   /* รูปไม่เสียสัดส่วน */
-      display:block;
+    .hero img {
+      width: 100%;
+      height: auto;
+      max-width: 1440px;
+      display: block;
     }
 
-    /* hotspot ใส ๆ บนรูป */
-    .hotspot{
-      position:absolute;
-      cursor:pointer;
-      background:transparent;
+    /* MENU — Figma style */
+    .menu {
+      position: fixed;
+      bottom: 60px;
+      left: 60px;
+      z-index: 200;
+      font-weight: 200;
+      font-size: var(--menu-size);
+      letter-spacing: var(--menu-spacing);
+      line-height: 1.9;
+      transition: opacity .3s ease;
     }
 
-    .hotspot-full{
-      left:0;top:0;width:100%;height:100%;
+    .menu a {
+      display: block;
+      color: var(--fg);
+      text-decoration: none;
+      margin: 2px 0;
     }
 
-    /* welcome1: โซนรูปกระดาษกว้าง ๆ */
-    .hs-w1-center{
-      left:20%;
-      top:10%;
-      width:60%;
-      height:80%;
+    .menu a.active {
+      text-decoration: underline;
     }
 
-    /* -------------------------
-       แถบเลือกคำตอบใน welcome2
-       ------------------------- */
-    .choice-bar{
-      position:absolute;
-      left:50%;
-      bottom:5%;
-      transform:translateX(-50%);
-      display:flex;
-      gap:12px;
-      padding:10px 14px;
-      background:rgba(0,0,0,0.35);
-      border:2px solid #ffffff66;
-      border-radius:4px;
-      backdrop-filter:blur(4px);
-      align-items:center;
+    /* HAMBURGER */
+    .hamburger {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      font-size: 32px;
+      cursor: pointer;
+      color: var(--fg);
+      display: none;
+      opacity: 0;
+      transition: opacity .3s ease;
+      z-index: 300;
     }
 
-    .choice-label{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      color:#ffd44d;
-      margin-right:4px;
+    /* Slide Panel */
+    .side-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      padding: 80px 30px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(5px);
+      transform: translateX(-120%);
+      transition: transform .35s ease, opacity .3s ease;
+      opacity: 0;
+      z-index: 250;
     }
 
-    .choice-btn{
-      border:1px solid #ffffff80;
-      background:rgba(17, 17, 60, 0.85);
-      color:#fff;
-      padding:4px 10px;
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      cursor:pointer;
+    .side-panel.open {
+      transform: translateX(0);
+      opacity: 1;
     }
 
-    .choice-btn:hover{
-      background:#ffd44d;
-      color:#280F91;
+    .side-panel a {
+      display: block;
+      margin: 12px 0;
+      color: var(--fg);
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.12em;
     }
 
-    @media (max-width:768px){
-      .hs-w1-center{left:15%;width:70%;}
-      .choice-bar{
-        flex-wrap:wrap;
-        bottom:4%;
-      }
+    /* PAGE */
+    .page {
+      max-width: 900px;
+      padding: 80px 20px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 300;
+      text-decoration: underline;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    /* BIO — FULL UPDATED */
+    .bio-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .bio-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bio-photo img {
+      width: 210px;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+
+    .bio-icons {
+      margin-top: 16px;
+      display: flex;
+      gap: 14px;
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .bio-icons a {
+      color: var(--fg);
+      text-decoration: none;
+      transition: opacity .25s ease;
+    }
+
+    .bio-icons a:hover {
+      opacity: 0.6;
+    }
+
+    .bio-languages {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+    }
+
+    .bio-location {
+      margin-top: 6px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .bio-right {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bio-name {
+      font-size: 26px;
+      font-weight: 300;
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+
+    .bio-name::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+
+    .bio-links {
+      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.7;
+      text-align: left;
+    }
+    
+    .bio-links a {
+      display: block;
+      color: var(--fg);
+      text-decoration: none;
+      opacity: 0.85;
+      transition: 0.2s;
+      margin-bottom: 4px;
+    }
+    
+    .bio-links a:hover {
+      opacity: 1;
+      margin-left: 4px;
+    }
+
+
+    /* UNDERLINE STYLE FOR SECTION HEADERS (education, projects...) */
+    .section-title-line {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    
+    .section-title-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+
+    .bio-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .bio-text {
+      margin-top: 5px;
+    }
+
+    .bio-tags {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.75;
+      letter-spacing: 0.08em;
+    }
+
+    /* EDUCATION – CARD STYLE */
+    #education {
+      margin-top: 50px;
+    }
+    
+    .edu-card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+    }
+    
+    .edu-block {
+      margin-bottom: 25px;
+    }
+    
+    .edu-title {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    
+    .edu-sub {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 3px;
+    }
+    
+    .edu-year {
+      font-size: 13px;
+      opacity: 0.75;
+      margin-bottom: 5px;
+    }
+    
+    .edu-honor {
+      font-size: 13px;
+      opacity: 0.8;
+      font-style: italic;
+    }
+    
+    /* remove bottom space from last item */
+    .edu-block:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Remove default underline from h2 only for education */
+    #education h2 {
+      text-decoration: none;  /* remove the built-in underline */
+    }
+    
+    /* Replace with bio-style underline */
+    #education .section-title-line {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    
+    #education .section-title-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--fg);
+      opacity: 0.65;
+      border-radius: 20px;
+    }
+
+    /* PROJECT CARDS — MATCH EDUCATION STYLE */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .card {
+      margin-top: 10px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);  /* same as edu-card */
+    }
+    
+    .card-title {
+      font-size: 17px;      /* same as .edu-title */
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    
+    .card-meta {
+      font-size: 14px;       /* same as .edu-sub */
+      opacity: 0.85;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    
+    
+    .card-links {
+      margin-top: 14px;
+    }
+    
+    .card-links a {
+      display: inline-block;          
+      margin-left: 20px;              
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--fg) !important;    
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+
+    /* TOGGLE IMAGE PANEL */
+    .toggle-btn {
+      font-size: 13px;
+      color: var(--fg);
+      opacity: 0.85;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+      transition: 0.2s;
+    }
+    
+    .toggle-btn:hover {
+      opacity: 1;
+      margin-left: 4px;
+    }
+    
+    .toggle-panel {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    
+    .toggle-panel.open {
+      max-height: 1200px;
+      padding: 12px 0;
+    }
+    
+    .toggle-panel img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    
+    .award-item {
+      margin-bottom: 18px;
+    }
+
+    .award-header {
+      font-size: 14px;
+      opacity: 0.85;
+      cursor: pointer;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .award-header:hover {
+      opacity: 1;
+    }
+    
+    .award-member {
+      margin-left: 20px;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    /* SKILLS — Glass White Box */
+    .skills-box {
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      margin-bottom: 60px;
+    }
+    
+    /* Skill Toggle Headers */
+    .skill-toggle {
+      font-size: 17px;
+      font-weight: 300;
+      padding: 12px 0;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .skill-toggle span.arrow {
+      transition: transform 0.25s ease;
+    }
+    
+    .skill-toggle.open span.arrow {
+      transform: rotate(90deg);
+    }
+    
+    /* Skill Content Hidden */
+    .skill-content {
+      display: none;
+      padding: 12px 0 20px 4px;
+    }
+    
+    /* Pill Style */
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.35);
+      margin: 6px 6px 0 0;
+      background: rgba(255,255,255,0.10);
+    }
+
+    /* ARTICLE LIST LAYOUT */
+    .medium-card {
+      padding: 18px;
+      margin: 18px 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+      display: flex;
+      gap: 18px;
+      transition: 0.25s ease;
+    }
+    
+    .medium-card:hover {
+      background: rgba(255,255,255,0.17);
+      transform: translateY(-3px);
+    }
+    
+    /* Thumbnail */
+    .medium-thumb {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    
+    /* Text section */
+    .medium-content {
+      flex: 1;
+    }
+    
+    .medium-title {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    
+    .medium-date {
+      font-size: 13px;
+      opacity: 0.75;
+      margin-bottom: 10px;
+    }
+    
+    .medium-link {
+      font-size: 14px;
+      color: var(--fg);
+      text-decoration: underline;
+    }
+    
+    /* SEE MORE */
+    .see-more {
+      margin-top: 25px;
+      text-align: center;
+    }
+    
+    .see-more a {
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+      color: var(--fg);
+      text-decoration: none;
+      transition: .25s ease;
+    }
+    
+    .see-more a:hover {
+      background: rgba(255,255,255,0.20);
+    }
+
+    /* CONTACT GRID */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    
+    /* GLASS CARD */
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 300;
+      transition: 0.25s;
+    }
+    
+    /* ICON STYLE */
+    .contact-card .icon {
+      width: 22px;
+      height: 22px;
+      opacity: 0.9;
+    }
+    
+    /* hover effect */
+    .contact-card:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.35);
+    }
+    .project-note {
+      font-size: 13.5px;
+      font-style: italic;
+      font-weight:300;
+    
+      color: var(--fg);
+      opacity: 0.55;              
+    
+      margin-top: 14px;
+      margin-left: 20px;
+      margin-bottom: 6px;
+    
+      letter-spacing: 0.01em;
+    }
+
+
+    @media(max-width:700px) {
+      .menu { bottom: 30px; left: 30px; }
+      .hamburger { bottom: 25px; left: 25px; }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="frame-wrapper">
-    <div id="frame" class="frame">
-      <img id="frame-img" src="assets/welcome1.png" alt="welcome screen" />
-      <!-- hotspot + choice bar จะถูกสร้างด้วย JS -->
-    </div>
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <img src="assets/Home.png" alt="Keira J.">
+  </header>
+
+  <!-- MENU -->
+  <nav class="menu" id="menu">
+    <a href="#top" class="active">home</a>
+    <a href="#bio">bio</a>
+    <a href="#projects">projects / publications</a>
+    <a href="#articles">articles</a>
+    <a href="#contact">contact</a>
+    <a href="#cv">cv [soon]</a>
+  </nav>
+
+  <!-- HAMBURGER -->
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <!-- SLIDE PANEL -->
+  <div class="side-panel" id="panel">
+    <a href="#top">home</a>
+    <a href="#bio">bio</a>
+    <a href="#projects">projects / publications</a>
+    <a href="#articles">articles</a>
+    <a href="#contact">contact</a>
+    <a href="#cv">cv [soon]</a>
   </div>
 
+
+  <!-- CONTENT -->
+  <main class="page">
+
+    <!-- BIO -->
+    <section id="bio">
+      <!--<h2>bio</h2>-->
+
+      <div class="bio-layout">
+
+        <!-- LEFT -->
+        <div class="bio-photo">
+          <img src="assets/my_bio_picture.png" alt="">
+
+          <div class="bio-icons">
+            <a href="mailto:supharada.mt@gmail.com">📧</a>
+            <a href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank">🔗</a>
+            <a href="https://github.com/mato8q" target="_blank">🐙</a>
+          </div>
+
+          <div class="bio-languages">
+            TH · LA · EN · 中文(繁體) · ES
+          </div>
+
+          <div class="bio-location">
+            Hualien 🇹🇼 · Khon Kaen 🇹🇭
+          </div>
+          
+          <div class="bio-links">
+            <a href="#education">> education</a>
+            <a href="#skills">> skills</a>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="bio-right">
+
+          <div class="bio-name">Supharada Jundok</div>
+
+          <div class="bio-subtitle">
+            CSIE student @ NDHU, Taiwan
+          </div>
+
+          <div class="bio-text">
+            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก), 
+            a CSIE senior student at National Dong Hwa University, Hualien, Taiwan.
+            <br><br>
+            My early journey into machine learning and cybersecurity led me into hands-on,
+            cross-disciplinary projects. I blend logic with language and with code to connect 
+            ideas through structure, storytelling, and creativity.
+            <br><br>
+            Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
+            My interests include testing ML models, writing politics and Taiwan-related content, 
+            and exploring LLM safety research. My Hobby is Muay Thai and Weight Training.
+          </div>
+
+          <div class="bio-tags">
+            CS / ML · CYBERSECURITY · REMOTE SENSING · DATA ANALYTICS
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-title-line" style="font-size:28px; font-weight:300; margin-bottom:20px;">
+        > education
+      </div>
+
+    
+      <div class="edu-card">
+    
+        <div class="edu-block">
+          <div class="edu-title">
+            🎓 National Dong Hwa University (NDHU), Taiwan 🇹🇼
+          </div>
+          <div class="edu-sub">
+            B.S. in International Computer Science & Information Engineering
+          </div>
+          <div class="edu-year">2022 — present</div>
+          <div class="edu-honor">
+            Honors: Honorable Mention Award from NDHU 2025 Undergraduate Project
+          </div>
+        </div>
+    
+        <div class="edu-block">
+          <div class="edu-title">
+            🎓 Khon Kaen Wittayayon School (KKW), Thailand 🇹🇭
+          </div>
+          <div class="edu-sub">
+            High School Diploma, English–Spanish Program
+          </div>
+          <div class="edu-year">2015 — 2020</div>
+        </div>
+    
+      </div>
+    </section>
+
+    <section id="skills" style="margin-top:60px;">
+      <div class="section-title-line" style="font-size:28px; font-weight:300; margin-bottom:20px;">
+        > skills
+      </div>
+
+    
+      <div class="skills-box">
+    
+        <!-- AI & MACHINE LEARNING -->
+        <div class="skill-toggle">
+          AI & Machine Learning <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Classification</span>
+          <span class="pill">Segmentation</span>
+          <span class="pill">PyTorch</span>
+          <span class="pill">CNN</span>
+          <span class="pill">R-CNN</span>
+          <span class="pill">ResNet50</span>
+          <span class="pill">EfficientNet</span>
+          <span class="pill">GANs</span>
+          <span class="pill">Few-Shot (CAML / SetFeat)</span>
+        </div>
+    
+        <!-- REMOTE SENSING -->
+        <div class="skill-toggle">
+          Remote Sensing & GIS <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">QGIS</span>
+          <span class="pill">GeoTIFF</span>
+          <span class="pill">Raster + Shapefile</span>
+          <span class="pill">CHM Analysis</span>
+          <span class="pill">UAV RGB Processing</span>
+        </div>
+    
+        <!-- DATA ANALYTICS -->
+        <div class="skill-toggle">
+          Data Analytics <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Pandas</span>
+          <span class="pill">NumPy</span>
+          <span class="pill">Matplotlib</span>
+          <span class="pill">Seaborn</span>
+          <span class="pill">Data Cleaning</span>
+          <span class="pill">Visualization</span>
+        </div>
+    
+        <!-- CYBERSECURITY -->
+        <div class="skill-toggle">
+          Cybersecurity <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">LLM Safety</span>
+          <span class="pill">Prompt Injection</span>
+          <span class="pill">Jailbreak Analysis</span>
+          <span class="pill">Adversarial ML</span>
+          <span class="pill">Linux Basics</span>
+          <span class="pill">IDS / SIEM</span>
+        </div>
+    
+        <!-- PROGRAMMING -->
+        <div class="skill-toggle">
+          Programming <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Python</span>
+          <span class="pill">C</span>
+          <span class="pill">C++</span>
+          <span class="pill">SQL</span>
+        </div>
+    
+        <!-- TOOLS -->
+        <div class="skill-toggle">
+          Tools <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Git</span>
+          <span class="pill">GitHub</span>
+          <span class="pill">VSCode</span>
+          <span class="pill">Jupyter</span>
+          <span class="pill">Colab</span>
+          <span class="pill">Canva</span>
+        </div>
+    
+        <!-- LANGUAGES -->
+        <div class="skill-toggle">
+          Languages <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Thai (Native)</span>
+          <span class="pill">Lao (Native)</span>
+          <span class="pill">English (Professional)</span>
+          <span class="pill">中文(繁體) (Basic)</span>
+          <span class="pill">Español (Basic)</span>
+        </div>
+    
+        <!-- SOFT SKILLS -->
+        <div class="skill-toggle">
+          Soft Skills <span class="arrow">▸</span>
+        </div>
+        <div class="skill-content">
+          <span class="pill">Technical Writing</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Adaptability</span>
+          <span class="pill">Cross-cultural Communication</span>
+        </div>
+    
+      </div>
+    </section>
+
+
+<!-- PROJECTS -->
+    <section id="projects">
+      <h2>projects / publications</h2>
+      <div class="card-list">
+          <div class="project-note">
+            click ▶ to view event pictures
+          </div>
+    
+        <article class="card">
+    
+          <div class="card-title">
+            Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification
+          </div>
+        
+          <!-- BDSIC AWARD -->
+          <div class="award-item">
+            <div class="award-header" onclick="togglePanel('award1', this)">
+              <span class="toggle-arrow">▶</span>
+              BDSIC 2025 — 🏆 Publication & Best Presentation Award @ BKK, TH.
+            </div>
+          
+            <div class="award-member">
+              <i>Keira J., C. Shiau-Wei</i>
+            </div>
+          
+            <div id="award1" class="toggle-panel">
+              <img src="assets/bdsic1.jpeg">
+              <img src="assets/bdsic2.jpg">
+              <img src="assets/bdsic3.jpeg">
+            </div>
+          </div>
+    
+          <!-- CSIE AWARD -->
+          <div class="award-item">
+            <div class="award-header" onclick="togglePanel('award2', this)">
+              <span class="toggle-arrow">▶</span>
+              CSIE 2025 Undergraduate Project — 🏆 Honorable Mention @ Hualien, TW.
+            </div>
+          
+            <div class="award-member">
+              <i>Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei</i>
+            </div>
+          
+            <div id="award2" class="toggle-panel">
+              <img src="assets/ndhu_undergradproj.jpeg">
+            </div>
+          </div>
+    
+          <!-- LINKS (อยู่ภายในกรอบ card แล้ว) -->
+          <div class="card-links">
+            <a href="https://dl.acm.org/doi/10.1145/3778265.3778269" target="_blank" rel="noopener">
+              paper
+            </a>
+          </div>
+    
+        </article>
+    
+      </div>
+    </section>
+
+
+    <!-- ARTICLES -->
+    <section id="articles">
+      <h2>articles</h2>
+    
+      <div id="medium-container" style="margin-top:25px;">
+        <p style="font-size:14px;color:var(--muted);">
+          Loading articles from Medium...
+        </p>
+      </div>
+    
+      <div class="see-more">
+        <a href="https://medium.com/@mato8q" target="_blank">See more on Medium →</a>
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" style="margin-top:80px;">
+      <h2>contact</h2>
+    
+        <div class="contact-grid">
+
+          <!-- Email -->
+          <a class="contact-card" href="mailto:supharada.mt@gmail.com">
+            <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
+            1.1.9 2 2 2h16c1.1 0 2-.9 
+            2-2V6c0-1.1-.9-2-2-2m0 4-8 
+            5-8-5V6l8 5 8-5z"/></svg>
+            Email
+          </a>
+      
+          <!-- LinkedIn -->
+          <a class="contact-card" href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank">
+            <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M19 3A2 2 0 0 1 21 
+            5V19A2 2 0 0 1 19 
+            21H5A2 2 0 0 1 3 
+            19V5A2 2 0 0 1 5 
+            3H19M8.34 17V10.67H5.67V17H8.34M7 
+            9.67A1.33 1.33 0 1 0 7 7A1.33 1.33 0 0 0 7 
+            9.67M18.33 17V13.43C18.33 11.07 16.87 
+            10.43 15.5 10.43A3.35 3.35 0 0 0 
+            13 11.93V10.67H10.33V17H13V13.83C13 
+            12.83 13.67 12.17 14.5 12.17C15.33 
+            12.17 16 12.83 16 13.83V17Z"/></svg>
+            LinkedIn
+          </a>
+      
+          <!-- GitHub -->
+          <a class="contact-card" href="https://github.com/mato8q" target="_blank">
+            <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M12 
+            2A10 10 0 0 0 2 12C2 16.42 4.87 20.17 
+            8.84 21.5C9.34 21.58 9.5 21.27 
+            9.5 21V19.24C6.73 19.91 6.14 
+            17.97 6.14 17.97C5.68 16.81 5.03 
+            16.5 5.03 16.5C4.12 15.88 5.1 
+            15.9 5.1 15.9C6.1 15.97 6.63 
+            16.93 6.63 16.93C7.5 18.47 8.97 
+            18 9.54 17.76C9.63 17.11 9.89 
+            16.67 10.17 16.42C7.95 16.17 5.62 
+            15.31 5.62 11.5C5.62 10.39 6 9.5 
+            6.65 8.79C6.55 8.54 6.2 7.5 6.75 
+            6.15C6.75 6.15 7.59 5.88 9.5 
+            7.17C10.29 6.95 11.15 6.84 12 
+            6.84C12.85 6.84 13.71 6.95 14.5 
+            7.17C16.41 5.88 17.25 6.15 17.25 
+            6.15C17.8 7.5 17.45 8.54 17.35 
+            8.79C18 9.5 18.38 10.39 18.38 
+            11.5C18.38 15.32 16.04 16.16 13.81 
+            16.41C14.17 16.72 14.5 17.33 14.5 
+            18.26V21C14.5 21.27 14.66 21.58 
+            15.16 21.5C19.13 20.17 22 16.42 22 
+            12A10 10 0 0 0 12 2Z"/></svg>
+            GitHub
+          </a>
+      
+          <!-- Medium -->
+          <a class="contact-card" href="https://medium.com/@mato8q" target="_blank">
+            <svg viewBox="0 0 1043.63 592.71" class="icon">
+              <path fill="white"
+                d="M588.67,296.35c0,163.67-131.71,296.36-294.33,296.36S0,460,0,296.35,131.7,0,294.34,0,588.67,132.7,588.67,296.35ZM771.44,296.35c0,154.41-68.34,279.69-152.66,279.69s-152.66-125.28-152.66-279.69S534.46,16.67,618.78,16.67,771.44,141.94,771.44,296.35Zm272.19,0c0,144.8-30.54,262.13-68.24,262.13s-68.24-117.33-68.24-262.13S936.69,34.22,974.39,34.22,1043.63,151.55,1043.63,296.35Z"/>
+            </svg>
+            Medium
+          </a>
+
+      
+          <!-- Kaggle -->
+          <a class="contact-card" href="https://www.kaggle.com/supharadajundok" target="_blank">
+            <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M12.32 
+            13.59L18.59 20H15.41L10 
+            14.05V20H7V4H10V12.12L15.18 
+            6H18.36L12.32 13.59Z"/></svg>
+            Kaggle
+          </a>
+      
+          <!-- Instagram -->
+          <a class="contact-card" href="https://www.instagram.com/i.mightbe.sleeping/" target="_blank">
+            <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M7 
+            2A5 5 0 0 0 2 7V17A5 5 0 0 0 7 
+            22H17A5 5 0 0 0 22 
+            17V7A5 5 0 0 0 17 
+            2H7M17 4A3 3 0 0 1 20 
+            7V17A3 3 0 0 1 17 
+            20H7A3 3 0 0 1 4 
+            17V7A3 3 0 0 1 7 
+            4H17M17.75 6A1.25 1.25 0 1 0 
+            17.75 8.5A1.25 1.25 0 0 0 
+            17.75 6M12 7A5 5 0 1 0 12 
+            17A5 5 0 0 0 12 
+            7M12 9A3 3 0 1 1 12 
+            15A3 3 0 0 1 12 9Z"/></svg>
+            Instagram
+          </a>
+      
+        </div>
+      </section>
+
+
+    <!-- CV -->
+    <section id="cv">
+      <h2>cv [soon]</h2>
+      <p style="font-size:14px;color:var(--muted);">
+        Curriculum vitae will be added later.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- JS -->
   <script>
-    const frame = document.getElementById('frame');
-    const img   = document.getElementById('frame-img');
+    const menu = document.getElementById("menu");
+    const hamburger = document.getElementById("hamburger");
+    const panel = document.getElementById("panel");
+    const bio = document.getElementById("bio");
 
-    let state = 1; // 1=welcome1, 2=welcome2, 3=welcome3, 4=welcome4
+    window.addEventListener("scroll", () => {
+      const trigger = bio.offsetTop - 150;
 
-    function clearHotspotsAndUI(){
-      frame.querySelectorAll('.hotspot, .choice-bar').forEach(el => el.remove());
-    }
+      if (window.scrollY > trigger) {
+        menu.style.opacity = "0";
+        menu.style.pointerEvents = "none";
 
-    function addHotspot(className, handler){
-      const h = document.createElement('div');
-      h.className = 'hotspot ' + className;
-      h.onclick = function(e){
-        e.stopPropagation();
-        handler();
-      };
-      frame.appendChild(h);
-    }
+        hamburger.style.display = "block";
+        setTimeout(() => hamburger.style.opacity = "1", 10);
+      } else {
+        menu.style.opacity = "1";
+        menu.style.pointerEvents = "auto";
 
-    function setState(s){
-      state = s;
-      clearHotspotsAndUI();
+        hamburger.style.opacity = "0";
+        setTimeout(() => hamburger.style.display = "none", 300);
 
-      if(state === 1){
-        img.src = 'assets/welcome1.png';
-
-        // คลิกตรงรูปกลาง -> welcome2
-        addHotspot('hs-w1-center', () => setState(2));
+        panel.classList.remove("open");
       }
-      else if(state === 2){
-        img.src = 'assets/welcome2.png';
+    });
 
-        // แถบเลือกชื่อด้านล่าง
-        const bar = document.createElement('div');
-        bar.className = 'choice-bar';
-
-        const label = document.createElement('span');
-        label.className = 'choice-label';
-        label.textContent = 'WHO AM I?';
-        bar.appendChild(label);
-
-        const names = ['PEI-YU 沛妤','KHANUN ขนุน', 'GÉnesis','KEIRA']; // เปลี่ยนข้อความได้
-        names.forEach(name => {
-          const btn = document.createElement('button');
-          btn.className = 'choice-btn';
-          btn.textContent = name;
-          btn.onclick = (e)=>{
-            e.stopPropagation();
-            if(name === 'KEIRA'){
-              setState(3);   // ตอบถูก
-            }else{
-              setState(4);   // ตอบผิด
-            }
-          };
-          bar.appendChild(btn);
-        });
-
-        frame.appendChild(bar);
-      }
-      else if(state === 3){
-        img.src = 'assets/welcome3.png';
-
-        // welcome3: คลิกที่ไหนก็เข้า home จริง
-        addHotspot('hotspot-full', () => {
-          window.location.href = 'home.html'; // ← ชื่อไฟล์หน้าโฮมของคุณ
-        });
-      }
-      else if(state === 4){
-        img.src = 'assets/welcome4.png';
-
-        // access denied: คลิกไหนก็กลับไปเริ่มใหม่
-        addHotspot('hotspot-full', () => setState(1));
-      }
-    }
-
-    // เริ่มที่ welcome1
-    setState(1);
+    hamburger.onclick = () => {
+      panel.classList.toggle("open");
+    };
   </script>
+
+  <script>
+  function togglePanel(id, header) {
+  const panel = document.getElementById(id);
+  const arrow = header.querySelector(".toggle-arrow");
+
+  if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
+    panel.style.maxHeight = "0px";
+    arrow.style.transform = "rotate(0deg)";
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+    arrow.style.transform = "rotate(90deg)";
+  }
+}
+
+  </script>
+  
+  <script>
+    document.querySelectorAll('.skill-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        const content = toggle.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+
+  <script>
+  async function loadMediumArticles() {
+    const username = "mato8q";
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`;
+    const container = document.getElementById("medium-container");
+  
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+  
+      container.innerHTML = "";
+  
+      data.items.slice(0, 5).forEach(article => {
+  
+        // 1️⃣ ดึงรูปจาก thumbnail ก่อน
+        let thumb = article.thumbnail;
+  
+        // 2️⃣ ถ้า thumbnail ว่างหรือเป็น placeholder → แกะรูปจาก content
+        if (!thumb || thumb.includes("stat?event")) {
+          const imgMatch = article.content.match(/<img[^>]+src="([^">]+)"/);
+          if (imgMatch) {
+            thumb = imgMatch[1];
+          }
+        }
+  
+        //ถ้าไม่มีรูปจริง ๆ → ใช้ fallback
+        if (!thumb) {
+          thumb = "assets/placeholder.png";  // ใส่รูปอะไรก็ได้
+        }
+  
+        // Build card
+        const card = document.createElement("div");
+        card.className = "medium-card";
+  
+        card.innerHTML = `
+          <img class="medium-thumb" src="${thumb}" alt="thumbnail">
+  
+          <div class="medium-content">
+            <div class="medium-title">${article.title}</div>
+            <div class="medium-date">${new Date(article.pubDate).toDateString()}</div>
+            <a class="medium-link" href="${article.link}" target="_blank">Read on Medium →</a>
+          </div>
+        `;
+  
+        container.appendChild(card);
+      });
+  
+    } catch (err) {
+      container.innerHTML = "<p style='color:#bbb;'>Failed to load Medium articles.</p>";
+    }
+  }
+  
+  loadMediumArticles();
+  </script>
+
+
+
 </body>
 </html>
