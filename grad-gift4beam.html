@@ -9,7 +9,6 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      border-radius: 0;
       background: #ffffff;
       color: #333;
     }
@@ -41,7 +40,7 @@
 
     .book-wrapper {
       width: 100%;
-      height: 85vh; /* พอดีจอมือถือ */
+      height: 85vh;
       border-radius: 12px;
       overflow: hidden;
       background: #fff;
@@ -60,10 +59,72 @@
       font-size: 0.85rem;
       color: #aaa;
     }
+
+    /* ===== Popup ===== */
+    #beam-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-card {
+      background: #ffffff;
+      padding: 32px 28px;
+      border-radius: 18px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .popup-card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+    }
+
+    .popup-card p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .popup-card button {
+      margin: 6px;
+      padding: 8px 22px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-yes {
+      background: #d6ecff;
+      color: #004a99;
+    }
+
+    .btn-no {
+      background: #f1f1f1;
+      color: #666;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Popup -->
+  <div id="beam-popup">
+    <div class="popup-card">
+      <h2>R u Beam? 🩵</h2>
+      <p>This page is only for you.</p>
+      <button class="btn-yes" onclick="yesBeam()">Yes</button>
+      <button class="btn-no" onclick="noBeam()">No</button>
+    </div>
+  </div>
+
   <div class="container">
 
     <!-- ข้อความเปิด -->
@@ -88,5 +149,16 @@
     </footer>
 
   </div>
+
+  <script>
+    function yesBeam() {
+      document.getElementById("beam-popup").style.display = "none";
+    }
+
+    function noBeam() {
+      window.location.href = "https://mato8q.github.io/imnotmato8q.github.io/";
+    }
+  </script>
+
 </body>
 </html>
