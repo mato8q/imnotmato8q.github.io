@@ -621,6 +621,27 @@
     
       letter-spacing: 0.01em;
     }
+    .card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    }
+    
+    .card-badge.pub {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    
+    .card-badge.proj {
+      background: rgba(255,200,100,0.15);
+      border: 1px solid rgba(255,200,100,0.35);
+      color: #ffd580;
+    }
 
 
     @media(max-width:700px) {
@@ -740,7 +761,7 @@
             🎓 National Dong Hwa University (NDHU), Taiwan 🇹🇼
           </div>
           <div class="edu-sub">
-            B.S. in International Computer Science & Information Engineering
+            International B.S. in Computer Science & Information Engineering
           </div>
           <div class="edu-year">2022 — present</div>
           <div class="edu-honor">
@@ -875,6 +896,7 @@
 
 
 <!-- PROJECTS -->
+    
     <section id="projects">
       <h2>projects / publications</h2>
       <div class="card-list">
@@ -883,7 +905,7 @@
           </div>
     
         <article class="card">
-    
+          <span class="card-badge pub">publication</span>
           <div class="card-title">
             Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification
           </div>
@@ -930,6 +952,23 @@
           </div>
     
         </article>
+
+        <article class="card">
+        <span class="card-badge proj">project</span>
+        <div class="card-title">Alzheimer's Disease Prediction and Comprehensive Data Analysis Using Machine Learning</div>
+        <div class="card-meta">
+          Term Project Report · Big Data Analytics Course · December 2025
+          <br>
+          Under the advisement of Prof. Chung Yung and TA Demiah Kisla Charlery.
+          <br><br>
+          Built ML models for Alzheimer disease prediction, conducted exploratory data analysis
+          and feature engineering, implemented predictive modeling using Python.
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/mato8q/Alzheimer_s_Disease_PredictionNComprehensive_Data_Analysis_Using_ML" target="_blank">github</a>
+          <a href="https://www.kaggle.com/code/supharadajundok/alzheimer-s-disease-prediction-comprehensive-d" target="_blank">kaggle</a>
+        </div>
+      </article>
     
       </div>
     </section>
