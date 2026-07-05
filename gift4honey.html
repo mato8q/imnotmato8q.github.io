@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>For ผึ้ง🐝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fffbf0;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 36px 28px 28px;
+      border-radius: 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #222;
+      line-height: 1.4;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #999;
+      margin-bottom: 24px;
+    }
+
+    /* popup 1 buttons */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn-yes {
+      padding: 10px 28px;
+      border-radius: 20px;
+      border: none;
+      background: #fde68a;
+      color: #78350f;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-yes:hover { background: #fcd34d; }
+
+    .btn-no {
+      padding: 10px 28px;
+      border-radius: 20px;
+      border: none;
+      background: #f1f1f1;
+      color: #666;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-no:hover { background: #e5e5e5; }
+
+    .wrong-msg {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #c0392b;
+      min-height: 20px;
+    }
+
+    .link-home {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: #aaa;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* popup 2 — card message */
+    .letter {
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #444;
+      white-space: pre-line;
+      margin-bottom: 24px;
+    }
+
+    .btn-open {
+      padding: 11px 32px;
+      border-radius: 20px;
+      border: none;
+      background: #fde68a;
+      color: #78350f;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-open:hover { background: #fcd34d; }
+
+    /* main */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .intro h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #2c2c2c;
+    }
+
+    .book-wrapper {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    .book-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 85vh;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.82rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="overlay">
+    <div class="card" id="card-wrap">
+
+      <!-- Popup 1 -->
+      <div id="p1">
+        <h2>คุณเป็นผึ้ง<br>เพื่อนสนิทของขนุนไหม? 🐝</h2>
+        <p>ตอบเพื่อเปิดของขวัญ</p>
+        <div class="btn-row">
+          <button class="btn-yes" onclick="goP2()">ใช่!</button>
+          <button class="btn-no" onclick="sayNo()">ไม่ใช่</button>
+        </div>
+        <div class="wrong-msg" id="err1"></div>
+        <span class="link-home" id="home-link" style="display:none" onclick="goHome()">ไปหน้าเว็บหลัก</span>
+      </div>
+
+      <!-- Popup 2 -->
+      <div id="p2" style="display:none;">
+        <div class="letter">ผึ้ง 🐝
+
+ขนุนขอโทษนะ ที่ส่งให้ช้า
+ขนุนเพิ่งกู้รูปออกมาได้
+
+และขอให้เป็นการ์ดอวยพรวันเกิดด้วย
+ขอให้เพื่อนมีความสุข
+สุขภาพกายและใจแข็งแรง
+ขอให้สมหวังในสิ่งที่ปรารถนา
+ร่ำรวยเงินทอง
+
+รักและคิดถึงมึงมากนะ 🧡</div>
+        <button class="btn-open" onclick="openBook()">เปิดการ์ด ✨</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="intro">
+      <h1>Happy Birthday ผึ้ง 🎂🐝</h1>
+    </div>
+
+    <div class="book-wrapper">
+      <iframe
+        allowfullscreen="allowfullscreen"
+        allow="autoplay; fullscreen; clipboard-write"
+        scrolling="no"
+        src="https://heyzine.com/flip-book/ce39d1759c.html">
+      </iframe>
+    </div>
+
+    <footer>Made with 🧡 ขนุน</footer>
+  </div>
+
+  <script>
+    function goP2() {
+      document.getElementById('p1').style.display = 'none';
+      document.getElementById('p2').style.display = 'block';
+    }
+
+    function sayNo() {
+      var err = document.getElementById('err1');
+      err.textContent = 'คำตอบผิด ช่วยตอบใหม่นะ 🙏';
+      document.getElementById('home-link').style.display = 'inline-block';
+    }
+
+    function goHome() {
+      window.location.href = 'https://imnotmato8q.github.io';
+    }
+
+    function openBook() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
