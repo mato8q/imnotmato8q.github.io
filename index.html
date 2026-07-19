@@ -2,483 +2,767 @@
 <html lang="en">
 <head>
   <meta name="google-site-verification" content="SEKd1FHc1o_0uvzArPGkxhdFuQSAh7MaD4LEMJQhz9k" />
-  <link rel="canonical" href="https://mato8q.github.io/imnotmato8q.github.io/">
+  <link rel="canonical" href="https://imnotmato8q.github.io/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="assets/bbicon.png" />
   <title>Supharada Jundok (Keira J.) | CSIE · ML · Cybersecurity</title>
   <meta name="description" content="Keira J. | Supharada Jundok – Personal website, portfolio, projects, and contact.">
-  <meta name="keywords" content="Keira J., Supharada Jundok, Portfolio, NDHU, Computer Science">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
+  <meta name="keywords" content="Keira J., Supharada Jundok, Portfolio, NDHU, NCKU, Computer Science, Machine Learning, Cybersecurity">
   <style>
+    /* ── Tokens ─────────────────────────────────────────────────────── */
     :root {
-      --bg: #2200A5;
-      --fg: #ffffff;
-      --muted: #b9b5e3;
-      --accent: #ffffff;
-      --menu-size: 17px;
-      --menu-spacing: 0.10em;
+      --bg:   #2200A5;
+      --ink:  #111111;
+      --mid:  #555;
+      --sub:  #999;
+      --cell: rgba(255,255,255,.15);
+      --bdr:  rgba(255,255,255,.25);
+      --acc:  #2200A5;
+      --rule: #e5e5e5;
+      --card: #ffffff;
+      --mono: "SF Mono","Fira Mono","Consolas",monospace;
     }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.7; font-weight: 300; overflow-x: hidden; }
-    .hero { width: 100%; display: flex; justify-content: center; background: var(--bg); }
-    .hero img { width: 100%; height: auto; max-width: 1440px; display: block; }
-    .menu { position: fixed; bottom: 60px; left: 60px; z-index: 200; font-weight: 200; font-size: var(--menu-size); letter-spacing: var(--menu-spacing); line-height: 1.9; transition: opacity .3s ease; }
-    .menu a { display: block; color: var(--fg); text-decoration: none; margin: 2px 0; }
-    .menu a.active { text-decoration: underline; }
-    .hamburger { position: fixed; bottom: 40px; left: 40px; font-size: 32px; cursor: pointer; color: var(--fg); display: none; opacity: 0; transition: opacity .3s ease; z-index: 300; }
-    .side-panel { position: fixed; bottom: 0; left: 0; width: 220px; height: 100vh; padding: 80px 30px; background: rgba(0,0,0,0.35); backdrop-filter: blur(5px); transform: translateX(-120%); transition: transform .35s ease, opacity .3s ease; opacity: 0; z-index: 250; }
-    .side-panel.open { transform: translateX(0); opacity: 1; }
-    .side-panel a { display: block; margin: 12px 0; color: var(--fg); font-weight: 300; font-size: 18px; letter-spacing: 0.12em; }
-    .page { max-width: 900px; padding: 80px 20px; margin: 0 auto; }
 
-    h2 { font-size: 28px; font-weight: 300; text-decoration: underline; margin-bottom: 20px; letter-spacing: 0.03em; }
-    .section-title-line { position: relative; display: inline-block; padding-bottom: 6px; font-size: 28px; font-weight: 300; }
-    .section-title-line::after { content: ""; position: absolute; left: 0; bottom: 0; width: 40%; height: 2px; background: var(--fg); opacity: 0.65; border-radius: 20px; }
-    #education h2 { text-decoration: none; }
+    /* ── Reset ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, sans-serif; font-size: 1rem; line-height: 1.8; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 
-    .bio-layout { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
-    .bio-photo { display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .bio-photo img { width: 210px; height: 210px; object-fit: cover; border-radius: 50%; border: 3px solid white; }
-    .bio-icons { margin-top: 16px; display: flex; gap: 14px; font-size: 20px; opacity: 0.9; }
-    .bio-icons a { color: var(--fg); text-decoration: none; transition: opacity .25s ease; }
-    .bio-icons a:hover { opacity: 0.6; }
-    .bio-languages { margin-top: 12px; font-size: 13px; opacity: 0.85; letter-spacing: 0.05em; }
-    .bio-location { margin-top: 6px; font-size: 13px; opacity: 0.8; }
-    .bio-right { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
-    .bio-name { font-size: 26px; font-weight: 300; margin-bottom: 6px; position: relative; display: inline-block; padding-bottom: 6px; }
-    .bio-name::after { content: ""; position: absolute; left: 0; bottom: 0; width: 40%; height: 2px; background: var(--fg); opacity: 0.65; border-radius: 20px; }
-    .bio-links { margin-top: 18px; font-size: 14px; line-height: 1.7; text-align: left; }
-    .bio-links a { display: block; color: var(--fg); text-decoration: none; opacity: 0.85; transition: 0.2s; margin-bottom: 4px; }
-    .bio-links a:hover { opacity: 1; margin-left: 4px; }
-    .bio-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-    .bio-text { margin-top: 5px; font-size: 14px; line-height: 1.7; }
-    .bio-tags { margin-top: 18px; font-size: 13px; opacity: 0.75; letter-spacing: 0.08em; }
+    /* ── Nav ────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(20, 0, 120, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: background .3s;
+    }
+    nav.scrolled {
+      background: rgba(20, 0, 120, 0.75);
+    }
+    .nav-bear { display: flex; align-items: center; }
+    .nav-bear img { width: 28px; height: 28px; object-fit: contain; display: block; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    @media (max-width: 640px) { .nav-links { gap: 1.25rem; } }
 
-    #education { margin-top: 50px; }
-    .edu-card { margin-top: 20px; padding: 20px; border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; background: rgba(255,255,255,0.08); }
-    .edu-block { margin-bottom: 25px; }
-    .edu-title { font-size: 17px; font-weight: 400; margin-bottom: 4px; }
-    .edu-sub { font-size: 14px; opacity: 0.85; margin-bottom: 3px; }
-    .edu-year { font-size: 13px; opacity: 0.75; margin-bottom: 5px; }
-    .edu-honor { font-size: 13px; opacity: 0.8; font-style: italic; }
-    .edu-block:last-child { margin-bottom: 0; }
+    /* ── Mouse-tracking gradient (whole page) ───────────────────────── */
+    body {
+      background: #2200A5;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse 70vmax 70vmax at var(--mx, 50%) var(--my, 40%),
+        rgba(180, 140, 255, 0.45) 0%,
+        rgba(100, 60, 255, 0.2) 40%,
+        transparent 72%
+      );
+      transition: background 0.06s linear;
+    }
 
-    .card-list { display: flex; flex-direction: column; gap: 20px; }
-    .card { margin-top: 10px; padding: 20px; border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; background: rgba(255,255,255,0.08); }
-    .card-title { font-size: 17px; font-weight: 400; margin-bottom: 6px; }
-    .card-meta { font-size: 14px; opacity: 0.85; margin-bottom: 10px; line-height: 1.6; }
-    .card-links { margin-top: 14px; }
-    .card-links a { display: inline-block; margin-left: 20px; font-size: 13px; font-weight: 300; color: var(--fg) !important; opacity: 0.85; text-decoration: underline; }
+    /* ── Hero / Crossword ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 5rem 2rem 4rem; gap: 0; position: relative; z-index: 1;
+      background: url('assets/IMG_6710.JPG') center top/cover no-repeat;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: rgba(10, 0, 80, 0.55);
+    }
+    .hero > * { position: relative; z-index: 2; }
+    .hero-kicker {
+      font-family: var(--mono); font-size: .78rem; letter-spacing: .22em;
+      text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 1.5rem;
+      text-align: center; width: 100%; display: block;
+    }
+    .stage {
+      position: relative; width: min(322px, 90vw); height: 286px; cursor: crosshair;
+      margin: 0 auto; display: flex; align-items: center; justify-content: center;
+    }
+    .cw {
+      display: grid;
+      grid-template-columns: repeat(9, 34px);
+      grid-template-rows: repeat(8, 34px);
+      gap: 2px; position: absolute;
+    }
+    .cl {
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: .78rem; font-weight: 500; position: relative;
+      transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .4s ease, background .15s;
+      will-change: transform, opacity;
+    }
+    .cl.f { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #fff; }
+    .cl.e { background: transparent; pointer-events: none; }
+    .cl-n { position: absolute; top: 2px; left: 2px; font-size: .44rem; color: var(--mid); line-height: 1; pointer-events: none; }
+    .reveal {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: clamp(3rem, 8vw, 5rem); font-weight: 400; letter-spacing: -.04em;
+      color: #fff; opacity: 0; pointer-events: none; transition: opacity .5s ease;
+    }
+    .reveal em { color: #a8ff78; font-style: normal; }
+    .stage.on .reveal { opacity: 1; }
+    .stage.on .cw     { pointer-events: none; }
+    .hero-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,255,255,.5); opacity: 1;
+      animation: bob 2.8s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(5px); }
+    }
 
-    .toggle-btn { font-size: 13px; color: var(--fg); opacity: 0.85; cursor: pointer; margin-top: 6px; display: inline-block; transition: 0.2s; }
-    .toggle-btn:hover { opacity: 1; margin-left: 4px; }
-    .toggle-panel { max-height: 0; overflow: hidden; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; transition: max-height 0.35s ease, padding 0.35s ease; }
-    .toggle-panel.open { max-height: 1200px; padding: 12px 0; }
-    .toggle-panel img { width: 100%; height: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25); }
-    .award-item { margin-bottom: 18px; }
-    .award-header { font-size: 14px; opacity: 0.85; cursor: pointer; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .award-header:hover { opacity: 1; }
-    .award-member { margin-left: 20px; margin-bottom: 8px; font-size: 14px; line-height: 1.7; }
+    /* ── Layout ─────────────────────────────────────────────────────── */
+    .page { max-width: 960px; padding: 0 1.5rem 6rem; margin: 0 auto; position: relative; z-index: 1; }
+    .hero { position: relative; z-index: 1; }
 
-    .skills-box { padding: 28px; border: 1px solid rgba(255,255,255,0.28); border-radius: 12px; background: rgba(255,255,255,0.08); backdrop-filter: blur(6px); margin-bottom: 60px; }
-    .skill-toggle { font-size: 17px; font-weight: 300; padding: 12px 0; cursor: pointer; letter-spacing: 0.02em; border-bottom: 1px solid rgba(255,255,255,0.22); display: flex; justify-content: space-between; align-items: center; }
-    .skill-toggle span.arrow { transition: transform 0.25s ease; }
-    .skill-toggle.open span.arrow { transform: rotate(90deg); }
-    .skill-content { display: none; padding: 12px 0 20px 4px; }
-    .pill { display: inline-block; padding: 6px 14px; font-size: 13px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.35); margin: 6px 6px 0 0; background: rgba(255,255,255,0.10); }
+    .section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 3rem 3rem;
+      margin-top: 1.5rem;
+      color: var(--ink);
+    }
 
-    .medium-card { padding: 18px; margin: 18px 0; border-radius: 12px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(6px); display: flex; gap: 18px; transition: 0.25s ease; }
-    .medium-card:hover { background: rgba(255,255,255,0.17); transform: translateY(-3px); }
-    .medium-thumb { width: 140px; height: 90px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25); }
-    .medium-content { flex: 1; }
-    .medium-title { font-size: 17px; font-weight: 400; margin-bottom: 6px; }
-    .medium-date { font-size: 13px; opacity: 0.75; margin-bottom: 10px; }
-    .medium-link { font-size: 14px; color: var(--fg); text-decoration: underline; }
-    .see-more { margin-top: 25px; text-align: center; }
-    .see-more a { font-size: 14px; padding: 10px 22px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.10); backdrop-filter: blur(6px); color: var(--fg); text-decoration: none; transition: .25s ease; }
-    .see-more a:hover { background: rgba(255,255,255,0.20); }
+    .sec-label {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--acc); margin-bottom: .75rem; display: block;
+      font-weight: 600;
+    }
+    .sec-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 600;
+      letter-spacing: -.02em; margin-bottom: 1.75rem; text-wrap: balance; line-height: 1.2;
+      color: #111;
+    }
+    /* glass card — override all dark token text */
+    .section a { color: var(--acc); }
+    .section a:hover { color: #140080; }
 
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; margin-top: 20px; }
-    .contact-card { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.22); border-radius: 12px; backdrop-filter: blur(6px); color: white; text-decoration: none; font-size: 14px; font-weight: 300; transition: 0.25s; }
-    .contact-card .icon { width: 22px; height: 22px; opacity: 0.9; }
-    .contact-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-3px); border-color: rgba(255,255,255,0.35); }
+    /* ── Bio ────────────────────────────────────────────────────────── */
+    .bio-layout { display: grid; grid-template-columns: 180px 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 600px) { .bio-layout { grid-template-columns: 1fr; } }
+    .bio-photo-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .bio-photo { width: 160px; height: 160px; object-fit: cover; object-position: top; display: block; }
+    .bio-icons { display: flex; gap: .75rem; }
+    .bio-icon-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border: 1px solid var(--rule);
+      color: var(--mid); transition: color .2s, border-color .2s;
+    }
+    .bio-icon-link:hover { color: var(--ink); border-color: var(--mid); }
+    .bio-icon-link svg { width: 16px; height: 16px; }
+    .bio-meta { font-family: var(--mono); font-size: .65rem; color: var(--mid); letter-spacing: .06em; line-height: 2; }
+    .bio-name { font-size: 1.75rem; font-weight: 300; letter-spacing: -.02em; margin-bottom: .3rem; }
+    .bio-sub { font-family: var(--mono); font-size: .75rem; color: var(--mid); letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .bio-text { font-size: 1rem; color: var(--mid); line-height: 1.9; }
+    .bio-text strong { color: var(--ink); font-weight: 400; }
+    .bio-tags { font-family: var(--mono); font-size: .62rem; color: var(--sub); letter-spacing: .1em; text-transform: uppercase; margin-top: 1.25rem; line-height: 2; }
 
-    .project-note { font-size: 13px; font-style: italic; font-weight: 300; color: var(--fg); opacity: 0.55; margin-top: 14px; margin-left: 20px; margin-bottom: 6px; letter-spacing: 0.01em; }
-    .card-badge { display: inline-block; font-size: 11px; font-weight: 400; letter-spacing: 0.10em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .card-badge.pub { background: rgba(255,200,100,0.15); border: 1px solid rgba(255,200,100,0.35); color: #ffd580; }
-    .card-badge.proj { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.35); color: var(--fg); }
-    @media(max-width:700px) { .menu { bottom: 30px; left: 30px; } .hamburger { bottom: 25px; left: 25px; } }
+    /* ── Education ──────────────────────────────────────────────────── */
+    .edu-list { display: flex; flex-direction: column; gap: 0; }
+    .edu-item { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: .35rem; }
+    .edu-inst { font-size: 1.15rem; font-weight: 600; color: #111; }
+    .edu-year { font-family: var(--mono); font-size: .72rem; color: var(--mid); letter-spacing: .05em; white-space: nowrap; }
+    .edu-deg  { font-size: .95rem; color: #444; margin-bottom: .2rem; }
+    .edu-honor { font-size: .78rem; color: var(--acc); font-style: italic; margin-top: .3rem; }
+
+    /* ── Skills ─────────────────────────────────────────────────────── */
+    .skills-list { display: flex; flex-direction: column; }
+    .skill-row {
+      border-bottom: 1px solid var(--rule);
+    }
+    .skill-toggle {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 0; cursor: pointer; font-size: 1.05rem; font-weight: 300;
+      background: none; border: none; color: #111; width: 100%; text-align: left; font-weight: 500;
+      transition: color .2s;
+    }
+    .skill-toggle:hover { color: var(--acc); }
+    .skill-arrow { font-family: var(--mono); font-size: .7rem; color: var(--mid); transition: transform .25s ease; }
+    .skill-toggle.open .skill-arrow { transform: rotate(90deg); }
+    .skill-content { display: none; padding-bottom: 1.25rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .pill {
+      display: inline-block; padding: .28em .7em;
+      font-family: var(--mono); font-size: .7rem;
+      background: #eeeeff; color: var(--acc);
+      letter-spacing: .02em; border-radius: 4px;
+    }
+
+    /* ── Projects ───────────────────────────────────────────────────── */
+    .proj-list { display: flex; flex-direction: column; gap: 2px; }
+    .proj-card {
+      padding: 1.75rem; background: #f7f6ff; border-radius: 10px;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    .proj-badge {
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+      text-transform: uppercase; padding: .2em .65em; display: inline-block;
+      border: 1px solid; width: fit-content;
+    }
+    .proj-badge.pub { color: #c09000; border-color: currentColor; }
+    .proj-badge.proj { color: var(--mid); border-color: var(--rule); }
+    .proj-title { font-size: 1.2rem; font-weight: 300; letter-spacing: -.02em; line-height: 1.35; }
+    .proj-meta { font-size: .9rem; color: var(--mid); line-height: 1.8; }
+    .proj-result {
+      padding: 1rem 1.25rem; background: #f7f6ff;
+      border-left: 2px solid var(--acc);
+      font-size: .8rem; line-height: 1.9;
+    }
+    .proj-result .rl { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); margin-bottom: .4rem; display: block; }
+    .proj-links { display: flex; gap: 1.5rem; margin-top: .25rem; }
+    .proj-links a { font-family: var(--mono); font-size: .68rem; letter-spacing: .05em; color: var(--mid); text-decoration: underline; transition: color .2s; }
+    .proj-links a:hover { color: var(--ink); }
+
+    .award-toggle {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .82rem; color: var(--mid); cursor: pointer;
+      padding: .5rem 0; transition: color .2s; background: none; border: none; text-align: left; width: 100%;
+    }
+    .award-toggle:hover { color: var(--ink); }
+    .award-arrow { font-family: var(--mono); font-size: .65rem; transition: transform .25s; }
+    .award-toggle.open .award-arrow { transform: rotate(90deg); }
+    .award-member { font-size: .78rem; color: var(--sub); font-style: italic; padding-left: .6rem; margin-bottom: .25rem; }
+    .award-gallery {
+      max-height: 0; overflow: hidden;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px;
+      transition: max-height .4s ease;
+    }
+    .award-gallery.open { max-height: 800px; }
+    .award-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+
+    /* ── Articles ───────────────────────────────────────────────────── */
+    .article-list { display: flex; flex-direction: column; gap: 2px; }
+    .article-card {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      padding: 1.25rem; background: #f7f6ff; transition: background .2s;
+      text-decoration: none; color: inherit; border-radius: 8px;
+    }
+    .article-card:hover { background: #eeecff; }
+    .article-thumb { width: 90px; height: 60px; object-fit: cover; flex-shrink: 0; display: block; }
+    .article-body { flex: 1; min-width: 0; }
+    .article-title { font-size: .9rem; font-weight: 400; line-height: 1.4; margin-bottom: .35rem; }
+    .article-date { font-family: var(--mono); font-size: .62rem; color: var(--mid); letter-spacing: .04em; }
+    .see-more { margin-top: 1.5rem; }
+    .see-more a {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+      padding: .45em 1.1em; border: 1px solid var(--rule);
+      color: var(--mid); transition: color .2s, border-color .2s;
+    }
+    .see-more a:hover { color: var(--ink); border-color: var(--mid); }
+
+    /* ── Contact ────────────────────────────────────────────────────── */
+    .contact-heading { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; letter-spacing: -.02em; margin-bottom: 2rem; }
+    .contact-heading a { border-bottom: 2px solid var(--acc); transition: color .2s; }
+    .contact-heading a:hover { color: var(--acc); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 2px; }
+    .contact-card {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 1rem 1.25rem; background: #f7f6ff; border-radius: 8px;
+      font-size: .82rem; color: var(--mid); transition: background .2s, color .2s;
+    }
+    .contact-card:hover { background: #e8e6ff; color: var(--acc); }
+    .contact-card svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .contact-card .ci { width: 16px; height: 16px; font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── CV ─────────────────────────────────────────────────────────── */
+    .cv-actions { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+    .cv-actions a {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+      padding: .45em 1.1em; border: 1px solid var(--rule);
+      color: var(--mid); transition: color .2s, border-color .2s;
+    }
+    .cv-actions a:hover { color: var(--ink); border-color: var(--mid); }
+    .cv-embed { width: 100%; height: 880px; border: 1px solid var(--rule); display: block; margin-top: .5rem; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 100%;
+    }
+    footer span { font-family: var(--mono); font-size: .62rem; color: rgba(255,255,255,.45); letter-spacing: .05em; }
   </style>
 </head>
 <body>
 
-  <header class="hero" id="top">
-    <img src="assets/Home.png" alt="Keira J.">
-  </header>
+<!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+<nav id="nav">
+  <a class="nav-bear" href="#top"><img src="assets/bbicon.png" alt="Keira J."></a>
+  <ul class="nav-links">
+    <li><a href="#bio">bio</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#articles">articles</a></li>
+    <li><a href="#contact">contact</a></li>
+    <li><a href="#cv">cv</a></li>
+  </ul>
+  <div style="width:28px"></div>
+</nav>
 
-  <nav class="menu" id="menu">
-    <a href="#top" class="active">home</a>
-    <a href="#bio">bio</a>
-    <a href="#projects">projects / publications</a>
-    <a href="#articles">articles</a>
-    <a href="#contact">contact</a>
-    <a href="#cv">cv / resume</a>
-  </nav>
-
-  <div class="hamburger" id="hamburger">☰</div>
-
-  <div class="side-panel" id="panel">
-    <a href="#top">home</a>
-    <a href="#bio">bio</a>
-    <a href="#projects">projects / publications</a>
-    <a href="#articles">articles</a>
-    <a href="#contact">contact</a>
-    <a href="#cv">cv / resume</a>
+<!-- ── Hero ────────────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <p class="hero-kicker">The Real Keira J.</p>
+  <div class="stage" id="stage">
+    <div class="cw" id="cw"></div>
+    <div class="reveal">KEIRA<em>.</em></div>
   </div>
+  <p class="hero-hint">scroll to explore ↓</p>
+</section>
 
-  <main class="page">
+<!-- ── Content ─────────────────────────────────────────────────────────── -->
+<main class="page">
 
-    <!-- BIO -->
-    <section id="bio">
-      <div class="bio-layout">
-        <div class="bio-photo">
-          <img src="assets/my_bio_picture.png" alt="">
-          <div class="bio-icons">
-            <a href="mailto:supharada.mt@gmail.com">📧</a>
-            <a href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank">🔗</a>
-            <a href="https://github.com/mato8q" target="_blank">🐙</a>
-          </div>
-          <div class="bio-languages">TH · LA · EN · 中文(繁體) · ES</div>
-          <div class="bio-location">Tainan · Hualien · Khon Kaen</div>
-          <div class="bio-links">
-            <a href="#education">> education</a>
-            <a href="#skills">> skills</a>
-          </div>
+  <!-- Bio -->
+  <section class="section" id="bio">
+    <span class="sec-label">Bio</span>
+    <div class="bio-layout">
+      <div class="bio-photo-wrap">
+        <img class="bio-photo" src="assets/grad_profile.jpg" alt="Keira J.">
+        <div class="bio-icons">
+          <a class="bio-icon-link" href="mailto:supharada.mt@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+          </a>
+          <a class="bio-icon-link" href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank" rel="noopener" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V10.67H5.67V17H8.34M7 9.67A1.33 1.33 0 1 0 7 7A1.33 1.33 0 0 0 7 9.67M18.33 17V13.43C18.33 11.07 16.87 10.43 15.5 10.43A3.35 3.35 0 0 0 13 11.93V10.67H10.33V17H13V13.83C13 12.83 13.67 12.17 14.5 12.17C15.33 12.17 16 12.83 16 13.83V17Z"/></svg>
+          </a>
+          <a class="bio-icon-link" href="https://github.com/mato8q" target="_blank" rel="noopener" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21V19.24C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.47 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.66 21.58 15.16 21.5C19.13 20.17 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+          </a>
         </div>
-        <div class="bio-right">
-          <div class="bio-name">Supharada Jundok</div>
-          <div class="bio-subtitle">CSIE student @ NDHU, Taiwan</div>
-          <div class="bio-text">
-            Hello! I'm Keira, Supharada Jundok (ศุภรดา จันทร์ดก),
-            an incoming graduate CSIE student at National Cheng Kung University, Tainan, Taiwan.
-            I recently graduated bachelor degree in CSIE, NDHU, Taiwan.
-            <br><br>
-            My early journey into machine learning, data analytics, and cybersecurity led me into hands-on,
-            cross-disciplinary projects. I blend logic with language and with code to connect
-            ideas through structure, storytelling, and creativity.
-            <br><br>
-            Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
-            My interests include testing ML models, writing politics and Taiwan-related content,
-            and exploring LLM safety research. My Hobby is Muay Thai, Kick-boxing, Boxing, and Weight Training.
-          </div>
-          <div class="bio-tags">CS / ML · CYBERSECURITY · REMOTE SENSING · DATA ANALYTICS</div>
+        <div class="bio-meta">
+          TH · LA · EN · 中文(繁體) · ES<br>
+          Tainan · Khon Kaen<br>
         </div>
       </div>
-    </section>
+      <div>
+        <div class="bio-name">Supharada Jundok</div>
+        <div class="bio-sub">CSIE, NCKU, Taiwan</div>
+        <p class="bio-text">
+          Hello! I'm <strong>Keira</strong>, Supharada Jundok (ศุภรดา จันทร์ดก),
+          an incoming graduate CSIE student at <strong>National Cheng Kung University</strong>, Tainan, Taiwan.
+          I recently graduated with a bachelor's degree in CSIE from <strong>NDHU</strong>, Taiwan.
+          <br><br>
+          My early journey into machine learning, data analytics, and cybersecurity led me into hands-on,
+          cross-disciplinary projects. I blend logic with language and with code to connect
+          ideas through structure, storytelling, and creativity.
+          <br><br>
+          Today, I work on projects between Hualien, Taiwan, and summertime in Khon Kaen, Thailand.
+          My interests include testing ML models, writing politics and Taiwan-related content,
+          and exploring LLM safety research. My hobbies are Muay Thai, Kickboxing, Boxing, and Weight Training.
+        </p>
+        <div class="bio-tags">CS / ML &nbsp;·&nbsp; Cybersecurity &nbsp;·&nbsp; Remote Sensing &nbsp;·&nbsp; Data Analytics</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- EDUCATION -->
-    <section id="education">
-      <div class="section-title-line" style="font-size:28px; font-weight:300; margin-bottom:20px;">
-        > education
+  <!-- Education -->
+  <section class="section" id="education">
+    <span class="sec-label">Education</span>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-inst">National Cheng Kung University (NCKU), Taiwan</span>
+          <span class="edu-year">2026 — present</span>
+        </div>
+        <div class="edu-deg">M.S. in Computer Science &amp; Information Engineering</div>
       </div>
-      <div class="edu-card">
-        <div class="edu-block">
-          <div class="edu-title">National Cheng Kung University (NCKU), Taiwan</div>
-          <div class="edu-sub">M.S. in Computer Science & Information Engineering</div>
-          <div class="edu-year">2026 — present</div>
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-inst">National Dong Hwa University (NDHU), Taiwan</span>
+          <span class="edu-year">2022 — 2026</span>
         </div>
-        <div class="edu-block">
-          <div class="edu-title">National Dong Hwa University (NDHU), Taiwan</div>
-          <div class="edu-sub">International B.S. in Computer Science & Information Engineering</div>
-          <div class="edu-year">2022 — 2026</div>
-          <div class="edu-honor">Honors: Honorable Mention Award from NDHU 2025 Undergraduate Project</div>
-        </div>
-        <div class="edu-block">
-          <div class="edu-title">Khon Kaen Wittayayon School (KKW), Thailand</div>
-          <div class="edu-sub">High School Diploma, English–Spanish Program</div>
-          <div class="edu-year">2015 — 2020</div>
-        </div>
+        <div class="edu-deg">International B.S. in Computer Science &amp; Information Engineering</div>
+        <div class="edu-honor">Honorable Mention Award — NDHU 2025 Undergraduate Project</div>
       </div>
-    </section>
+      <div class="edu-item">
+        <div class="edu-header">
+          <span class="edu-inst">Khon Kaen Wittayayon School (KKW), Thailand</span>
+          <span class="edu-year">2015 — 2020</span>
+        </div>
+        <div class="edu-deg">High School Diploma, English–Spanish Program</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- SKILLS -->
-    <section id="skills" style="margin-top:60px;">
-      <div class="section-title-line" style="font-size:28px; font-weight:300; margin-bottom:20px;">
-        > skills
-      </div>
-      <div class="skills-box">
-        <div class="skill-toggle">AI & Machine Learning <span class="arrow">▸</span></div>
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <span class="sec-label">Skills</span>
+    <div class="skills-list">
+      <div class="skill-row">
+        <button class="skill-toggle">AI &amp; Machine Learning <span class="skill-arrow">▸</span></button>
         <div class="skill-content">
-          <span class="pill">Classification</span><span class="pill">Segmentation</span><span class="pill">PyTorch</span><span class="pill">CNN</span><span class="pill">R-CNN</span><span class="pill">ResNet50</span><span class="pill">EfficientNet</span><span class="pill">GANs</span><span class="pill">Few-Shot (CAML / SetFeat)</span>
-        </div>
-        <div class="skill-toggle">Remote Sensing & GIS <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">QGIS</span><span class="pill">GeoTIFF</span><span class="pill">Raster + Shapefile</span><span class="pill">CHM Analysis</span><span class="pill">UAV RGB Processing</span>
-        </div>
-        <div class="skill-toggle">Data Analytics <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Matplotlib</span><span class="pill">Seaborn</span><span class="pill">Data Cleaning</span><span class="pill">Visualization</span>
-        </div>
-        <div class="skill-toggle">Cybersecurity <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">LLM Safety</span><span class="pill">Prompt Injection</span><span class="pill">Jailbreak Analysis</span><span class="pill">Adversarial ML</span><span class="pill">Linux Basics</span><span class="pill">IDS / SIEM</span>
-        </div>
-        <div class="skill-toggle">Programming <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">Python</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">SQL</span>
-        </div>
-        <div class="skill-toggle">Tools <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">VSCode</span><span class="pill">Jupyter</span><span class="pill">Colab</span><span class="pill">Canva</span>
-        </div>
-        <div class="skill-toggle">Languages <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">Thai (Native)</span><span class="pill">Lao (Native)</span><span class="pill">English (Professional)</span><span class="pill">中文(繁體) (Basic)</span><span class="pill">Español (Basic)</span>
-        </div>
-        <div class="skill-toggle">Soft Skills <span class="arrow">▸</span></div>
-        <div class="skill-content">
-          <span class="pill">Technical Writing</span><span class="pill">Problem Solving</span><span class="pill">Adaptability</span><span class="pill">Cross-cultural Communication</span>
+          <div class="pills">
+            <span class="pill">Classification</span><span class="pill">Segmentation</span><span class="pill">PyTorch</span><span class="pill">CNN</span><span class="pill">R-CNN</span><span class="pill">ResNet50</span><span class="pill">EfficientNet</span><span class="pill">GANs</span><span class="pill">Few-Shot (CAML / SetFeat)</span>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>projects / publications</h2>
-      <div class="card-list">
-        <div class="project-note">click ▶ to view event pictures</div>
-
-        <article class="card">
-          <span class="card-badge pub">publication</span>
-          <div class="card-title">Carbon Sink Estimation in Primary Forest via Tree Segmentation & Species-Level Classification</div>
-
-          <div class="award-item">
-            <div class="award-header" onclick="togglePanel('award1', this)">
-              <span class="toggle-arrow">▶</span>
-              BDSIC 2025 — Publication & Best Presentation Award @ BKK, TH.
-            </div>
-            <div class="award-member"><i>Keira J., C. Shiau-Wei</i></div>
-            <div id="award1" class="toggle-panel">
-              <img src="assets/bdsic1.jpeg">
-              <img src="assets/bdsic2.jpg">
-              <img src="assets/bdsic3.jpeg">
-            </div>
+      <div class="skill-row">
+        <button class="skill-toggle">Remote Sensing &amp; GIS <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">QGIS</span><span class="pill">GeoTIFF</span><span class="pill">Raster + Shapefile</span><span class="pill">CHM Analysis</span><span class="pill">UAV RGB Processing</span>
           </div>
-
-          <div class="award-item">
-            <div class="award-header" onclick="togglePanel('award2', this)">
-              <span class="toggle-arrow">▶</span>
-              CSIE 2025 Undergraduate Project — Honorable Mention @ Hualien, TW.
-            </div>
-            <div class="award-member"><i>Keira J., Aaron Kuo · Advisor Prof: C. Shiau-Wei</i></div>
-            <div id="award2" class="toggle-panel">
-              <img src="assets/ndhu_undergradproj.jpeg">
-            </div>
-          </div>
-
-          <div class="card-links">
-            <a href="https://dl.acm.org/doi/10.1145/3778265.3778269" target="_blank" rel="noopener">paper</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <span class="card-badge proj">project</span>
-
-          <div class="card-title">Alzheimer's Disease Prediction and Comprehensive Data Analysis Using Machine Learning</div>
-
-          <div class="card-meta">
-            Final Project · Big Data Analytics Course · December 2025<br>
-            Advisor: Prof. Chung Yung &amp; TA Demiah Kisla Charlery · CSIE, NDHU
-          </div>
-
-          <div class="award-item">
-            <div class="award-member">
-              Applied ML techniques to predict Alzheimer's disease diagnosis from structured clinical data,
-              covering a cohort of 2,149 patients across 35 clinical features. The project encompasses a full
-              analytical pipeline — from exploratory data analysis and statistical feature selection
-              (correlation, t-test, chi-square) down to five retained features — through a comprehensive
-              11-model comparison and SHAP-based explainability.
-            </div>
-          </div>
-
-          <div style="
-            margin-top: 14px;
-            padding: 14px 18px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.18);
-            border-radius: 8px;
-            font-size: 13.5px;
-            line-height: 2;
-          ">
-            <div style="opacity:0.5; font-size:11px; letter-spacing:0.09em; text-transform:uppercase; margin-bottom:4px;">Best Model</div>
-            <strong>Random Forest</strong> &nbsp;—&nbsp;
-            <span style="color:#7effa0; font-weight:400;">96.74% accuracy</span> &nbsp;·&nbsp;
-            <span style="color:#7ec8ff; font-weight:400;">97.48% ROC-AUC</span> &nbsp;·&nbsp;
-            <span style="opacity:0.8;">96.40% F1</span><br>
-            <span style="opacity:0.45; font-size:12px;">RandomForestClassifier(n_estimators=300, class_weight='balanced', random_state=123)</span>
-          </div>
-
-          <div class="card-links" style="margin-top:16px;">
-            <a href="https://github.com/mato8q/Alzheimer_s_Disease_PredictionNComprehensive_Data_Analysis_Using_ML" target="_blank" rel="noopener">github</a>
-            <a href="https://www.kaggle.com/code/supharadajundok/alzheimer-s-disease-prediction-comprehensive-d" target="_blank" rel="noopener">kaggle</a>
-            <a href="https://mato8q.github.io/Alzheimer_s_Disease_PredictionNComprehensive_Data_Analysis_Using_ML" target="_blank" rel="noopener">live showcase</a>
-          </div>
-
-        </article>
-
+        </div>
       </div>
-    </section>
-
-    <!-- ARTICLES -->
-    <section id="articles">
-      <h2>articles</h2>
-      <div id="medium-container" style="margin-top:25px;">
-        <p style="font-size:14px;color:var(--muted);">Loading articles from Medium...</p>
-      </div>
-      <div class="see-more">
-        <a href="https://medium.com/@mato8q" target="_blank">See more on Medium →</a>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" style="margin-top:80px;">
-      <h2>contact</h2>
-      <div class="contact-grid">
-        <a class="contact-card" href="mailto:supharada.mt@gmail.com">
-          <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg>
-          Email
-        </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank">
-          <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V10.67H5.67V17H8.34M7 9.67A1.33 1.33 0 1 0 7 7A1.33 1.33 0 0 0 7 9.67M18.33 17V13.43C18.33 11.07 16.87 10.43 15.5 10.43A3.35 3.35 0 0 0 13 11.93V10.67H10.33V17H13V13.83C13 12.83 13.67 12.17 14.5 12.17C15.33 12.17 16 12.83 16 13.83V17Z"/></svg>
-          LinkedIn
-        </a>
-        <a class="contact-card" href="https://github.com/mato8q" target="_blank">
-          <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M12 2A10 10 0 0 0 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21V19.24C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.47 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.66 21.58 15.16 21.5C19.13 20.17 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
-          GitHub
-        </a>
-        <a class="contact-card" href="https://medium.com/@mato8q" target="_blank">
-          <svg viewBox="0 0 1043.63 592.71" class="icon">
-            <path fill="white" d="M588.67,296.35c0,163.67-131.71,296.36-294.33,296.36S0,460,0,296.35,131.7,0,294.34,0,588.67,132.7,588.67,296.35ZM771.44,296.35c0,154.41-68.34,279.69-152.66,279.69s-152.66-125.28-152.66-279.69S534.46,16.67,618.78,16.67,771.44,141.94,771.44,296.35Zm272.19,0c0,144.8-30.54,262.13-68.24,262.13s-68.24-117.33-68.24-262.13S936.69,34.22,974.39,34.22,1043.63,151.55,1043.63,296.35Z"/>
-          </svg>
-          Medium
-        </a>
-        <a class="contact-card" href="https://www.kaggle.com/supharadajundok" target="_blank">
-          <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M12.32 13.59L18.59 20H15.41L10 14.05V20H7V4H10V12.12L15.18 6H18.36L12.32 13.59Z"/></svg>
-          Kaggle
-        </a>
-        <a class="contact-card" href="https://www.instagram.com/i.mightbe.sleeping/" target="_blank">
-          <svg viewBox="0 0 24 24" class="icon"><path fill="white" d="M7 2A5 5 0 0 0 2 7V17A5 5 0 0 0 7 22H17A5 5 0 0 0 22 17V7A5 5 0 0 0 17 2H7M17 4A3 3 0 0 1 20 7V17A3 3 0 0 1 17 20H7A3 3 0 0 1 4 17V7A3 3 0 0 1 7 4H17M17.75 6A1.25 1.25 0 1 0 17.75 8.5A1.25 1.25 0 0 0 17.75 6M12 7A5 5 0 1 0 12 17A5 5 0 0 0 12 7M12 9A3 3 0 1 1 12 15A3 3 0 0 1 12 9Z"/></svg>
-          Instagram
-        </a>
-        <a class="contact-card" href="https://www.tensortonic.com/profile/mato8q" target="_blank">
-          <span style="width:22px;height:22px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0.9;flex-shrink:0;">T</span>
-          TensorTonic
-        </a>
-      </div>
-    </section>
-
-    <!-- CV -->
-    <section id="cv" style="margin-top:80px;">
-      <h2>cv</h2>
-      <div class="card-list">
-        <article class="card">
-          <div class="card-title">CV (resume soon..)</div>
-          <div class="card-meta">My academic CV including education, research, publications, and technical skills.</div>
-          <div class="card-links">
-            <a href="assets/KJ_CV_v24.pdf" target="_blank">view</a>
-            <a href="assets/KJ_CV_v24.pdf" download>download</a>
+      <div class="skill-row">
+        <button class="skill-toggle">Data Analytics <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Matplotlib</span><span class="pill">Seaborn</span><span class="pill">Data Cleaning</span><span class="pill">Visualization</span>
           </div>
-          <iframe src="assets/KJ_CV_v24.pdf" width="100%" height="900px" style="margin-top:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.25);"></iframe>
-        </article>
+        </div>
       </div>
-    </section>
+      <div class="skill-row">
+        <button class="skill-toggle">Cybersecurity <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">LLM Safety</span><span class="pill">Prompt Injection</span><span class="pill">Jailbreak Analysis</span><span class="pill">Adversarial ML</span><span class="pill">Linux Basics</span><span class="pill">IDS / SIEM</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <button class="skill-toggle">Programming <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">Python</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">SQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <button class="skill-toggle">Tools <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">VSCode</span><span class="pill">Jupyter</span><span class="pill">Colab</span><span class="pill">Canva</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <button class="skill-toggle">Languages <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">Thai (Native)</span><span class="pill">Lao (Native)</span><span class="pill">English (Professional)</span><span class="pill">中文(繁體) (Basic)</span><span class="pill">Español (Basic)</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <button class="skill-toggle">Soft Skills <span class="skill-arrow">▸</span></button>
+        <div class="skill-content">
+          <div class="pills">
+            <span class="pill">Technical Writing</span><span class="pill">Problem Solving</span><span class="pill">Adaptability</span><span class="pill">Cross-cultural Communication</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <span class="sec-label">Projects &amp; Publications</span>
+    <div class="proj-list">
 
-  <script>
-    const menu = document.getElementById("menu");
-    const hamburger = document.getElementById("hamburger");
-    const panel = document.getElementById("panel");
-    const bio = document.getElementById("bio");
+      <article class="proj-card">
+        <span class="proj-badge pub">Publication</span>
+        <h3 class="proj-title">Carbon Sink Estimation in Primary Forest via Tree Segmentation &amp; Species-Level Classification</h3>
 
-    window.addEventListener("scroll", () => {
-      const trigger = bio.offsetTop - 150;
-      if (window.scrollY > trigger) {
-        menu.style.opacity = "0";
-        menu.style.pointerEvents = "none";
-        hamburger.style.display = "block";
-        setTimeout(() => hamburger.style.opacity = "1", 10);
-      } else {
-        menu.style.opacity = "1";
-        menu.style.pointerEvents = "auto";
-        hamburger.style.opacity = "0";
-        setTimeout(() => hamburger.style.display = "none", 300);
-        panel.classList.remove("open");
+        <div>
+          <button class="award-toggle" onclick="toggleAward('award1', this)">
+            <span class="award-arrow">▸</span>
+            BDSIC 2025 — Publication &amp; Best Presentation Award @ BKK, TH.
+          </button>
+          <div class="award-member">Keira J., C. Shiau-Wei</div>
+          <div id="award1" class="award-gallery">
+            <img src="assets/bdsic1.jpeg" alt="BDSIC 2025">
+            <img src="assets/bdsic2.jpg" alt="BDSIC 2025">
+            <img src="assets/bdsic3.jpeg" alt="BDSIC 2025">
+          </div>
+        </div>
+
+        <div>
+          <button class="award-toggle" onclick="toggleAward('award2', this)">
+            <span class="award-arrow">▸</span>
+            CSIE 2025 Undergraduate Project — Honorable Mention @ Hualien, TW.
+          </button>
+          <div class="award-member">Keira J., Aaron Kuo · Advisor: Prof. C. Shiau-Wei</div>
+          <div id="award2" class="award-gallery">
+            <img src="assets/ndhu_undergradproj.jpeg" alt="NDHU Undergrad Project">
+          </div>
+        </div>
+
+        <div class="proj-links">
+          <a href="https://dl.acm.org/doi/10.1145/3778265.3778269" target="_blank" rel="noopener">paper ↗</a>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <span class="proj-badge proj">Project</span>
+        <h3 class="proj-title">Alzheimer's Disease Prediction and Comprehensive Data Analysis Using Machine Learning</h3>
+        <p class="proj-meta">
+          Final Project · Big Data Analytics Course · December 2025<br>
+          Advisor: Prof. Chung Yung &amp; TA Demiah Kisla Charlery · CSIE, NDHU
+        </p>
+        <p class="proj-meta">
+          Applied ML techniques to predict Alzheimer's disease diagnosis from structured clinical data,
+          covering a cohort of 2,149 patients across 35 clinical features. Full analytical pipeline —
+          from EDA and statistical feature selection down to an 11-model comparison with SHAP-based explainability.
+        </p>
+        <div class="proj-result">
+          <span class="rl">Best Model</span>
+          <strong>Random Forest</strong> &nbsp;—&nbsp;
+          <span style="color:#2a9a50;">96.74% accuracy</span> &nbsp;·&nbsp;
+          <span style="color:var(--acc);">97.48% ROC-AUC</span> &nbsp;·&nbsp;
+          96.40% F1
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/mato8q/Alzheimer_s_Disease_PredictionNComprehensive_Data_Analysis_Using_ML" target="_blank" rel="noopener">github ↗</a>
+          <a href="https://www.kaggle.com/code/supharadajundok/alzheimer-s-disease-prediction-comprehensive-d" target="_blank" rel="noopener">kaggle ↗</a>
+          <a href="https://mato8q.github.io/Alzheimer_s_Disease_PredictionNComprehensive_Data_Analysis_Using_ML" target="_blank" rel="noopener">live showcase ↗</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section class="section" id="articles">
+    <span class="sec-label">Articles</span>
+    <div id="article-list" class="article-list">
+      <p style="font-size:.82rem;color:var(--mid);">Loading articles…</p>
+    </div>
+    <div class="see-more" style="margin-top:1.5rem;">
+      <a href="https://medium.com/@mato8q" target="_blank" rel="noopener">See more on Medium ↗</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <span class="sec-label">Contact</span>
+    <p class="contact-heading">Let's <a href="mailto:supharada.mt@gmail.com">talk.</a></p>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:supharada.mt@gmail.com">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+        Email
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/supharada-jundok-090a48239" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V10.67H5.67V17H8.34M7 9.67A1.33 1.33 0 1 0 7 7A1.33 1.33 0 0 0 7 9.67M18.33 17V13.43C18.33 11.07 16.87 10.43 15.5 10.43A3.35 3.35 0 0 0 13 11.93V10.67H10.33V17H13V13.83C13 12.83 13.67 12.17 14.5 12.17C15.33 12.17 16 12.83 16 13.83V17Z"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-card" href="https://github.com/mato8q" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21V19.24C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.47 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26V21C14.5 21.27 14.66 21.58 15.16 21.5C19.13 20.17 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+        GitHub
+      </a>
+      <a class="contact-card" href="https://medium.com/@mato8q" target="_blank" rel="noopener">
+        <svg viewBox="0 0 1043.63 592.71" fill="currentColor"><path d="M588.67,296.35c0,163.67-131.71,296.36-294.33,296.36S0,460,0,296.35,131.7,0,294.34,0,588.67,132.7,588.67,296.35ZM771.44,296.35c0,154.41-68.34,279.69-152.66,279.69s-152.66-125.28-152.66-279.69S534.46,16.67,618.78,16.67,771.44,141.94,771.44,296.35Zm272.19,0c0,144.8-30.54,262.13-68.24,262.13s-68.24-117.33-68.24-262.13S936.69,34.22,974.39,34.22,1043.63,151.55,1043.63,296.35Z"/></svg>
+        Medium
+      </a>
+      <a class="contact-card" href="https://www.kaggle.com/supharadajundok" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.32 13.59L18.59 20H15.41L10 14.05V20H7V4H10V12.12L15.18 6H18.36L12.32 13.59Z"/></svg>
+        Kaggle
+      </a>
+      <a class="contact-card" href="https://www.instagram.com/i.mightbe.sleeping/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2A5 5 0 0 0 2 7V17A5 5 0 0 0 7 22H17A5 5 0 0 0 22 17V7A5 5 0 0 0 17 2H7M17 4A3 3 0 0 1 20 7V17A3 3 0 0 1 17 20H7A3 3 0 0 1 4 17V7A3 3 0 0 1 7 4H17M17.75 6A1.25 1.25 0 1 0 17.75 8.5A1.25 1.25 0 0 0 17.75 6M12 7A5 5 0 1 0 12 17A5 5 0 0 0 12 7M12 9A3 3 0 1 1 12 15A3 3 0 0 1 12 9Z"/></svg>
+        Instagram
+      </a>
+      <a class="contact-card" href="https://www.tensortonic.com/profile/mato8q" target="_blank" rel="noopener">
+        <span class="ci">T</span>
+        TensorTonic
+      </a>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section class="section" id="cv">
+    <span class="sec-label">CV / Resume</span>
+    <p style="font-size:.88rem;color:var(--mid);margin-bottom:1.25rem;">Academic CV including education, research, publications, and technical skills.</p>
+    <div class="cv-actions">
+      <a href="assets/KJ_CV_v24.pdf" target="_blank">View PDF ↗</a>
+      <a href="assets/KJ_CV_v24.pdf" download>Download</a>
+    </div>
+    <iframe class="cv-embed" src="assets/KJ_CV_v24.pdf" title="Keira J. CV"></iframe>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2025 Supharada Jundok</span>
+  <span>NDHU · NCKU · Hualien, Taiwan</span>
+</footer>
+
+<script>
+// ── Mouse-tracking gradient (whole page) ──────────────────────────────
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth  * 100).toFixed(1) + '%';
+  const y = (e.clientY / window.innerHeight * 100).toFixed(1) + '%';
+  document.body.style.setProperty('--mx', x);
+  document.body.style.setProperty('--my', y);
+});
+
+// ── Nav glass on scroll ────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Crossword grid ─────────────────────────────────────────────────────
+const G = [
+  ['C','T','F',null,null,null,null,null,null],
+  [null,null,null,null,'D',null,null,null,null],
+  ['M','L',null,null,'E',null,null,null,null],
+  [null,null,null,null,'S',null,null,null,null],
+  [null,null,'K','E','I','R','A',null,null],
+  [null,null,null,null,'G',null,null,null,null],
+  [null,null,null,null,'N','D','H','U',null],
+  [null,null,'P','Y','T','H','O','N',null],
+];
+const NUMS = {'0,0':1,'2,0':2,'4,2':3,'6,4':4,'7,2':5,'1,4':6};
+
+const cwEl   = document.getElementById('cw');
+const stage  = document.getElementById('stage');
+const filled = [];
+
+for (let r = 0; r < 8; r++) {
+  for (let c = 0; c < 9; c++) {
+    const d  = document.createElement('div');
+    const ch = G[r][c];
+    d.className = 'cl ' + (ch ? 'f' : 'e');
+    if (ch) {
+      const k = r + ',' + c;
+      if (NUMS[k]) {
+        const n = document.createElement('span');
+        n.className = 'cl-n'; n.textContent = NUMS[k];
+        d.appendChild(n);
       }
-    });
-
-    hamburger.onclick = () => panel.classList.toggle("open");
-  </script>
-
-  <script>
-    function togglePanel(id, header) {
-      const panel = document.getElementById(id);
-      const arrow = header.querySelector(".toggle-arrow");
-      if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
-        panel.style.maxHeight = "0px";
-        arrow.style.transform = "rotate(0deg)";
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        arrow.style.transform = "rotate(90deg)";
-      }
+      const s = document.createElement('span'); s.textContent = ch;
+      d.appendChild(s);
+      filled.push(d);
     }
-  </script>
+    cwEl.appendChild(d);
+  }
+}
 
-  <script>
-    document.querySelectorAll('.skill-toggle').forEach(toggle => {
-      toggle.addEventListener('click', () => {
-        toggle.classList.toggle('open');
-        const content = toggle.nextElementSibling;
-        content.style.display = content.style.display === "block" ? "none" : "block";
-      });
-    });
-  </script>
+// Pre-compute scatter vectors
+const targets = filled.map(() => ({
+  dx: (Math.random() - .5) * 340,
+  dy: (Math.random() - .5) * 260,
+  ro: (Math.random() - .5) * 70,
+}));
 
-  <script>
-    async function loadMediumArticles() {
-      const username = "mato8q";
-      const url = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${username}`;
-      const container = document.getElementById("medium-container");
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        container.innerHTML = "";
-        data.items.slice(0, 5).forEach(article => {
-          let thumb = article.thumbnail;
-          if (!thumb || thumb.includes("stat?event")) {
-            const imgMatch = article.content.match(/<img[^>]+src="([^">]+)"/);
-            if (imgMatch) thumb = imgMatch[1];
-          }
-          if (!thumb) thumb = "assets/placeholder.png";
-          const card = document.createElement("div");
-          card.className = "medium-card";
-          card.innerHTML = `
-            <img class="medium-thumb" src="${thumb}" alt="thumbnail">
-            <div class="medium-content">
-              <div class="medium-title">${article.title}</div>
-              <div class="medium-date">${new Date(article.pubDate).toDateString()}</div>
-              <a class="medium-link" href="${article.link}" target="_blank">Read on Medium →</a>
-            </div>
-          `;
-          container.appendChild(card);
-        });
-      } catch (err) {
-        container.innerHTML = "<p style='color:#bbb;'>Failed to load Medium articles.</p>";
-      }
+let revealed = false, busy = false, hovered = false, scrolled = false;
+
+function scatter() {
+  if (revealed || busy) return;
+  busy = true;
+  filled.forEach((el, i) => {
+    const { dx, dy, ro } = targets[i];
+    el.style.transform = `translate(${dx}px,${dy}px) rotate(${ro}deg)`;
+    el.style.opacity = '0';
+  });
+  cwEl.style.pointerEvents = 'none';
+  setTimeout(() => { stage.classList.add('on'); document.getElementById('top').classList.add('on'); busy = false; revealed = true; }, 380);
+}
+
+function gather() {
+  if (!revealed || busy || scrolled) return;
+  busy = true;
+  stage.classList.remove('on');
+  setTimeout(() => {
+    filled.forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
+    cwEl.style.pointerEvents = '';
+    document.getElementById('top').classList.remove('on');
+    busy = false; revealed = false;
+  }, 420);
+}
+
+stage.addEventListener('mouseenter', () => { hovered = true;  scatter(); });
+stage.addEventListener('mouseleave', () => { hovered = false; if (!scrolled) gather(); });
+stage.addEventListener('click',      () => { scatter(); });
+
+const obs = new IntersectionObserver(([e]) => {
+  if (!e.isIntersecting && e.intersectionRatio < 0.3) {
+    scrolled = true; scatter();
+  } else if (e.isIntersecting && e.intersectionRatio > 0.6) {
+    scrolled = false; if (!hovered) gather();
+  }
+}, { threshold: [0, 0.3, 0.6, 1] });
+obs.observe(document.getElementById('top'));
+
+// ── Skills accordion ───────────────────────────────────────────────────
+document.querySelectorAll('.skill-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const content = btn.nextElementSibling;
+    const open    = btn.classList.toggle('open');
+    content.style.display = open ? 'block' : 'none';
+  });
+});
+
+// ── Award photo toggle ─────────────────────────────────────────────────
+function toggleAward(id, btn) {
+  const panel = document.getElementById(id);
+  const open  = panel.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+
+// ── Nav active link ────────────────────────────────────────────────────
+const sections = document.querySelectorAll('main .section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
     }
-    loadMediumArticles();
-  </script>
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => io.observe(s));
+
+
+// ── Medium articles ────────────────────────────────────────────────────
+async function loadArticles() {
+  const container = document.getElementById('article-list');
+  try {
+    const res  = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@mato8q');
+    const data = await res.json();
+    container.innerHTML = '';
+    data.items.slice(0, 5).forEach(item => {
+      let thumb = item.thumbnail;
+      if (!thumb || thumb.includes('stat?event')) {
+        const m = item.content.match(/<img[^>]+src="([^">]+)"/);
+        if (m) thumb = m[1];
+      }
+      const card = document.createElement('a');
+      card.className = 'article-card';
+      card.href      = item.link;
+      card.target    = '_blank';
+      card.rel       = 'noopener';
+      card.innerHTML = thumb
+        ? `<img class="article-thumb" src="${thumb}" alt="">`
+        : '';
+      card.innerHTML += `
+        <div class="article-body">
+          <div class="article-title">${item.title}</div>
+          <div class="article-date">${new Date(item.pubDate).toDateString()}</div>
+        </div>`;
+      container.appendChild(card);
+    });
+  } catch {
+    container.innerHTML = '<p style="font-size:.82rem;color:var(--mid);">Could not load articles.</p>';
+  }
+}
+loadArticles();
+</script>
 
 </body>
 </html>
