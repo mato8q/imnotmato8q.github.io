@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="google-site-verification" content="SEKd1FHc1o_0uvzArPGkxhdFuQSAh7MaD4LEMJQhz9k" />
-  <link rel="canonical" href="https://mato8q.github.io/imnotmato8q.github.io/">
+  <link rel="canonical" href="https://imnotmato8q.github.io/" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="assets/bbicon.png" />
@@ -247,6 +247,14 @@
     }
 
     /* ── Projects ───────────────────────────────────────────────────── */
+    .proj-filter { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .proj-filter-btn {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: .35em .9em; border: 1px solid var(--rule); background: none;
+      color: var(--mid); cursor: pointer; transition: all .2s; border-radius: 4px;
+    }
+    .proj-filter-btn:hover { color: var(--ink); border-color: var(--mid); }
+    .proj-filter-btn.active { background: var(--acc); color: #fff; border-color: var(--acc); }
     .proj-list { display: flex; flex-direction: column; gap: 2px; }
     .proj-card {
       padding: 1.75rem; background: #f7f6ff; border-radius: 10px;
@@ -260,6 +268,7 @@
     }
     .proj-badge.pub { color: #c09000; border-color: currentColor; }
     .proj-badge.proj { color: var(--mid); border-color: var(--rule); }
+    .proj-badge.side { color: #2a9a50; border-color: currentColor; }
     .proj-title { font-size: 1.2rem; font-weight: 300; letter-spacing: -.02em; line-height: 1.35; }
     .proj-meta { font-size: .9rem; color: var(--mid); line-height: 1.8; }
     .proj-result {
@@ -288,6 +297,17 @@
     }
     .award-gallery.open { max-height: 800px; }
     .award-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+
+    /* ── Project pagination ─────────────────────────────────────────── */
+    .proj-pagination { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
+    .proj-page-btn {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+      padding: .4em 1em; border: 1px solid var(--rule); background: none;
+      color: var(--mid); cursor: pointer; transition: color .2s, border-color .2s;
+    }
+    .proj-page-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--mid); }
+    .proj-page-btn:disabled { opacity: .3; cursor: default; }
+    .proj-page-info { font-family: var(--mono); font-size: .65rem; color: var(--sub); letter-spacing: .06em; }
 
     /* ── Articles ───────────────────────────────────────────────────── */
     .article-list { display: flex; flex-direction: column; gap: 2px; }
@@ -423,6 +443,36 @@
           Right now, I'm based between <strong>Tainan, Taiwan</strong>, and <strong>Khon Kaen, Thailand</strong>.
         </p>
         <div class="bio-tags">ML &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; UAV Remote Sensing &nbsp;·&nbsp; AI Safety</div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:1.25rem;">
+      <button class="bio-nav-links" onclick="toggleHobby()" id="hobby-toggle" style="background:none;border:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;">
+        <svg class="award-arrow" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;transition:transform .2s;flex-shrink:0;color:var(--acc);">
+          <!-- pixel chat bubble -->
+          <rect x="1" y="1" width="11" height="8" rx="0" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="3" y="3" width="1" height="1" fill="currentColor"/>
+          <rect x="6" y="3" width="1" height="1" fill="currentColor"/>
+          <rect x="9" y="3" width="1" height="1" fill="currentColor"/>
+          <polyline points="3,9 3,11 5,9" fill="currentColor" stroke="none"/>
+        </svg>
+        <span style="font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--acc);text-decoration:none;">know me better</span>
+      </button>
+      <div id="hobby-wrap" style="display:none; margin-top:.75rem; position:relative;">
+        <div id="hobby-scroll" style="display:flex; gap:8px; overflow:hidden; scroll-behavior:smooth;">
+          <img src="assets/muaythai.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai1.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai2.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai3.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai4.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai5.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/muaythai6.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/weight.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+          <img src="assets/weight1.jpg" alt="" style="height:200px; width:auto; flex-shrink:0; object-fit:cover; border-radius:6px;">
+        </div>
+        <button onclick="hobbyScroll(-1)" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;width:32px;height:32px;cursor:pointer;font-size:1rem;border-radius:50%;">‹</button>
+        <button onclick="hobbyScroll(1)"  style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;width:32px;height:32px;cursor:pointer;font-size:1rem;border-radius:50%;">›</button>
       </div>
     </div>
   </section>
@@ -530,7 +580,13 @@
   <!-- Projects -->
   <section class="section" id="projects">
     <span class="sec-label">Projects &amp; Publications</span>
-    <div class="proj-list">
+    <div class="proj-filter">
+      <button class="proj-filter-btn active" onclick="filterProj('all', this)">All</button>
+      <button class="proj-filter-btn" onclick="filterProj('pub', this)">Publications</button>
+      <button class="proj-filter-btn" onclick="filterProj('proj', this)">Projects</button>
+      <button class="proj-filter-btn" onclick="filterProj('side', this)">Side Projects</button>
+    </div>
+    <div id="proj-list" class="proj-list">
 
       <article class="proj-card">
         <span class="proj-badge pub">Publication</span>
@@ -591,6 +647,38 @@
         </div>
       </article>
 
+      <article class="proj-card">
+        <span class="proj-badge side">Side Project</span>
+        <h3 class="proj-title">Build an MLP in JAX from Scratch</h3>
+        <p class="proj-meta">Personal learning project · 2026</p>
+        <p class="proj-meta">
+          Implemented a multi-layer perceptron end-to-end in JAX — from PRNG key handling and parameter initialization
+          to forward passes, loss computation, autodiff, and SGD training. A deep dive into how modern ML frameworks work under the hood.
+        </p>
+        <div class="proj-links">
+          <a href="https://github.com/mato8q/build-an-mlp-in-jax-from-scratch" target="_blank" rel="noopener">github ↗</a>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <span class="proj-badge side">Side Project</span>
+        <h3 class="proj-title">RAG Hijack Benchmark — Open-Weight LLM Safety Eval</h3>
+        <p class="proj-meta">Personal research project · 2026</p>
+        <p class="proj-meta">
+          Benchmarked open-weight LLMs against RAG hijacking attacks — a class of prompt injection where adversarial
+          content embedded in retrieved documents overrides the model's intended behavior. Evaluated robustness across
+          multiple models and attack strategies.
+        </p>
+        <div class="proj-links">
+          <a href="https://github.com/mato8q/open-weight-llm-safety-eval" target="_blank" rel="noopener">github ↗</a>
+        </div>
+      </article>
+
+    </div>
+    <div class="proj-pagination" id="proj-pagination">
+      <button class="proj-page-btn" id="proj-prev" onclick="projPage(-1)">← prev</button>
+      <span class="proj-page-info" id="proj-page-info"></span>
+      <button class="proj-page-btn" id="proj-next" onclick="projPage(1)">next →</button>
     </div>
   </section>
 
@@ -656,7 +744,7 @@
 
 <footer>
   <span>© 2025 Supharada Jundok</span>
-  <span>KJ loves Meaw Meaw</span>
+  <span>KJ loves Meae Meaw</span>
 </footer>
 
 <script>
@@ -820,6 +908,69 @@ async function loadArticles() {
   }
 }
 loadArticles();
+
+// ── Project filter ────────────────────────────────────────────────────────
+let activeFilter = 'all';
+window.filterProj = function(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.proj-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  projRender();
+};
+
+// ── Hobby scroll ──────────────────────────────────────────────────────────
+window.toggleHobby = function() {
+  const wrap = document.getElementById('hobby-wrap');
+  const toggle = document.getElementById('hobby-toggle');
+  const arrow = toggle.querySelector('.award-arrow');
+  const open = wrap.style.display === 'none';
+  wrap.style.display = open ? 'block' : 'none';
+  arrow.style.opacity = open ? '1' : '.5';
+  arrow.style.transform = open ? 'scale(1.15)' : 'scale(1)';
+};
+window.hobbyScroll = function(dir) {
+  const el = document.getElementById('hobby-scroll');
+  el.scrollLeft += dir * 220;
+};
+
+// ── Project pagination + filter ───────────────────────────────────────────
+(function() {
+  const PER_PAGE = 3;
+  const list = document.getElementById('proj-list');
+  const allCards = Array.from(list.querySelectorAll('article.proj-card'));
+  let page = 0;
+
+  window.projRender = function() {
+    page = 0;
+    render();
+  };
+
+  function render() {
+    const visible = allCards.filter(c => {
+      if (activeFilter === 'all') return true;
+      return c.querySelector('.proj-badge.' + activeFilter) !== null;
+    });
+    const total = Math.ceil(visible.length / PER_PAGE) || 1;
+    allCards.forEach(c => c.style.display = 'none');
+    visible.slice(page * PER_PAGE, (page + 1) * PER_PAGE).forEach(c => c.style.display = '');
+    document.getElementById('proj-page-info').textContent = (page + 1) + ' / ' + total;
+    document.getElementById('proj-prev').disabled = page === 0;
+    document.getElementById('proj-next').disabled = page >= total - 1;
+  }
+
+  window.projPage = function(dir) {
+    const visible = allCards.filter(c => {
+      if (activeFilter === 'all') return true;
+      return c.querySelector('.proj-badge.' + activeFilter) !== null;
+    });
+    const total = Math.ceil(visible.length / PER_PAGE) || 1;
+    page = Math.max(0, Math.min(total - 1, page + dir));
+    render();
+    document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  render();
+})();
 
 </script>
 
